@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
+import { useApplyModal } from './ApplyModal'
 
 function scrollTo(id) {
   const el = document.getElementById(id)
@@ -11,11 +12,18 @@ function scrollTo(id) {
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { open: openApplyModal } = useApplyModal()
 
   const handleNavClick = (e, id) => {
     e.preventDefault()
     setIsOpen(false)
     scrollTo(id)
+  }
+
+  const handleApplyClick = (e) => {
+    e.preventDefault()
+    setIsOpen(false)
+    openApplyModal()
   }
 
   return (
@@ -43,7 +51,7 @@ export default function Navbar() {
             <a href="#apply" onClick={(e) => handleNavClick(e, 'apply')} className="px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition cursor-pointer">
               Sign In
             </a>
-            <a href="#apply" onClick={(e) => handleNavClick(e, 'apply')} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
+            <a href="#apply" onClick={handleApplyClick} className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition cursor-pointer">
               Apply Now
             </a>
           </div>
@@ -65,7 +73,7 @@ export default function Navbar() {
             <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} className="block text-blue-800 hover:text-blue-600 cursor-pointer">FAQ</a>
             <div className="pt-2 space-y-2">
               <a href="#apply" onClick={(e) => handleNavClick(e, 'apply')} className="block text-center px-4 py-2 border border-blue-600 text-blue-600 rounded-lg cursor-pointer">Sign In</a>
-              <a href="#apply" onClick={(e) => handleNavClick(e, 'apply')} className="block text-center px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Apply Now</a>
+              <a href="#apply" onClick={handleApplyClick} className="block text-center px-4 py-2 bg-blue-600 text-white rounded-lg cursor-pointer">Apply Now</a>
             </div>
           </div>
         )}

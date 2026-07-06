@@ -1,6 +1,6 @@
 // components/CertificatePreview.js
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { ShieldCheck, Calendar, Clock, Award, Copy, Download, Share2, CheckCircle, Star } from 'lucide-react'
 
 export default function CertificatePreview({
@@ -19,6 +19,8 @@ export default function CertificatePreview({
   skills = ["React.js", "Node.js", "Industry Mentored", "Project-Based", "Live Deployment"],
 }) {
   const [copied, setCopied] = useState(false)
+  const [downloading, setDownloading] = useState(false)
+  const certRef = useRef(null)
 
   const handleCopy = () => {
     navigator.clipboard.writeText(certificateId)
@@ -26,12 +28,32 @@ export default function CertificatePreview({
     setTimeout(() => setCopied(false), 2000)
   }
 
+  const handleDownload = async () => {
+    if (!certRef.current || downloading) return
+    setDownloading(true)
+    try {
+      const { toPng } = await import('html-to-image')
+      const dataUrl = await toPng(certRef.current, {
+        quality: 1,
+        pixelRatio: 2,
+      })
+      const link = document.createElement('a')
+      link.download = `Thinkly_Certificate_${certificateId}.png`
+      link.href = dataUrl
+      link.click()
+    } catch (err) {
+      console.error('Download failed:', err)
+    } finally {
+      setDownloading(false)
+    }
+  }
+
   return (
     <section id='certificate' className="py-16 bg-gray-100 min-h-screen">
       <div className="max-w-2xl mx-auto px-4">
 
         {/* ───── CERTIFICATE CARD ───── */}
-        <div className="bg-white border border-blue-200 rounded-sm overflow-hidden shadow-2xl relative">
+        <div ref={certRef} className="bg-white border border-blue-200 rounded-sm overflow-hidden shadow-2xl relative">
 
           {/* Top Header Band */}
           <div className="bg-[#0B1F4F] px-7 py-4 flex items-center justify-between">
@@ -285,9 +307,13 @@ export default function CertificatePreview({
                 <Copy size={13} />
                 {copied ? 'Copied!' : 'Copy Cert ID'}
               </button>
-              <button className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] border-[#185FA5] text-[#185FA5] text-xs font-semibold rounded-lg hover:bg-blue-50 transition-all">
+              <button
+                onClick={handleDownload}
+                disabled={downloading}
+                className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] border-[#185FA5] text-[#185FA5] text-xs font-semibold rounded-lg hover:bg-blue-50 transition-all disabled:opacity-50"
+              >
                 <Download size={13} />
-                Download PDF
+                {downloading ? 'Downloading...' : 'Download PDF'}
               </button>
               <button className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] border-[#185FA5] text-[#185FA5] text-xs font-semibold rounded-lg hover:bg-blue-50 transition-all">
                 <Share2 size={13} />

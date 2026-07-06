@@ -1,4 +1,3 @@
-// app/page.js
 import Hero from '@/components/Hero'
 import Statistics from '@/components/Statistics'
 import Domains from '@/components/Domains'
@@ -7,7 +6,6 @@ import WhyChooseUs from '@/components/WhyChooseUs'
 import CertificatePreview from '@/components/CertificatePreview'
 import FAQ from '@/components/FAQ'
 import Footer from '@/components/Footer'
-import ApplyForm from '@/components/ApplyForm'
 
 export default function Home() {
   return (
@@ -18,7 +16,6 @@ export default function Home() {
       <HowItWorks />
       <WhyChooseUs />
       <CertificatePreview />
-      <ApplyForm />
       <FAQ />
       <Footer />
     </main>
