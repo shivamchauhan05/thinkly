@@ -1,6 +1,6 @@
 // app/layout.js
 import './globals.css'
-import Navbar from '@/components/Navbar'
+import Navbar from '@/components/Navbar' 
 import { ApplyModalProvider } from '@/components/ApplyModal'
 
 export const metadata = {
