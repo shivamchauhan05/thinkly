@@ -78,12 +78,10 @@ export default function CourseRegistrationForm() {
         {/* Header */}
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center space-x-2 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-[#0a2540] flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-900/20">
-              T
-            </div>
-            <span className="text-2xl font-bold text-[#0a2540] tracking-tight">
-              thinkly<span className="text-blue-500 text-sm font-normal">.com</span>
-            </span>
+            <div className="text-white font-semibold text-base leading-tight">
+                           <img src='./logo.png' alt="Logo" className="h-35 w-70" />
+
+                </div>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Course Registration</h1>
           <p className="text-gray-500 max-w-lg mx-auto">

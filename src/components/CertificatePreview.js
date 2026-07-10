@@ -56,11 +56,11 @@ export default function CertificatePreview({
         <div ref={certRef} className="bg-white border border-blue-200 rounded-sm overflow-hidden shadow-2xl relative">
 
           {/* Top Header Band */}
-          <div className="bg-[#0B1F4F] px-7 py-4 flex items-center justify-between">
+          <div className="bg-gray-100 px-7 py-4 flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-white/10 border border-white/25 flex items-center justify-center">
                 {/* Replace with your actual Thinkly SVG logo */}
-                <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+                {/* <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
                   <ellipse cx="16" cy="18" rx="7" ry="8.5" stroke="white" strokeWidth="1.8" fill="none"/>
                   <rect x="13" y="26" width="6" height="2" rx="1" fill="#60a5fa"/>
                   <rect x="14" y="28" width="4" height="1.5" rx=".75" fill="#60a5fa"/>
@@ -70,20 +70,21 @@ export default function CertificatePreview({
                   <line x1="22" y1="8" x2="20.5" y2="9.5" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round"/>
                   <line x1="7.5" y1="13" x2="9.5" y2="13" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round"/>
                   <line x1="24.5" y1="13" x2="22.5" y2="13" stroke="#4ade80" strokeWidth="1.8" strokeLinecap="round"/>
-                </svg>
+                </svg> */}
               </div>
               <div>
                 <div className="text-white font-semibold text-base leading-tight">
-                  thinkly<span className="text-blue-400">.com</span>
+                           <img src='./logo.png' alt="Logo" className="h-35 w-70" />
+
                 </div>
-                <div className="text-white/40 text-[9px] tracking-[2px] uppercase mt-0.5">
+                <div className="text-black text-[9px] tracking-[2px] uppercase mt-0.5">
                   Learning &amp; Development
                 </div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-white/40 text-[9px] tracking-widest uppercase mb-1">Registration No.</div>
-              <div className="text-white font-mono font-semibold text-xs">{certificateId}</div>
+              <div className="text-black text-[9px] tracking-widest uppercase mb-1">Registration No.</div>
+              <div className="text-black font-mono font-semibold text-xs">{certificateId}</div>
             </div>
           </div>
 

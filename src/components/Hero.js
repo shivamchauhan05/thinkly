@@ -1,6 +1,7 @@
 // components/Hero.js
 'use client'
 import { ArrowRight, Briefcase } from 'lucide-react'
+import { useApplyModal } from './ApplyModal'
 
 function scrollTo(id) {
   const el = document.getElementById(id)
@@ -8,6 +9,7 @@ function scrollTo(id) {
 }
 
 export default function Hero() {
+  const { open: openApplyModal } = useApplyModal()
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-blue-50 to-white">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
@@ -31,7 +33,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#apply"
-                onClick={(e) => { e.preventDefault(); scrollTo('apply') }}
+                onClick={(e) => { e.preventDefault(); openApplyModal() }}
                 className="group inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
               >
                 Apply Now

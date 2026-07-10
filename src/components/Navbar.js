@@ -40,7 +40,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
-            <a href="#internships" onClick={(e) => handleNavClick(e, 'internships')} className="text-blue-800 hover:text-blue-600 transition cursor-pointer">Internships</a>
+            <a href="#internships" onClick={(e) => handleNavClick(e, 'domains')} className="text-blue-800 hover:text-blue-600 transition cursor-pointer">Internships</a>
             <a href="#projects" onClick={(e) => handleNavClick(e, 'projects')} className="text-blue-800 hover:text-blue-600 transition cursor-pointer">Projects</a>
             <a href="#certificate" onClick={(e) => handleNavClick(e, 'certificate')} className="text-blue-800 hover:text-blue-600 transition cursor-pointer">Certificate</a>
             <a href="#faq" onClick={(e) => handleNavClick(e, 'faq')} className="text-blue-800 hover:text-blue-600 transition cursor-pointer">FAQ</a>

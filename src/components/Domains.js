@@ -3,6 +3,7 @@
 import { 
   Code2, Brain, BarChart3, Palette, Megaphone, Shield, PenTool 
 } from 'lucide-react'
+import { useApplyModal } from './ApplyModal'
 
 const domains = [
   { id: 1, name: 'Web Development', icon: Code2, color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-500', students: '1,200+' },
@@ -15,6 +16,8 @@ const domains = [
 ]
 
 export default function Domains() {
+  const { open: openApplyModal } = useApplyModal()
+
   return (
     <section id="domains" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,7 +49,7 @@ export default function Domains() {
                 <h3 className="text-lg font-bold text-blue-900 mb-2">{domain.name}</h3>
                 <p className="text-blue-600 text-sm mb-2">👥 {domain.students} enrolled</p>
                 <p className="text-blue-600 text-sm mb-4">Learn from industry experts</p>
-                <button className="text-blue-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                <button onClick={openApplyModal} className="text-blue-600 font-semibold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                   Apply Now → 
                 </button>
               </div>
