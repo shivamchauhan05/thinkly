@@ -5,7 +5,7 @@ import { ShieldCheck, Calendar, Clock, Award, Copy, Download, Share2, CheckCircl
 
 export default function CertificatePreview({
   studentName = "Priya Sharma",
-  courseName = "Full Stack Web Development",
+  courseName = "Full Stack Web Development", 
   programType = "Internship",
   startDate = "6 January 2026",
   endDate = "28 March 2026",
