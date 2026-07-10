@@ -129,10 +129,14 @@ export default function CourseRegistrationForm() {
               <div className="relative">
                 <select name="internshipDomain" value={formData.internshipDomain} onChange={handleChange} className={selectClass}>
                   <option value="">Select domain</option>
-                  <option value="Web Development">Web Development</option>
+                    <option value="Web Development">Web Development</option>
                   <option value="Data Science">Data Science</option>
                   <option value="UI/UX Design">UI/UX Design</option>
-                  <option value="Marketing">Marketing</option>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Content Writing">Content Writing</option>
+                  <option value="SEO">SEO</option>
+                  <option value="PHP Developer"> PHP Developer</option>
+
                 </select>
                 <svg className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </div>
