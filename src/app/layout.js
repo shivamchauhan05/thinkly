@@ -4,7 +4,10 @@ import Navbar from '@/components/Navbar'
 import { ApplyModalProvider } from '@/components/ApplyModal'
 
 export const metadata = {
-  title: 'Thinkly.co - Build Your Future',
+  verification:{
+    google:"439LD31UM_4C8T_bYhwYufdpooj0HVhv1arax79Voyo",
+  },
+  title: 'Thinkly - Build Your Future',
   description: 'Internships, projects, certificates, and a community that helps you grow.',
 }
 
