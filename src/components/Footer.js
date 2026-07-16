@@ -44,7 +44,7 @@ export default function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <h3 className="text-2xl font-bold mb-4">
-                        <img src='./logo.png' alt="Logo"  className="h-20 w-auto object-contain" />
+                        <img src='./logo.png' alt="Logo"  className="h-40 w-60" />
 
             </h3>
 
