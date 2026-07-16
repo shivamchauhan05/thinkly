@@ -220,12 +220,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-blue-200">
               <li className="flex items-center gap-2">
                 <Mail size={14} />
-                hello@thinkly.co
+                supportthinkly.co@gmail.com
               </li>
 
               <li className="flex items-center gap-2">
                 <Phone size={14} />
-                +91 98765 43210
+                 +91 9818509083
               </li>
 
               <li className="flex items-center gap-2">
