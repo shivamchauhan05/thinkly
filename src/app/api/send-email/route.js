@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer'
 export async function POST(req) {
   try {
     const body = await req.json()
-    const { name, email, college, currentYear, internshipDomain, tenure, whyJoin, priorExperience, flexibleSchedule } = body
+    const { name, email, college, currentYear, internshipDomain, tenure, whyJoin, priorExperience, flexibleSchedule,studypassed } = body
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -25,6 +25,8 @@ export async function POST(req) {
           <tr><td><strong>Email</strong></td><td>${email}</td></tr>
           <tr><td><strong>College/University</strong></td><td>${college}</td></tr>
           <tr><td><strong>Current Year</strong></td><td>${currentYear || 'N/A'}</td></tr>
+          <tr><td><strong>Current year of study passed</strong></td><td>${studypassed || 'N/A'}</td></tr>
+
           <tr><td><strong>Domain</strong></td><td>${internshipDomain || 'N/A'}</td></tr>
           <tr><td><strong>Tenure</strong></td><td>${tenure}</td></tr>
           <tr><td><strong>Why Join</strong></td><td>${whyJoin || 'N/A'}</td></tr>
