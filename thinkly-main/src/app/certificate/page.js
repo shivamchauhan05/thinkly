@@ -274,7 +274,7 @@ export default function CertificatePage() {
         <div style={{ position: "absolute", top: -100, right: -80, width: 380, height: 380, borderRadius: "50%", background: "rgba(34,197,94,0.07)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: -60, left: "20%", width: 260, height: 260, borderRadius: "50%", background: "rgba(34,197,94,0.04)", pointerEvents: "none" }} />
 
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center", position: "relative", zIndex: 1 }}>
+        <div className="rx-stack" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center", position: "relative", zIndex: 1 }}>
           {/* Left */}
           <div>
             <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.1s forwards", marginBottom: 20 }}>
@@ -340,7 +340,7 @@ export default function CertificatePage() {
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
       <section style={{ background: "white", padding: "52px 24px", borderBottom: "1px solid #F1F5F9" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
+        <div className="rx-2" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
           {[
             { val: 500, suffix: "+", label: "Certificates Issued" },
             { val: 40, suffix: "+", label: "Recognizing Companies" },
@@ -372,7 +372,7 @@ export default function CertificatePage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: 48, alignItems: "start" }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "80px 1fr", gap: 48, alignItems: "start" }}>
             {/* Controls */}
             <Reveal>
               <div>
@@ -436,7 +436,7 @@ export default function CertificatePage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {FEATURES.map((f, i) => (
               <Reveal key={f.title} delay={i * 70}>
                 <div style={{ background: "#FAFBFC", border: "1.5px solid #E2E8F0", borderRadius: 18, padding: 26, transition: "all 0.25s" }}

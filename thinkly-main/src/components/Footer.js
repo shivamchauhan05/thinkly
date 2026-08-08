@@ -84,10 +84,10 @@ export default function Footer() {
 
       {/* Main footer body */}
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px 40px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
+        <div className="rx-foot" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
 
           {/* Brand column */}
-          <div>
+          <div className="rx-foot-span">
             <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 16 }}>
               <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#1a2f50", border: "1px solid rgba(34,197,94,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <span style={{ color: "#22C55E", fontWeight: 900, fontSize: 17 }}>T</span>

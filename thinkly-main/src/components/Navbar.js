@@ -176,6 +176,7 @@ export default function Header() {
         @media (max-width: 768px) {
           .thinkly-desktop-nav { display: none !important; }
           .thinkly-hamburger { display: flex !important; }
+          .thinkly-nav-apply { display: none !important; }
         }
         @media (min-width: 769px) {
           .thinkly-hamburger { display: none !important; }
@@ -274,7 +275,7 @@ export default function Header() {
 
           {/* Apply CTA + hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href="#" className="thinkly-apply-btn" style={{ fontFamily: "'Inter', sans-serif" }} onClick={(e) => { e.preventDefault(); openApplyModal(); setDropdownOpen(false); setMobileMenuOpen(false); }}>
+            <a href="#" className="thinkly-apply-btn thinkly-nav-apply" style={{ fontFamily: "'Inter', sans-serif" }} onClick={(e) => { e.preventDefault(); openApplyModal(); setDropdownOpen(false); setMobileMenuOpen(false); }}>
               Apply Now →
             </a>
 

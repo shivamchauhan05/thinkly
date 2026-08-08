@@ -64,3 +64,19 @@ body {
 .perspective-1000 {
   perspective: 1000px;
 }
+
+/* ── Responsive helpers (mobile & tablet ≤ 768px) ───────────────────────────
+   These override inline grid styles so fixed multi-column layouts collapse
+   gracefully on small screens. */
+@media (max-width: 768px) {
+  .rx-stack { grid-template-columns: 1fr !important; }
+  .rx-2 { grid-template-columns: repeat(2, 1fr) !important; }
+  .rx-full { width: 100% !important; }
+  .rx-hide { display: none !important; }
+  .rx-foot { grid-template-columns: repeat(2, 1fr) !important; }
+  .rx-foot-span { grid-column: 1 / -1 !important; }
+  .rx-cta { grid-template-columns: 1fr !important; padding: 32px 24px !important; }
+  .rx-visual { width: 100% !important; }
+  .rx-visual > div { width: 100% !important; }
+  .rx-nowrap { flex-wrap: wrap !important; }
+}

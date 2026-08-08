@@ -321,7 +321,7 @@ export default function ProjectPage() {
             </span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
             {/* Left */}
             <div>
               <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.2s forwards", marginBottom: 18 }}>
@@ -404,7 +404,7 @@ export default function ProjectPage() {
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
       <section style={{ background: "white", padding: "52px 24px", borderBottom: "1px solid #F1F5F9" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
+        <div className="rx-2" style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 24, textAlign: "center" }}>
           {[
             { val: 5, suffix: "", label: "Live Websites Delivered" },
             { val: 10, suffix: "+", label: "Interns Involved" },
@@ -437,7 +437,7 @@ export default function ProjectPage() {
           </Reveal>
 
           {/* Featured 2 */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24, marginBottom: 24 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 24, marginBottom: 24 }}>
             {PROJECTS.slice(0, 2).map((p, i) => <ProjectCard key={p.id} project={p} index={i} />)}
           </div>
 
@@ -450,7 +450,7 @@ export default function ProjectPage() {
                 <span style={{ fontSize: 12, color: "#94A3B8" }}>3 websites delivered</span>
               </div>
             </Reveal>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+            <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
               {PROJECTS.slice(2).map((p, i) => <ProjectCard key={p.id} project={p} index={i + 2} />)}
             </div>
           </div>
@@ -469,7 +469,7 @@ export default function ProjectPage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
+          <div className="rx-2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
             {SKILLS_USED.map((s, i) => (
               <Reveal key={s.label} delay={i * 60}>
                 <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 16, padding: "20px 24px", display: "flex", alignItems: "center", gap: 12, transition: "all 0.25s", cursor: "default" }}
@@ -499,7 +499,7 @@ export default function ProjectPage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
+          <div className="rx-2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 20 }}>
             {PROCESS.map((p, i) => (
               <Reveal key={p.step} delay={i * 80}>
                 <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 18, padding: 24, textAlign: "center", transition: "all 0.25s", position: "relative" }}
@@ -526,7 +526,7 @@ export default function ProjectPage() {
       <section style={{ padding: "80px 24px", background: "white" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Reveal>
-            <div style={{ background: "linear-gradient(135deg,#0D1F3C 0%,#1a3a60 100%)", borderRadius: 28, padding: "52px 56px", display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center", position: "relative", overflow: "hidden" }}>
+            <div className="rx-cta" style={{ background: "linear-gradient(135deg,#0D1F3C 0%,#1a3a60 100%)", borderRadius: 28, padding: "52px 56px", display: "grid", gridTemplateColumns: "1fr auto", gap: 40, alignItems: "center", position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", top: -40, right: -40, width: 200, height: 200, borderRadius: "50%", background: "rgba(34,197,94,0.06)", pointerEvents: "none" }} />
               <div style={{ position: "relative", zIndex: 1 }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#22C55E", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 12 }}>🏢 Are You a Business Owner?</div>

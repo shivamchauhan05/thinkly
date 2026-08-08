@@ -146,7 +146,7 @@ export default function MarketingInternshipPage() {
             </span>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "flex-end" }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "flex-end" }}>
             <div>
               {/* Badge */}
               <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.2s forwards", marginBottom: 20 }}>
@@ -204,7 +204,7 @@ export default function MarketingInternshipPage() {
             </div>
 
             {/* Hero visual card */}
-            <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.5s forwards", flexShrink: 0 }}>
+            <div className="rx-visual" style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.5s forwards", flexShrink: 0 }}>
               <div style={{ width: 280, background: "#F8FAFC", border: "1px solid #E2E8F0", borderRadius: 24, padding: 28, backdropFilter: "blur(12px)" }}>
                 <div style={{ fontSize: 48, marginBottom: 12, textAlign: "center" }}>📣</div>
                 <div style={{ textAlign: "center", marginBottom: 20 }}>
@@ -249,7 +249,7 @@ export default function MarketingInternshipPage() {
 
       {/* ── STATS ─────────────────────────────────────────────────────────── */}
       <section style={{ background: "white", padding: "56px 24px", borderBottom: "1px solid #F1F5F9" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32, textAlign: "center" }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32, textAlign: "center" }} className="rx-2">
           {[
             { val: 200, suffix: "+", label: "Marketing Interns Placed" },
             { val: 40, suffix: "+", label: "Partner Brands" },
@@ -281,7 +281,7 @@ export default function MarketingInternshipPage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {SKILLS.map((s, i) => (
               <Reveal key={s.title} delay={i * 70}>
                 <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 18, padding: 26, transition: "all 0.25s", cursor: "default" }}
@@ -348,7 +348,7 @@ export default function MarketingInternshipPage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TESTIMONIALS.map((t, i) => (
               <Reveal key={t.name} delay={i * 80}>
                 <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, transition: "all 0.25s" }}

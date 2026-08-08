@@ -88,7 +88,7 @@ function Hero() {
   return (
     <section style={{ minHeight: "100vh", background: "linear-gradient(160deg, #ffffff 0%, #f0f9f4 50%, #ffffff 100%)", display: "flex", alignItems: "center", paddingTop: 100, paddingBottom: 60 }}>
       <div className="max-w-6xl mx-auto px-6 w-full">
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
+        <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64, alignItems: "center" }}>
 
           {/* Left */}
           <div>
@@ -126,7 +126,7 @@ function Hero() {
             </div>
 
             {/* Trust bar */}
-            <div style={{ display: "flex", alignItems: "center", gap: 24, marginTop: 48, opacity: 0, animation: "fadeUp 0.7s ease 0.8s forwards" }}>
+            <div className="rx-nowrap" style={{ display: "flex", alignItems: "center", gap: 24, marginTop: 48, opacity: 0, animation: "fadeUp 0.7s ease 0.8s forwards" }}>
               <div style={{ display: "flex" }}>
                 {["#22C55E","#0D1F3C","#3B82F6","#F59E0B","#EF4444"].map((c, i) => (
                   <div key={i} style={{ width: 32, height: 32, borderRadius: "50%", background: c, border: "2px solid white", marginLeft: i === 0 ? 0 : -10, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -187,7 +187,7 @@ function Hero() {
 function Stats() {
   return (
     <section style={{ background: "#0D1F3C", padding: "52px 24px" }}>
-      <div className="max-w-6xl mx-auto" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32, textAlign: "center" }}>
+      <div className="max-w-6xl mx-auto rx-2" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32, textAlign: "center" }}>
         {[
           { value: 500, suffix: "+", label: "Students Placed" },
           { value: 120, suffix: "+", label: "Partner Companies" },
@@ -232,7 +232,7 @@ function Features() {
           </div>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+        <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
           {features.map((f, i) => (
             <Reveal key={f.title} delay={i * 80}>
               <div style={{ background: "#FAFBFC", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, transition: "all 0.3s", cursor: "default" }}
@@ -278,9 +278,9 @@ function HowItWorks() {
         {/* Timeline */}
         <div style={{ position: "relative" }}>
           {/* Connecting line */}
-          <div style={{ position: "absolute", top: 40, left: "calc(10% + 20px)", right: "calc(10% + 20px)", height: 2, background: "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.2))", zIndex: 0 }} />
+          <div className="rx-hide" style={{ position: "absolute", top: 40, left: "calc(10% + 20px)", right: "calc(10% + 20px)", height: 2, background: "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.2))", zIndex: 0 }} />
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 24, position: "relative", zIndex: 1 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 24, position: "relative", zIndex: 1 }}>
             {steps.map((step, i) => (
               <Reveal key={step.num} delay={i * 100}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
@@ -329,7 +329,7 @@ function Testimonials() {
           </div>
         </Reveal>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+        <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 70}>
               <div style={{ background: "#FAFBFC", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, height: "100%", boxSizing: "border-box", transition: "all 0.3s" }}

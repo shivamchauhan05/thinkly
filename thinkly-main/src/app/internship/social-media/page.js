@@ -115,7 +115,7 @@ export default function SocialMediaInternshipPage() {
 
       <section style={{ background: "linear-gradient(160deg, #ffffff 0%, #f5fbf8 55%, #ffffff 100%)", padding: "88px 24px 56px", overflow: "hidden", position: "relative" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "center" }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "center" }}>
             <div>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#22C55E", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "6px 16px", background: "rgba(34,197,94,0.06)", marginBottom: 24 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E", display: "inline-block" }} />
@@ -168,7 +168,7 @@ export default function SocialMediaInternshipPage() {
               </div>
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 20 }}>
+            <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 20 }}>
               {[
                 { label: "Content Creation", value: "Posts, Reels, Carousels" },
                 { label: "Strategy", value: "Content Calendars, Planning" },
@@ -203,7 +203,7 @@ export default function SocialMediaInternshipPage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {SKILLS.map((skill, index) => (
               <Reveal key={skill.title} delay={index * 70}>
                 <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 26, transition: "transform 0.25s, box-shadow 0.25s" }}
@@ -303,7 +303,7 @@ export default function SocialMediaInternshipPage() {
               </h2>
             </div>
           </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TESTIMONIALS.map((item, index) => (
               <Reveal key={item.name} delay={index * 70}>
                 <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, transition: "transform 0.25s, box-shadow 0.25s" }}
