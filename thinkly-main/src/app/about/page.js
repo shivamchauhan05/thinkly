@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Footer from '@/components/Footer'
 import { useApplyModal } from '@/components/ApplyModal'
 
-// ── Icons (inline SVG, no external deps) ──────────────────────────────────────
+// ── Icons (inline SVG, no external deps) ────────────────────────────────────── 
 const IconRocket = () => (
   <svg viewBox="0 0 24 24" fill="none" className="w-7 h-7" stroke="currentColor" strokeWidth={1.8}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.82m5.84-2.56a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.63 2a14.98 14.98 0 0 0-6.16 12.12A14.98 14.98 0 0 0 8.32 19.19v-4.82m7.27 0-7.27 0" />
