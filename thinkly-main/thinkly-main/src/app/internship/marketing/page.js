@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Footer from '@/components/Footer'
-import Image from "next/image";
 
 // ── Scroll reveal ─────────────────────────────────────────────────────────────
 function Reveal({ children, delay = 0, className = "" }) {
@@ -121,16 +120,16 @@ export default function MarketingInternshipPage() {
 
   return (
     <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", color: "#0D1F3C", paddingTop: 68, background: "white" }}>
-        <style>{`
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        @keyframes fadeUp { from { opacity:0; transform:translateY (24px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes float { 0%,100% { transform:translateY(0); } 50%{   transform:translateY(-8px); } }
-        @keyframes marquee { 0% { transform:translateX(0); } 100% {  transform:translateX(-50%); } }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+        @keyframes marquee { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
         * { box-sizing: border-box; }
-        `}</style>
+      `}</style>
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
-      <section style={{ background: "#ffffff", padding: "80px 24px 0", overflow: "hidden", position: "relative",}}>
+      <section style={{ background: "#ffffff", padding: "80px 24px 0", overflow: "hidden", position: "relative" }}>
         {/* bg glow */}
         <div style={{ position: "absolute", top: -100, right: -100, width: 400, height: 400, borderRadius: "50%", background: "rgba(34,197,94,0.08)", pointerEvents: "none" }} />
         <div style={{ position: "absolute", bottom: 0, left: "30%", width: 300, height: 300, borderRadius: "50%", background: "rgba(34,197,94,0.04)", pointerEvents: "none" }} />

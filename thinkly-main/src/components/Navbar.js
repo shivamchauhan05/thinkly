@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { useApplyModal } from './ApplyModal'
-
+import { useApplyModal } from "./ApplyModal";
+import Image from "next/image";
 const INTERNSHIP_DOMAINS = [
   { emoji: "📣", label: "Marketing", sub: "Social media, SEO, campaigns" },
   { emoji: "🎨", label: "Design", sub: "UI/UX, graphics, branding" },
@@ -18,7 +18,7 @@ const INTERNSHIP_DOMAINS = [
 ];
 
 export default function Header() {
-  const { open: openApplyModal } = useApplyModal()
+  const { open: openApplyModal } = useApplyModal();
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -184,37 +184,80 @@ export default function Header() {
       `}</style>
 
       {/* ── HEADER ───────────────────────────────────────────────────────── */}
-      <header style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000,
-        height: 68,
-        background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.85)",
-        backdropFilter: "blur(16px)",
-        borderBottom: scrolled ? "1px solid #F1F5F9" : "1px solid rgba(241,245,249,0.5)",
-        boxShadow: scrolled ? "0 2px 24px rgba(0,0,0,0.07)" : "none",
-        transition: "all 0.3s ease",
-        fontFamily: "'Inter', -apple-system, sans-serif",
-      }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", height: "100%", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-
+      <header
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 1000,
+          height: 68,
+          background: scrolled
+            ? "rgba(255,255,255,0.97)"
+            : "rgba(255,255,255,0.85)",
+          backdropFilter: "blur(16px)",
+          borderBottom: scrolled
+            ? "1px solid #F1F5F9"
+            : "1px solid rgba(241,245,249,0.5)",
+          boxShadow: scrolled ? "0 2px 24px rgba(0,0,0,0.07)" : "none",
+          transition: "all 0.3s ease",
+          fontFamily: "'Inter', -apple-system, sans-serif",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: 1100,
+            margin: "0 auto",
+            padding: "0 24px",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
           {/* Logo */}
-          <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0 }}>
-            <div style={{
-              width: 38, height: 38, borderRadius: "50%",
-              background: "#0D1F3C",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              boxShadow: "0 0 0 3px rgba(34,197,94,0.2)",
-            }}>
-              <span style={{ color: "#22C55E", fontWeight: 900, fontSize: 17, lineHeight: 1 }}>T</span>
-            </div>
-            <span style={{ fontWeight: 800, color: "#0D1F3C", fontSize: 19, letterSpacing: "-0.02em" }}>
+          <a
+            href="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+              flexShrink: 0,
+            }}
+          >
+            <span className=" flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full">
+              <Image
+                src="/thinkly_logo.jpeg"
+                alt="Thinkly logo"
+                width={100}
+                height={50}
+                className="h-full w-full object-cover"
+              />
+            </span>
+            <span
+              style={{
+                fontWeight: 800,
+                color: "#0D1F3C",
+                fontSize: 19,
+                letterSpacing: "-0.02em",
+              }}
+            >
               Thinkly<span style={{ color: "#22C55E" }}>edu</span>
             </span>
           </a>
 
           {/* Desktop Nav */}
-          <nav className="thinkly-desktop-nav" style={{ display: "flex", alignItems: "center", gap: 32 }}>
-            <a href="/" className="thinkly-nav-link">Home</a>
-            <a href="/about" className="thinkly-nav-link">About</a>
+          <nav
+            className="thinkly-desktop-nav"
+            style={{ display: "flex", alignItems: "center", gap: 32 }}
+          >
+            <a href="/" className="thinkly-nav-link">
+              Home
+            </a>
+            <a href="/about" className="thinkly-nav-link">
+              About
+            </a>
 
             {/* Internship with dropdown */}
             <div ref={dropdownRef} style={{ position: "relative" }}>
@@ -226,16 +269,41 @@ export default function Header() {
                 aria-haspopup="true"
               >
                 Internship
-                <svg className={`thinkly-chevron ${dropdownOpen ? "open" : ""}`} viewBox="0 0 16 16" fill="none">
-                  <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className={`thinkly-chevron ${dropdownOpen ? "open" : ""}`}
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M4 6l4 4 4-4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </button>
 
               {/* Dropdown */}
               <div className={`thinkly-dropdown ${dropdownOpen ? "open" : ""}`}>
                 {/* Header */}
-                <div style={{ marginBottom: 16, paddingBottom: 14, borderBottom: "1px solid #F1F5F9" }}>
-                  <p style={{ fontSize: 12, fontWeight: 700, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.1em", margin: "0 0 2px" }}>
+                <div
+                  style={{
+                    marginBottom: 16,
+                    paddingBottom: 14,
+                    borderBottom: "1px solid #F1F5F9",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: "#94A3B8",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      margin: "0 0 2px",
+                    }}
+                  >
                     Internship Domains
                   </p>
                   <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
@@ -244,38 +312,106 @@ export default function Header() {
                 </div>
 
                 {/* Domain grid */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 4 }}>
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gap: 4,
+                  }}
+                >
                   {INTERNSHIP_DOMAINS.map((domain) => (
-                    <a key={domain.label} href={`/internship/${domain.label.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
+                    <a
+                      key={domain.label}
+                      href={`/internship/${domain.label.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
                       className="thinkly-domain-card"
-                      onClick={() => setDropdownOpen(false)}>
-                      <span style={{ fontSize: 22, lineHeight: 1, flexShrink: 0, marginTop: 1 }}>{domain.emoji}</span>
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      <span
+                        style={{
+                          fontSize: 22,
+                          lineHeight: 1,
+                          flexShrink: 0,
+                          marginTop: 1,
+                        }}
+                      >
+                        {domain.emoji}
+                      </span>
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: "#0D1F3C", marginBottom: 2 }}>{domain.label}</div>
-                        <div style={{ fontSize: 11.5, color: "#94A3B8", lineHeight: 1.4 }}>{domain.sub}</div>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: "#0D1F3C",
+                            marginBottom: 2,
+                          }}
+                        >
+                          {domain.label}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 11.5,
+                            color: "#94A3B8",
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          {domain.sub}
+                        </div>
                       </div>
                     </a>
                   ))}
                 </div>
 
                 {/* Footer */}
-                <div style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #F1F5F9", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 12.5, color: "#94A3B8" }}>Can't find your domain? We'll find one for you.</span>
-                  <a href="/internship" style={{ fontSize: 12.5, fontWeight: 700, color: "#22C55E", textDecoration: "none" }}
-                    onClick={() => setDropdownOpen(false)}>
+                <div
+                  style={{
+                    marginTop: 16,
+                    paddingTop: 14,
+                    borderTop: "1px solid #F1F5F9",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span style={{ fontSize: 12.5, color: "#94A3B8" }}>
+                    Can't find your domain? We'll find one for you.
+                  </span>
+                  <a
+                    href="/internship"
+                    style={{
+                      fontSize: 12.5,
+                      fontWeight: 700,
+                      color: "#22C55E",
+                      textDecoration: "none",
+                    }}
+                    onClick={() => setDropdownOpen(false)}
+                  >
                     View all →
                   </a>
                 </div>
               </div>
             </div>
 
-            <a href="/certificate" className="thinkly-nav-link">Certificate</a>
-            <a href="/project" className="thinkly-nav-link">Project</a>
+            <a href="/certificate" className="thinkly-nav-link">
+              Certificate
+            </a>
+            <a href="/project" className="thinkly-nav-link">
+              Project
+            </a>
           </nav>
 
           {/* Apply CTA + hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <a href="#" className="thinkly-apply-btn thinkly-nav-apply" style={{ fontFamily: "'Inter', sans-serif" }} onClick={(e) => { e.preventDefault(); openApplyModal(); setDropdownOpen(false); setMobileMenuOpen(false); }}>
+            <a
+              href="#"
+              className="thinkly-apply-btn thinkly-nav-apply"
+              style={{ fontFamily: "'Inter', sans-serif" }}
+              onClick={(e) => {
+                e.preventDefault();
+                openApplyModal();
+                setDropdownOpen(false);
+                setMobileMenuOpen(false);
+              }}
+            >
               Apply Now →
             </a>
 
@@ -283,20 +419,37 @@ export default function Header() {
             <button
               className="thinkly-hamburger"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              style={{ background: "none", border: "none", cursor: "pointer", padding: 8, display: "none", flexDirection: "column", gap: 5 }}
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 8,
+                display: "none",
+                flexDirection: "column",
+                gap: 5,
+              }}
               aria-label="Toggle menu"
             >
               {[0, 1, 2].map((i) => (
-                <span key={i} style={{
-                  display: "block", width: 22, height: 2, background: "#0D1F3C", borderRadius: 2,
-                  transition: "all 0.2s",
-                  transform: mobileMenuOpen
-                    ? i === 0 ? "rotate(45deg) translateY(7px)"
-                    : i === 1 ? "scaleX(0)"
-                    : "rotate(-45deg) translateY(-7px)"
-                    : "none",
-                  opacity: mobileMenuOpen && i === 1 ? 0 : 1,
-                }} />
+                <span
+                  key={i}
+                  style={{
+                    display: "block",
+                    width: 22,
+                    height: 2,
+                    background: "#0D1F3C",
+                    borderRadius: 2,
+                    transition: "all 0.2s",
+                    transform: mobileMenuOpen
+                      ? i === 0
+                        ? "rotate(45deg) translateY(7px)"
+                        : i === 1
+                          ? "scaleX(0)"
+                          : "rotate(-45deg) translateY(-7px)"
+                      : "none",
+                    opacity: mobileMenuOpen && i === 1 ? 0 : 1,
+                  }}
+                />
               ))}
             </button>
           </div>
@@ -304,41 +457,129 @@ export default function Header() {
       </header>
 
       {/* ── MOBILE MENU ─────────────────────────────────────────────────── */}
-      <div className={`thinkly-mobile-menu ${mobileMenuOpen ? "open" : ""}`} style={{ fontFamily: "'Inter', sans-serif" }}>
-        <a href="/" className="thinkly-mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Home</a>
-        <a href="/about" className="thinkly-mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>About</a>
+      <div
+        className={`thinkly-mobile-menu ${mobileMenuOpen ? "open" : ""}`}
+        style={{ fontFamily: "'Inter', sans-serif" }}
+      >
+        <a
+          href="/"
+          className="thinkly-mobile-nav-link"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          Home
+        </a>
+        <a
+          href="/about"
+          className="thinkly-mobile-nav-link"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          About
+        </a>
 
         {/* Mobile internship accordion */}
         <div>
           <button
             onClick={() => setMobileDomainOpen(!mobileDomainOpen)}
-            style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", background: "none", border: "none", cursor: "pointer", padding: "12px 0", borderBottom: "1px solid #F1F5F9", fontFamily: "inherit" }}>
-            <span style={{ color: "#475569", fontSize: 15, fontWeight: 500 }}>Internship</span>
-            <svg style={{ width: 16, height: 16, color: "#94A3B8", transition: "transform 0.2s", transform: mobileDomainOpen ? "rotate(180deg)" : "none" }} viewBox="0 0 16 16" fill="none">
-              <path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "12px 0",
+              borderBottom: "1px solid #F1F5F9",
+              fontFamily: "inherit",
+            }}
+          >
+            <span style={{ color: "#475569", fontSize: 15, fontWeight: 500 }}>
+              Internship
+            </span>
+            <svg
+              style={{
+                width: 16,
+                height: 16,
+                color: "#94A3B8",
+                transition: "transform 0.2s",
+                transform: mobileDomainOpen ? "rotate(180deg)" : "none",
+              }}
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M4 6l4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </button>
 
           {mobileDomainOpen && (
             <div style={{ paddingLeft: 8, paddingBottom: 8 }}>
               {INTERNSHIP_DOMAINS.map((d) => (
-                <a key={d.label} href={`/internship/${d.label.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
-                  style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 8px", textDecoration: "none", borderRadius: 8 }}
-                  onClick={() => setMobileMenuOpen(false)}>
+                <a
+                  key={d.label}
+                  href={`/internship/${d.label.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "10px 8px",
+                    textDecoration: "none",
+                    borderRadius: 8,
+                  }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
                   <span style={{ fontSize: 18 }}>{d.emoji}</span>
-                  <span style={{ fontSize: 14, color: "#0D1F3C", fontWeight: 500 }}>{d.label}</span>
+                  <span
+                    style={{ fontSize: 14, color: "#0D1F3C", fontWeight: 500 }}
+                  >
+                    {d.label}
+                  </span>
                 </a>
               ))}
             </div>
           )}
         </div>
 
-        <a href="/certificate" className="thinkly-mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Certificate</a>
-        <a href="/project" className="thinkly-mobile-nav-link" onClick={() => setMobileMenuOpen(false)}>Project</a>
+        <a
+          href="/certificate"
+          className="thinkly-mobile-nav-link"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          Certificate
+        </a>
+        <a
+          href="/project"
+          className="thinkly-mobile-nav-link"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          Project
+        </a>
 
-        <a href="#"
-          style={{ display: "block", background: "#22C55E", color: "white", fontWeight: 700, fontSize: 15, padding: "14px", borderRadius: 12, textAlign: "center", textDecoration: "none", marginTop: 12 }}
-          onClick={(e) => { e.preventDefault(); openApplyModal(); setMobileMenuOpen(false); }}>
+        <a
+          href="#"
+          style={{
+            display: "block",
+            background: "#22C55E",
+            color: "white",
+            fontWeight: 700,
+            fontSize: 15,
+            padding: "14px",
+            borderRadius: 12,
+            textAlign: "center",
+            textDecoration: "none",
+            marginTop: 12,
+          }}
+          onClick={(e) => {
+            e.preventDefault();
+            openApplyModal();
+            setMobileMenuOpen(false);
+          }}
+        >
           Apply Now →
         </a>
       </div>

@@ -1,5 +1,15 @@
 "use client";
-import { useApplyModal } from './ApplyModal'
+
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  FaLinkedinIn,
+  FaInstagram,
+  FaTwitter,
+  FaYoutube,
+  FaArrowRight,
+} from "react-icons/fa";
 
 const LINKS = {
   Platform: [
@@ -7,165 +17,396 @@ const LINKS = {
     { label: "Internship", href: "/internship" },
     { label: "Certificate", href: "/certificate" },
     { label: "Project", href: "/project" },
+    { label: "Verification Portal", href: "/verification" },
   ],
+
   Company: [
     { label: "About Us", href: "/about" },
     { label: "Blog", href: "/blog" },
     { label: "Contact", href: "/contact" },
     { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
   ],
+
   Domains: [
     { label: "Marketing", href: "/internship/marketing" },
-    { label: "Design", href: "/internship/design" },
-    { label: "Technology", href: "/internship/technology" },
+    { label: "UI/UX Design", href: "/internship/design" },
+    { label: "Tech & Coding", href: "/internship/technology" },
     { label: "Finance", href: "/internship/finance" },
     { label: "Content Writing", href: "/internship/content-writing" },
-    { label: "View All →", href: "/internship" },
+    { label: "View All Domains →", href: "/internship" },
   ],
 };
 
 export default function Footer() {
-  const { open: openApplyModal } = useApplyModal()
-
   return (
-    <footer style={{
-      background: "#0a1628",
-      fontFamily: "'Inter', -apple-system, sans-serif",
-      color: "white",
-    }}>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-        .thinkly-footer-link {
-          color: rgba(255,255,255,0.35);
-          font-size: 13.5px;
-          text-decoration: none;
-          display: block;
-          padding: 5px 0;
-          transition: color 0.18s;
-        }
-        .thinkly-footer-link:hover { color: #22C55E; }
-        .thinkly-social-btn {
-          width: 36px; height: 36px;
-          border-radius: 50%;
-          border: 1px solid rgba(255,255,255,0.1);
-          display: flex; align-items: center; justify-content: center;
-          text-decoration: none;
-          transition: all 0.2s;
-          font-size: 15px;
-          background: rgba(255,255,255,0.04);
-        }
-        .thinkly-social-btn:hover {
-          border-color: rgba(34,197,94,0.4);
-          background: rgba(34,197,94,0.1);
-          transform: translateY(-2px);
-        }
-      `}</style>
+    <footer className="w-full bg-[#020b14] p-4 sm:p-6">
+      <div
+        className="
+          mx-auto w-full max-w-[90%]
+          overflow-hidden rounded-2xl
+          border border-white/10
+          bg-gradient-to-br from-[#26323d]/90 to-[#101923]/95
+          shadow-[0_0_25px_rgba(0,255,200,0.08)]
+        "
+      >
+        <div
+          className="
+            grid w-full
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-[1.4fr_1fr_1fr_1fr]
+          "
+        >
+          <div
+            className="
+              border-b border-white/10 p-6
+              sm:border-r sm:border-b-0
+              lg:p-8
+            "
+          >
+            {/* Logo */}
 
-      {/* Top band */}
-      <div style={{ background: "#0D1F3C", padding: "40px 24px" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 20 }}>
-          <div>
-            <h3 style={{ fontSize: "clamp(20px, 3vw, 26px)", fontWeight: 800, margin: "0 0 6px", letterSpacing: "-0.02em" }}>
-              Ready to launch your career?
-            </h3>
-            <p style={{ color: "rgba(255,255,255,0.45)", fontSize: 14, margin: 0 }}>
-              Join 500+ students — no fees, no experience required.
-            </p>
-          </div>
-          <a href="#"
-            style={{ background: "#22C55E", color: "white", fontWeight: 700, fontSize: 15, padding: "13px 32px", borderRadius: 999, textDecoration: "none", whiteSpace: "nowrap", boxShadow: "0 8px 24px rgba(34,197,94,0.2)", transition: "all 0.2s", fontFamily: "inherit" }}
-            onClick={(e) => { e.preventDefault(); openApplyModal() }}
-            onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-            onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
-            Apply for Internship →
-          </a>
-        </div>
-      </div>
-
-      {/* Main footer body */}
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "56px 24px 40px" }}>
-        <div className="rx-foot" style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
-
-          {/* Brand column */}
-          <div className="rx-foot-span">
-            <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", marginBottom: 16 }}>
-              <div style={{ width: 38, height: 38, borderRadius: "50%", background: "#1a2f50", border: "1px solid rgba(34,197,94,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ color: "#22C55E", fontWeight: 900, fontSize: 17 }}>T</span>
-              </div>
-              <span style={{ color: "white", fontWeight: 800, fontSize: 18 }}>
-                Thinkly<span style={{ color: "#22C55E" }}>edu</span>
+            <Link href="/" className="flex w-fit items-center gap-2">
+              <span
+                className="
+                  flex h-8 w-8 shrink-0
+                  items-center justify-center
+                  overflow-hidden rounded-full
+                  border border-[#22C55E]/30
+                  bg-[#1a2f50]
+                "
+              >
+                <Image
+                  src="/thinkly_logo.jpeg"
+                  alt="Thinkly logo"
+                  width={100}
+                  height={50}
+                  className="h-full w-full object-cover"
+                />
               </span>
-            </a>
-            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13.5, lineHeight: 1.75, margin: "0 0 24px", maxWidth: 260 }}>
-              Connecting students across India with real internship opportunities — completely free, always.
+
+              <span className="text-2xl font-bold text-[#eeeeee]">
+                Thinklyedu
+              </span>
+            </Link>
+
+            {/* Description */}
+
+            <p
+              className="
+                mt-4 max-w-[230px]
+                text-sm leading-[1.4]
+                text-[#aeb5bc]
+              "
+            >
+              Connecting students across India with completely free, always real
+              internship opportunities.
             </p>
+
+            <div className="mt-5 flex gap-3">
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex h-8 w-8 items-center justify-center
+                  rounded-full
+                  border border-[#5ce9c4]/30
+                  bg-[#5ce9c4]/10
+                  text-[#5ce9c4]
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  hover:border-[#18b98b]
+                  hover:bg-[#18b98b]
+                  hover:text-white
+                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                "
+              >
+                <FaLinkedinIn size={14} />
+              </a>
+
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex h-8 w-8 items-center justify-center
+                  rounded-full
+                  border border-[#5ce9c4]/30
+                  bg-[#5ce9c4]/10
+                  text-[#5ce9c4]
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  hover:border-[#18b98b]
+                  hover:bg-[#18b98b]
+                  hover:text-white
+                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                "
+              >
+                <FaInstagram size={14} />
+              </a>
+
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex h-8 w-8 items-center justify-center
+                  rounded-full
+                  border border-[#5ce9c4]/30
+                  bg-[#5ce9c4]/10
+                  text-[#5ce9c4]
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  hover:border-[#18b98b]
+                  hover:bg-[#18b98b]
+                  hover:text-white
+                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                "
+              >
+                <FaTwitter size={14} />
+              </a>
+
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex h-8 w-8 items-center justify-center
+                  rounded-full
+                  border border-[#5ce9c4]/30
+                  bg-[#5ce9c4]/10
+                  text-[#5ce9c4]
+                  transition-all duration-300
+                  hover:-translate-y-1
+                  hover:border-[#18b98b]
+                  hover:bg-[#18b98b]
+                  hover:text-white
+                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                "
+              >
+                <FaYoutube size={14} />
+              </a>
+            </div>
 
             {/* Contact */}
-            <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 24 }}>
-              {[
-                { icon: "📧", text: "supportthinkly.co@gmail.com", href: "mailto:supportthinkly.co@gmail.com" },
-                { icon: "📞", text: "+91 98185 09083", href: "tel:+919818509083" },
-              ].map((c) => (
-                <a key={c.text} href={c.href}
-                  style={{ display: "flex", alignItems: "center", gap: 8, color: "rgba(255,255,255,0.35)", fontSize: 13, textDecoration: "none", transition: "color 0.18s" }}
-                  onMouseOver={e => e.currentTarget.style.color = "#22C55E"}
-                  onMouseOut={e => e.currentTarget.style.color = "rgba(255,255,255,0.35)"}>
-                  <span style={{ fontSize: 14 }}>{c.icon}</span>
-                  {c.text}
-                </a>
-              ))}
-            </div>
 
-            {/* Social icons */}
-            <div style={{ display: "flex", gap: 10 }}>
-              {[
-                { emoji: "in", href: "https://linkedin.com", label: "LinkedIn" },
-                { emoji: "ig", href: "https://instagram.com", label: "Instagram" },
-                { emoji: "tw", href: "https://twitter.com", label: "Twitter" },
-                { emoji: "yt", href: "https://youtube.com", label: "YouTube" },
-              ].map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer"
-                  className="thinkly-social-btn" aria-label={s.label}
-                  style={{ color: "rgba(255,255,255,0.4)", fontWeight: 700, fontSize: 11, fontFamily: "inherit" }}>
-                  {s.emoji}
-                </a>
+            <div className="mt-6 flex flex-col text-sm text-[#d0d5d8]">
+              <p className="mb-1 text-[#9fa7ad]">Phone</p>
+
+              <a
+                href="tel:+919818509083"
+                className="
+                  mb-2
+                  text-[#d0d5d8]
+                  transition-colors
+                  hover:text-[#4ee5bd]
+                "
+              >
+                +91 98185 09083
+              </a>
+
+              <a
+                href="mailto:support@thinkyedu.co"
+                className="
+                  text-[#d0d5d8]
+                  transition-colors
+                  hover:text-[#4ee5bd]
+                "
+              >
+                support@thinkyedu.co
+              </a>
+            </div>
+          </div>
+
+          <div
+            className="
+              border-b border-white/10
+              p-6 sm:p-7
+              lg:border-b-0
+            "
+          >
+            <h3
+              className="
+                mb-5
+                text-base
+                font-medium
+                tracking-wide
+                text-[#999fa5]
+              "
+            >
+              PLATFORM
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              {LINKS.Platform.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="
+                    group relative w-fit
+                    text-sm text-[#d5d8db]
+                    transition-colors duration-300
+                    hover:text-[#4ee5bd]
+                  "
+                >
+                  {item.label}
+
+                  <span
+                    className="
+                      absolute -bottom-1 left-0
+                      h-[2px] w-0
+                      bg-[#20d9a3]
+                      transition-all duration-300
+                      group-hover:w-full
+                    "
+                  />
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Link columns */}
-          {Object.entries(LINKS).map(([section, links]) => (
-            <div key={section}>
-              <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 18 }}>
-                {section}
-              </div>
-              {links.map((link) => (
-                <a key={link.label} href={link.href} className="thinkly-footer-link"
-                  style={{ color: link.label === "View All →" ? "#22C55E" : "rgba(255,255,255,0.35)", fontWeight: link.label === "View All →" ? 600 : 400 }}>
-                  {link.label}
-                </a>
+          <div
+            className="
+              border-b border-white/10
+              p-6 sm:p-7
+              lg:border-b-0
+            "
+          >
+            <h3
+              className="
+                mb-5
+                text-base
+                font-medium
+                tracking-wide
+                text-[#999fa5]
+              "
+            >
+              COMPANY
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              {LINKS.Company.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="
+                    group relative w-fit
+                    text-sm text-[#d5d8db]
+                    transition-colors duration-300
+                    hover:text-[#4ee5bd]
+                  "
+                >
+                  {item.label}
+
+                  <span
+                    className="
+                      absolute -bottom-1 left-0
+                      h-[2px] w-0
+                      bg-[#20d9a3]
+                      transition-all duration-300
+                      group-hover:w-full
+                    "
+                  />
+                </Link>
               ))}
             </div>
-          ))}
+          </div>
+
+          <div className="p-6 sm:p-7">
+            <h3
+              className="
+                mb-5
+                text-base
+                font-medium
+                tracking-wide
+                text-[#999fa5]
+              "
+            >
+              DOMAINS
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              {LINKS.Domains.map((item) => {
+                const isViewAll = item.label === "View All Domains →";
+
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`
+                      group relative w-fit
+                      text-sm
+                      transition-colors duration-300
+                      ${
+                        isViewAll
+                          ? "mt-2 font-medium text-[#3de0ad]"
+                          : "text-[#d5d8db] hover:text-[#4ee5bd]"
+                      }
+                    `}
+                  >
+                    {item.label}
+
+                    {!isViewAll && (
+                      <span
+                        className="
+                          absolute -bottom-1 left-0
+                          h-[2px] w-0
+                          bg-[#20d9a3]
+                          transition-all duration-300
+                          group-hover:w-full
+                        "
+                      />
+                    )}
+
+                    {isViewAll && (
+                      <FaArrowRight
+                        className="
+                          ml-1 inline-block
+                          transition-transform duration-300
+                          group-hover:translate-x-1
+                        "
+                        size={12}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
-        {/* Divider */}
-        <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)", paddingTop: 28, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>
+        <div className=" border-t border-white/10 px-6 py-5 flex flex-col gap-3 text sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-xs text-[#8f989f]">
             © 2026 Thinklyedu. All rights reserved.
-          </span>
-          <div style={{ display: "flex", gap: 24 }}>
-            {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((t) => (
-              <a key={t} href="#" style={{ color: "rgba(255,255,255,0.2)", fontSize: 12.5, textDecoration: "none", transition: "color 0.18s" }}
-                onMouseOver={e => e.currentTarget.style.color = "rgba(255,255,255,0.5)"}
-                onMouseOut={e => e.currentTarget.style.color = "rgba(255,255,255,0.2)"}>
-                {t}
-              </a>
-            ))}
+          </p>
+
+          <div className=" flex flex-wrap gap-x-5  gap-y-2 text-xs">
+            <Link
+              href="/terms"
+              className=" text-[#8f989f]  transition-colors duration-300  hover:text-[#4ee5bd]"
+            >
+              Terms of Service
+            </Link>
+
+            <Link
+              href="/privacy"
+              className="  text-[#8f989f]  transition-colors duration-300  hover:text-[#4ee5bd]"
+            >
+              Privacy Policy
+            </Link>
+
+            <Link
+              href="/cookies"
+              className=" text-[#8f989f] transition-colors duration-300 hover:text-[#4ee5bd]
+      "
+            >
+              Cookie Policy
+            </Link>
           </div>
-          <span style={{ color: "rgba(255,255,255,0.2)", fontSize: 13 }}>
-            Made with 💚 for students
-          </span>
+
+          <p className="text-xs text-[#8f989f]">Made with 💚 for students</p>
         </div>
       </div>
     </footer>
