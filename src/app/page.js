@@ -103,6 +103,7 @@ function Hero() {
 
   return (
     <section
+      className="section-py-lg home-hero"
       style={{
         minHeight: "100vh",
         background:
@@ -115,7 +116,7 @@ function Hero() {
     >
       <div className="max-w-6xl mx-auto px-6 w-full">
         <div
-          className="rx-stack"
+          className="rx-stack hero-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
@@ -327,6 +328,7 @@ function Hero() {
 
           {/* Right — floating cards visual */}
           <div
+            className="hero-visual"
             style={{
               position: "relative",
               height: 480,
@@ -544,11 +546,12 @@ function Features() {
   return (
     <section
       id="features"
+      className="section-py"
       style={{ padding: "96px 24px", background: "white" }}
     >
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 64 }}>
             <span
               style={{
                 color: "#22C55E",
@@ -687,10 +690,10 @@ function HowItWorks() {
   ];
 
   return (
-    <section id="how" style={{ padding: "96px 24px", background: "#F0F4F8" }}>
+    <section id="how" className="section-py" style={{ padding: "96px 24px", background: "#F0F4F8" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 72 }}>
+          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 72 }}>
             <span
               style={{
                 color: "#22C55E",
@@ -901,11 +904,12 @@ function Testimonials() {
   return (
     <section
       id="testimonials"
+      className="section-py"
       style={{ padding: "96px 24px", background: "white", overflow: "hidden" }}
     >
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div style={{ textAlign: "center", marginBottom: 64 }}>
+          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 64 }}>
             <span
               style={{
                 color: "#22C55E",
@@ -1051,6 +1055,7 @@ function CTA() {
   return (
     <section
       id="cta"
+      className="section-py-lg"
       style={{
         padding: "100px 24px",
         background: "#0D1F3C",

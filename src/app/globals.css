@@ -69,6 +69,8 @@ body {
    These override inline grid styles so fixed multi-column layouts collapse
    gracefully on small screens. */
 @media (max-width: 768px) {
+  body { overflow-x: hidden; }
+
   .rx-stack { grid-template-columns: 1fr !important; }
   .rx-2 { grid-template-columns: repeat(2, 1fr) !important; }
   .rx-full { width: 100% !important; }
@@ -79,6 +81,15 @@ body {
   .rx-visual { width: 100% !important; }
   .rx-visual > div { width: 100% !important; }
   .rx-nowrap { flex-wrap: wrap !important; }
+
+  .section-py { padding-top: 48px !important; padding-bottom: 48px !important; }
+  .section-py-lg { padding-top: 88px !important; padding-bottom: 56px !important; }
+  .hero-visual { height: auto !important; min-height: 280px !important; }
+  .hero-visual .max-w-\[430px\] { max-width: min(78vw, 330px) !important; }
+  .home-hero { overflow: hidden !important; }
+  .orbit-container img { width: 52px !important; height: 52px !important; }
+  .hero-grid { gap: 32px !important; margin-top: 8px !important; }
+  .section-head-mb { margin-bottom: 36px !important; }
 }
 
 
