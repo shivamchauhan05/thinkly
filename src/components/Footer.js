@@ -8,9 +8,8 @@ import {
   FaInstagram,
   FaTwitter,
   FaYoutube,
-  FaArrowRight,
 } from "react-icons/fa";
-import { Phone, Mail, Heart } from "lucide-react";
+import { Phone, Mail, Heart, ArrowRight, ArrowUp } from "lucide-react";
 
 const LINKS = {
   Platform: [
@@ -39,15 +38,17 @@ const LINKS = {
   ],
 };
 
+const SOCIALS = [
+  { Icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
+  { Icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
+  { Icon: FaTwitter, href: "https://twitter.com", label: "Twitter" },
+  { Icon: FaYoutube, href: "https://youtube.com", label: "YouTube" },
+];
+
 function ColumnHeading({ children }) {
   return (
     <h3
-      className="
-        mb-5 flex items-center gap-1.5
-        text-xs font-semibold uppercase
-        tracking-[0.15em]
-        text-[#7d8790]
-      "
+      className="mb-5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#7d8790]"
       style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
     >
       <span className="text-[#22C55E]/60">//</span> {children}
@@ -55,48 +56,36 @@ function ColumnHeading({ children }) {
   );
 }
 
+function FooterLink({ href, children }) {
+  return (
+    <Link
+      href={href}
+      className="group relative w-fit text-sm text-[#94A3B8] transition-colors duration-300 hover:text-[#4ADE80]"
+    >
+      {children}
+      <span className="absolute -bottom-1 left-0 h-px w-0 bg-[#22C55E] transition-all duration-300 group-hover:w-full" />
+    </Link>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer
-      className="w-full p-4 sm:p-6"
-      style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-    >
+    <footer className="relative w-full">
+      {/* glowing circuit-line divider */}
       <div
-        className="
-          mx-auto w-full max-w-[90%]
-          overflow-hidden rounded-2xl
-          border border-white/[0.08]
-          bg-white/[0.03]
-          shadow-[0_0_25px_rgba(34,197,94,0.06)]
-        "
-      >
-        <div
-          className="
-            grid w-full
-            grid-cols-1
-            sm:grid-cols-2
-            lg:grid-cols-[1.4fr_1fr_1fr_1fr]
-          "
-        >
-          <div
-            className="
-              border-b border-white/10 p-6
-              sm:border-r sm:border-b-0
-              lg:p-8
-            "
-          >
-            {/* Logo */}
+        className="h-px w-full"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.35) 50%, transparent 100%)",
+        }}
+      />
 
-            <Link href="/" className="flex w-fit items-center gap-2">
-              <span
-                className="
-                  flex h-8 w-8 shrink-0
-                  items-center justify-center
-                  overflow-hidden rounded-full
-                  border border-[#22C55E]/30
-                  bg-[#0d1b30]
-                "
-              >
+      <div className="mx-auto w-full max-w-6xl px-6 py-16">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-8">
+          {/* Brand */}
+          <div>
+            <Link href="/" className="flex w-fit items-center gap-2.5">
+              <span className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#22C55E]/30 bg-[#0d1b30]">
                 <Image
                   src="/thinkly_logo.jpeg"
                   alt="Thinkly logo"
@@ -105,301 +94,137 @@ export default function Footer() {
                   className="h-full w-full object-cover"
                 />
               </span>
-
-              <span className="text-2xl font-bold text-[#eeeeee]">
-                Thinklyedu
+              <span className="text-xl font-bold text-[#F1F5F9]">
+                Thinkly<span className="text-[#22C55E]">edu</span>
               </span>
             </Link>
 
-            {/* Description */}
-
-            <p
-              className="
-                mt-4 max-w-[230px]
-                text-sm leading-[1.4]
-                text-[#aeb5bc]
-              "
-            >
-              Connecting students across India with completely free, always real
-              internship opportunities.
+            <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-[#94A3B8]">
+              Connecting students across India with completely free, always
+              real internship opportunities.
             </p>
 
-            <div className="mt-5 flex gap-3">
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex h-8 w-8 items-center justify-center
-                  rounded-full
-                  border border-[#22C55E]/30
-                  bg-[#22C55E]/10
-                  text-[#4ADE80]
-                  transition-all duration-300
-                  hover:-translate-y-1
-                  hover:border-[#22C55E]
-                  hover:bg-[#22C55E]
-                  hover:text-[#08150C]
-                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
-                "
-              >
-                <FaLinkedinIn size={14} />
-              </a>
-
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex h-8 w-8 items-center justify-center
-                  rounded-full
-                  border border-[#22C55E]/30
-                  bg-[#22C55E]/10
-                  text-[#4ADE80]
-                  transition-all duration-300
-                  hover:-translate-y-1
-                  hover:border-[#22C55E]
-                  hover:bg-[#22C55E]
-                  hover:text-[#08150C]
-                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
-                "
-              >
-                <FaInstagram size={14} />
-              </a>
-
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex h-8 w-8 items-center justify-center
-                  rounded-full
-                  border border-[#22C55E]/30
-                  bg-[#22C55E]/10
-                  text-[#4ADE80]
-                  transition-all duration-300
-                  hover:-translate-y-1
-                  hover:border-[#22C55E]
-                  hover:bg-[#22C55E]
-                  hover:text-[#08150C]
-                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
-                "
-              >
-                <FaTwitter size={14} />
-              </a>
-
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="
-                  flex h-8 w-8 items-center justify-center
-                  rounded-full
-                  border border-[#22C55E]/30
-                  bg-[#22C55E]/10
-                  text-[#4ADE80]
-                  transition-all duration-300
-                  hover:-translate-y-1
-                  hover:border-[#22C55E]
-                  hover:bg-[#22C55E]
-                  hover:text-[#08150C]
-                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
-                "
-              >
-                <FaYoutube size={14} />
-              </a>
-            </div>
-
-            {/* Contact */}
-
-            <div className="mt-6 flex flex-col gap-2 text-sm text-[#d0d5d8]">
+            <div className="mt-5 flex flex-col gap-2.5 text-sm">
               <a
                 href="tel:+919818509083"
-                className="
-                  flex items-center gap-2
-                  text-[#d0d5d8]
-                  transition-colors
-                  hover:text-[#4ADE80]
-                "
+                className="flex items-center gap-2 text-[#94A3B8] transition-colors hover:text-[#4ADE80]"
               >
-                <Phone size={14} className="text-[#22C55E]/70 shrink-0" />
+                <Phone size={14} className="shrink-0 text-[#22C55E]/70" />
                 +91 98185 09083
               </a>
-
               <a
                 href="mailto:support@thinkyedu.co"
-                className="
-                  flex items-center gap-2
-                  text-[#d0d5d8]
-                  transition-colors
-                  hover:text-[#4ADE80]
-                "
+                className="flex items-center gap-2 text-[#94A3B8] transition-colors hover:text-[#4ADE80]"
               >
-                <Mail size={14} className="text-[#22C55E]/70 shrink-0" />
+                <Mail size={14} className="shrink-0 text-[#22C55E]/70" />
                 support@thinkyedu.co
               </a>
             </div>
+
+            <div className="mt-6 flex gap-3">
+              {SOCIALS.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-[#94A3B8] transition-all duration-300 hover:-translate-y-1 hover:border-[#22C55E] hover:bg-[#22C55E] hover:text-[#08150C] hover:shadow-[0_0_15px_rgba(34,197,94,0.4)]"
+                >
+                  <Icon size={14} />
+                </a>
+              ))}
+            </div>
           </div>
 
-          <div
-            className="
-              border-b border-white/10
-              p-6 sm:p-7
-              lg:border-b-0
-            "
-          >
+          {/* Platform */}
+          <div>
             <ColumnHeading>platform</ColumnHeading>
-
             <div className="flex flex-col gap-3">
               {LINKS.Platform.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="
-                    group relative w-fit
-                    text-sm text-[#d5d8db]
-                    transition-colors duration-300
-                    hover:text-[#4ADE80]
-                  "
-                >
+                <FooterLink key={item.label} href={item.href}>
                   {item.label}
-
-                  <span
-                    className="
-                      absolute -bottom-1 left-0
-                      h-[2px] w-0
-                      bg-[#22C55E]
-                      transition-all duration-300
-                      group-hover:w-full
-                    "
-                  />
-                </Link>
+                </FooterLink>
               ))}
             </div>
           </div>
 
-          <div
-            className="
-              border-b border-white/10
-              p-6 sm:p-7
-              lg:border-b-0
-            "
-          >
+          {/* Company */}
+          <div>
             <ColumnHeading>company</ColumnHeading>
-
             <div className="flex flex-col gap-3">
               {LINKS.Company.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className="
-                    group relative w-fit
-                    text-sm text-[#d5d8db]
-                    transition-colors duration-300
-                    hover:text-[#4ADE80]
-                  "
-                >
+                <FooterLink key={item.label} href={item.href}>
                   {item.label}
-
-                  <span
-                    className="
-                      absolute -bottom-1 left-0
-                      h-[2px] w-0
-                      bg-[#22C55E]
-                      transition-all duration-300
-                      group-hover:w-full
-                    "
-                  />
-                </Link>
+                </FooterLink>
               ))}
             </div>
           </div>
 
-          <div className="p-6 sm:p-7">
+          {/* Domains */}
+          <div>
             <ColumnHeading>domains</ColumnHeading>
-
             <div className="flex flex-col gap-3">
-              {LINKS.Domains.map((item) => {
-                const isViewAll = item.label === "View All Domains →";
-
-                return (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    className={`
-                      group relative w-fit
-                      text-sm
-                      transition-colors duration-300
-                      ${
-                        isViewAll
-                          ? "mt-2 font-medium text-[#22C55E]"
-                          : "text-[#d5d8db] hover:text-[#4ADE80]"
-                      }
-                    `}
-                  >
-                    {item.label}
-
-                    {!isViewAll && (
-                      <span
-                        className="
-                          absolute -bottom-1 left-0
-                          h-[2px] w-0
-                          bg-[#22C55E]
-                          transition-all duration-300
-                          group-hover:w-full
-                        "
-                      />
-                    )}
-
-                    {isViewAll && (
-                      <FaArrowRight
-                        className="
-                          ml-1 inline-block
-                          transition-transform duration-300
-                          group-hover:translate-x-1
-                        "
-                        size={12}
-                      />
-                    )}
-                  </Link>
-                );
-              })}
+              {LINKS.Domains.slice(0, -1).map((item) => (
+                <FooterLink key={item.label} href={item.href}>
+                  {item.label}
+                </FooterLink>
+              ))}
+              <Link
+                href="/internship"
+                className="group mt-1 flex w-fit items-center gap-1 text-sm font-semibold text-[#22C55E] transition-colors hover:text-[#4ADE80]"
+              >
+                View all domains
+                <ArrowRight
+                  size={13}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
             </div>
           </div>
         </div>
 
-        <div className=" border-t border-white/10 px-6 py-5 flex flex-col gap-3 text sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-xs text-[#8f989f]">
+        {/* Bottom bar */}
+        <div className="mt-14 flex flex-col items-center gap-4 border-t border-white/[0.08] pt-6 text-center sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-xs text-[#7d8790]">
             © 2026 Thinklyedu. All rights reserved.
           </p>
 
-          <div className=" flex flex-wrap gap-x-5  gap-y-2 text-xs">
+          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
             <Link
               href="/terms"
-              className=" text-[#8f989f]  transition-colors duration-300  hover:text-[#4ADE80]"
+              className="text-[#7d8790] transition-colors duration-300 hover:text-[#4ADE80]"
             >
               Terms of Service
             </Link>
-
             <Link
               href="/privacy"
-              className="  text-[#8f989f]  transition-colors duration-300  hover:text-[#4ADE80]"
+              className="text-[#7d8790] transition-colors duration-300 hover:text-[#4ADE80]"
             >
               Privacy Policy
             </Link>
-
             <Link
               href="/cookies"
-              className=" text-[#8f989f] transition-colors duration-300 hover:text-[#4ADE80]
-      "
+              className="text-[#7d8790] transition-colors duration-300 hover:text-[#4ADE80]"
             >
               Cookie Policy
             </Link>
           </div>
 
-          <p className="flex items-center gap-1.5 text-xs text-[#8f989f]">
-            Made with <Heart size={12} className="text-[#22C55E]" fill="#22C55E" /> for students
-          </p>
+          <div className="flex items-center gap-4">
+            <p className="flex items-center gap-1.5 text-xs text-[#7d8790]">
+              Made with{" "}
+              <Heart size={12} className="text-[#22C55E]" fill="#22C55E" />{" "}
+              for students
+            </p>
+            <a
+              href="#top"
+              aria-label="Back to top"
+              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/[0.08] bg-white/[0.03] text-[#94A3B8] transition-all duration-300 hover:border-[#22C55E] hover:text-[#4ADE80]"
+            >
+              <ArrowUp size={14} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
