@@ -1,6 +1,27 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Footer from '@/components/Footer'
+import TechBackground from '@/components/TechBackground'
+import { useApplyModal } from '@/components/ApplyModal'
+import {
+  PenLine,
+  Search,
+  Megaphone,
+  Smartphone,
+  Video,
+  Mail,
+  Brain,
+  FileSearch,
+  Puzzle,
+  Wrench,
+  TrendingUp,
+  FolderOpen,
+  Clock,
+  Globe,
+  FileText,
+  GraduationCap,
+  ChevronDown,
+} from "lucide-react";
 
 function useReveal() {
   const ref = useRef(null);
@@ -37,19 +58,39 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
+// ── Section label (monospace "// tag" style, matches homepage) ────────────────
+function SectionTag({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        color: "#22C55E",
+        fontSize: 12,
+        fontWeight: 700,
+        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+        letterSpacing: "0.05em",
+      }}
+    >
+      <span style={{ opacity: 0.6 }}>//</span> {children}
+    </span>
+  );
+}
+
 const SKILLS = [
-  { icon: "✍️", title: "Article & Blog Writing", desc: "Write well-researched, engaging long-form articles and blog posts on real briefs." },
-  { icon: "🔍", title: "SEO Content Writing", desc: "Use keyword research, on-page SEO, and search intent to write content that ranks." },
-  { icon: "📣", title: "Copywriting", desc: "Craft persuasive landing pages, ads, and emails that drive clicks and conversions." },
-  { icon: "📱", title: "Social Media Content", desc: "Write scroll-stopping captions, threads, and posts for Instagram, LinkedIn, and X." },
-  { icon: "🎬", title: "Scriptwriting", desc: "Write scripts for YouTube, reels, and short-form video content that hold attention." },
-  { icon: "📧", title: "Email & Newsletter Writing", desc: "Write email sequences and newsletters that build an audience and drive action." },
-  { icon: "🧠", title: "Content Strategy", desc: "Plan content calendars, pillars, and briefs aligned to real business goals." },
-  { icon: "📊", title: "Research & Fact-Checking", desc: "Source credible references, verify facts, and write with accuracy and rigor." },
-  { icon: "🧩", title: "UX & Microcopy Writing", desc: "Write clear product copy — buttons, onboarding flows, and error messages." },
-  { icon: "🛠️", title: "Editing & Proofreading", desc: "Sharpen grammar, clarity, tone, and structure across every piece you write." },
-  { icon: "📈", title: "Content Analytics", desc: "Read performance data and use it to improve headlines, structure, and CTAs." },
-  { icon: "📁", title: "Portfolio Case Studies", desc: "Package your best work into a portfolio site recruiters can review in minutes." },
+  { icon: PenLine, title: "Article & Blog Writing", desc: "Write well-researched, engaging long-form articles and blog posts on real briefs." },
+  { icon: Search, title: "SEO Content Writing", desc: "Use keyword research, on-page SEO, and search intent to write content that ranks." },
+  { icon: Megaphone, title: "Copywriting", desc: "Craft persuasive landing pages, ads, and emails that drive clicks and conversions." },
+  { icon: Smartphone, title: "Social Media Content", desc: "Write scroll-stopping captions, threads, and posts for Instagram, LinkedIn, and X." },
+  { icon: Video, title: "Scriptwriting", desc: "Write scripts for YouTube, reels, and short-form video content that hold attention." },
+  { icon: Mail, title: "Email & Newsletter Writing", desc: "Write email sequences and newsletters that build an audience and drive action." },
+  { icon: Brain, title: "Content Strategy", desc: "Plan content calendars, pillars, and briefs aligned to real business goals." },
+  { icon: FileSearch, title: "Research & Fact-Checking", desc: "Source credible references, verify facts, and write with accuracy and rigor." },
+  { icon: Puzzle, title: "UX & Microcopy Writing", desc: "Write clear product copy — buttons, onboarding flows, and error messages." },
+  { icon: Wrench, title: "Editing & Proofreading", desc: "Sharpen grammar, clarity, tone, and structure across every piece you write." },
+  { icon: TrendingUp, title: "Content Analytics", desc: "Read performance data and use it to improve headlines, structure, and CTAs." },
+  { icon: FolderOpen, title: "Portfolio Case Studies", desc: "Package your best work into a portfolio site recruiters can review in minutes." },
 ];
 
 const MONTHS = [
@@ -58,7 +99,7 @@ const MONTHS = [
   { month: "Month 3", title: "Blog & Article Writing", desc: "Write and publish long-form articles and blog posts on real client-style briefs.", color: "#F59E0B" },
   { month: "Month 4", title: "Copywriting & Social Content", desc: "Write landing pages, ads, emails, and social media content for real campaigns.", color: "#EF4444" },
   { month: "Month 5", title: "Content Strategy Project", desc: "Plan and execute a content calendar with mentor feedback and performance review.", color: "#8B5CF6" },
-  { month: "Month 6", title: "Portfolio & Handoff", desc: "Finalize a writing portfolio, polish samples, and prepare for interviews.", color: "#0D1F3C" },
+  { month: "Month 6", title: "Portfolio & Handoff", desc: "Finalize a writing portfolio, polish samples, and prepare for interviews.", color: "#94A3B8" },
 ];
 
 const TESTIMONIALS = [
@@ -78,25 +119,24 @@ const FAQS = [
 function FAQ({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ borderBottom: "1px solid #E2E8F0" }}>
+    <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
       <button onClick={() => setOpen(!open)} style={{
         width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "none", border: "none", cursor: "pointer", padding: "18px 0",
         fontFamily: "inherit", textAlign: "left",
       }}>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "#0D1F3C", paddingRight: 20 }}>{q}</span>
-        <svg style={{ width: 18, height: 18, color: "#22C55E", flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(45deg)" : "none" }} viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
+        <span style={{ fontSize: 15, fontWeight: 600, color: "#F1F5F9", paddingRight: 20 }}>{q}</span>
+        <ChevronDown size={18} color="#4ADE80" style={{ flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(180deg)" : "none" }} />
       </button>
       {open && (
-        <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.75, paddingBottom: 18, margin: 0, paddingRight: 32 }}>{a}</p>
+        <p style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.75, paddingBottom: 18, margin: 0, paddingRight: 32 }}>{a}</p>
       )}
     </div>
   );
 }
 
 export default function ContentWritingInternshipPage() {
+  const { open: openApplyModal } = useApplyModal();
   const lineRef = useRef(null);
 
   useEffect(() => {
@@ -108,61 +148,63 @@ export default function ContentWritingInternshipPage() {
   }, []);
 
   return (
-    <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", color: "#0D1F3C", background: "white", paddingTop: 68 }}>
+    <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", color: "#F1F5F9", position: "relative", background: "#0a1628", paddingTop: 68 }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
       `}</style>
+      <TechBackground />
+      <div style={{ position: "relative", zIndex: 1 }}>
 
-      <section style={{ background: "linear-gradient(160deg, #ffffff 0%, #f5fbf8 55%, #ffffff 100%)", padding: "88px 24px 56px", overflow: "hidden", position: "relative" }}>
+      <section style={{ padding: "88px 24px 56px", overflow: "hidden", position: "relative" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "center" }}>
             <div>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#22C55E", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "6px 16px", background: "rgba(34,197,94,0.06)", marginBottom: 24 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#4ADE80", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "6px 16px", background: "rgba(34,197,94,0.08)", marginBottom: 24 }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E", display: "inline-block" }} />
                 1–6 month internship track
               </span>
 
-              <h1 style={{ fontSize: "clamp(38px,5vw,62px)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#0D1F3C", margin: "0 0 18px" }}>
+              <h1 style={{ fontSize: "clamp(38px,5vw,62px)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#F8FAFC", margin: "0 0 18px" }}>
                 Content Writing
                 <span style={{ display: "block", color: "#22C55E", position: "relative" }}>
                   Internship
-                  <span ref={lineRef} style={{ display: "block", height: 3, background: "rgba(34,197,94,0.25)", borderRadius: 4, marginTop: 6, width: "0%" }} />
+                  <span ref={lineRef} style={{ display: "block", height: 3, background: "rgba(34,197,94,0.35)", borderRadius: 4, marginTop: 6, width: "0%" }} />
                 </span>
               </h1>
 
-              <p style={{ fontSize: 17, color: "#64748B", lineHeight: 1.75, maxWidth: 560, margin: "0 0 32px" }}>
+              <p style={{ fontSize: 17, color: "#94A3B8", lineHeight: 1.75, maxWidth: 560, margin: "0 0 32px" }}>
                 Start your writing career with a flexible 1 to 6 month content writing internship. Learn SEO writing, copywriting, social media content, and content strategy — build a real portfolio and graduate with a verified certificate.
               </p>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
                 {[
-                  { icon: "⏱️", label: "Flexible duration", value: "1–6 months" },
-                  { icon: "🌐", label: "Remote ready", value: "Work from anywhere" },
-                  { icon: "📝", label: "Project-based", value: "Real writing briefs" },
-                  { icon: "🎓", label: "Verified certificate", value: "Shareable on LinkedIn" },
+                  { icon: Clock, label: "Flexible duration", value: "1–6 months" },
+                  { icon: Globe, label: "Remote ready", value: "Work from anywhere" },
+                  { icon: FileText, label: "Project-based", value: "Real writing briefs" },
+                  { icon: GraduationCap, label: "Verified certificate", value: "Shareable on LinkedIn" },
                 ].map((item) => (
                   <div key={item.label} style={{ display: "flex", gap: 12, alignItems: "center", minWidth: 200 }}>
-                    <div style={{ width: 44, height: 44, borderRadius: 18, background: "#f4fdf7", display: "grid", placeItems: "center", fontSize: 18 }}>
-                      {item.icon}
+                    <div style={{ width: 44, height: 44, borderRadius: 18, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.25)", display: "grid", placeItems: "center" }}>
+                      <item.icon size={18} color="#4ADE80" strokeWidth={1.8} />
                     </div>
                     <div>
                       <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "#22C55E" }}>{item.label}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#0D1F3C" }}>{item.value}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#F1F5F9" }}>{item.value}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-                <a href="#" style={{ background: "#0D1F3C", color: "white", fontWeight: 700, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 32px rgba(13,31,60,0.16)", transition: "transform 0.2s" }}
+                <a href="#" style={{ background: "#22C55E", color: "#08150C", fontWeight: 700, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", boxShadow: "0 8px 28px rgba(34,197,94,0.28)", transition: "all 0.2s" }}
                   onClick={(e) => { e.preventDefault(); openApplyModal() }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; }}>
+                  onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Apply Now
                 </a>
-                <a href="#curriculum" style={{ border: "1.5px solid rgba(13,31,60,0.18)", color: "#0D1F3C", fontWeight: 600, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", transition: "all 0.2s" }}
-                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.color = "#22C55E"; }}
-                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(13,31,60,0.18)"; e.currentTarget.style.color = "#0D1F3C"; }}>
+                <a href="#curriculum" style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0", fontWeight: 600, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", transition: "all 0.2s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.color = "#4ADE80"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)"; e.currentTarget.style.color = "#E2E8F0"; }}>
                   See Curriculum
                 </a>
               </div>
@@ -179,9 +221,9 @@ export default function ContentWritingInternshipPage() {
                 { label: "Tools", value: "SEO Tools, Grammarly, CMS" },
                 { label: "Editing", value: "Proofreading, Style Guides" },
               ].map((item) => (
-                <div key={item.label} style={{ background: "white", borderRadius: 24, border: "1px solid #E2E8F0", padding: 20, minHeight: 120, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: "#0D1F3C" }}>{item.label}</span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#64748B" }}>{item.value}</span>
+                <div key={item.label} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 24, border: "1.5px solid rgba(255,255,255,0.08)", padding: 20, minHeight: 120, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: "#F1F5F9" }}>{item.label}</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#94A3B8" }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -189,15 +231,15 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "#F8FAFC", padding: "72px 24px" }}>
+      <section style={{ background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)", padding: "72px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>What you will learn</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>what_you_will_learn</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Writing skills real brands hire for.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
+              <p style={{ color: "#94A3B8", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
                 Every module moves you from writing for yourself to writing for readers, search engines, and business goals.
               </p>
             </div>
@@ -206,12 +248,14 @@ export default function ContentWritingInternshipPage() {
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {SKILLS.map((skill, index) => (
               <Reveal key={skill.title} delay={index * 70}>
-                <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 26, transition: "transform 0.25s, box-shadow 0.25s" }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(15,23,42,0.08)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                  <div style={{ fontSize: 28, marginBottom: 16 }}>{skill.icon}</div>
-                  <h3 style={{ fontSize: 17, fontWeight: 700, color: "#0D1F3C", marginBottom: 10 }}>{skill.title}</h3>
-                  <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.8, margin: 0 }}>{skill.desc}</p>
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 26, transition: "all 0.3s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)"; e.currentTarget.style.background = "rgba(34,197,94,0.05)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                    <skill.icon size={22} color="#4ADE80" strokeWidth={1.8} />
+                  </div>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, color: "#F1F5F9", marginBottom: 10 }}>{skill.title}</h3>
+                  <p style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.8, margin: 0 }}>{skill.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -219,15 +263,15 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section style={{ padding: "72px 24px", background: "white" }}>
+      <section style={{ padding: "72px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 44 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Writing toolkit</span>
-              <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>writing_toolkit</SectionTag>
+              <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Every format and skill you'll practice, hands-on.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
+              <p style={{ color: "#94A3B8", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
                 From SEO articles to ad copy to scripts — this internship covers the full modern content writing workflow.
               </p>
             </div>
@@ -246,12 +290,12 @@ export default function ContentWritingInternshipPage() {
                 "Storytelling", "Brand Voice",
               ].map((tool) => (
                 <span key={tool} style={{
-                  fontSize: 13.5, fontWeight: 600, color: "#0D1F3C", background: "#F8FAFC",
-                  border: "1px solid #E2E8F0", borderRadius: 999, padding: "9px 18px",
+                  fontSize: 13, fontWeight: 600, color: "#4ADE80", fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  border: "1px solid rgba(34,197,94,0.3)", background: "rgba(34,197,94,0.06)", borderRadius: 999, padding: "9px 18px",
                   transition: "all 0.2s", cursor: "default",
                 }}
-                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.background = "rgba(34,197,94,0.06)"; e.currentTarget.style.color = "#16803C"; }}
-                  onMouseOut={e => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.background = "#F8FAFC"; e.currentTarget.style.color = "#0D1F3C"; }}>
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.6)"; e.currentTarget.style.background = "rgba(34,197,94,0.12)"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.3)"; e.currentTarget.style.background = "rgba(34,197,94,0.06)"; }}>
                   {tool}
                 </span>
               ))}
@@ -260,15 +304,15 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section id="curriculum" style={{ padding: "88px 24px", background: "#F8FAFC" }}>
+      <section id="curriculum" style={{ padding: "88px 24px", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Curriculum</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>curriculum</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 A clear path from month 1 to month 6.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.7 }}>
+              <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.7 }}>
                 Progress through structured monthly goals, practical assignments, and mentor-led writing projects.
               </p>
             </div>
@@ -280,12 +324,12 @@ export default function ContentWritingInternshipPage() {
                 <div style={{ display: "grid", gridTemplateColumns: "48px 1fr", gap: 20, alignItems: "start" }}>
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <div style={{ width: 16, height: 16, borderRadius: "50%", background: item.color, marginTop: 4 }} />
-                    {index < MONTHS.length - 1 && <div style={{ flex: 1, width: 2, background: "#E2E8F0", marginTop: 8 }} />}
+                    {index < MONTHS.length - 1 && <div style={{ flex: 1, width: 2, background: "rgba(255,255,255,0.1)", marginTop: 8 }} />}
                   </div>
-                  <div style={{ padding: 26, background: "white", borderRadius: 20, border: "1px solid #E2E8F0" }}>
+                  <div style={{ padding: 26, background: "rgba(255,255,255,0.03)", borderRadius: 20, border: "1.5px solid rgba(255,255,255,0.08)" }}>
                     <div style={{ fontSize: 12, fontWeight: 700, color: item.color, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10 }}>{item.month}</div>
-                    <h3 style={{ fontSize: 18, fontWeight: 800, color: "#0D1F3C", margin: "0 0 10px" }}>{item.title}</h3>
-                    <p style={{ fontSize: 15, color: "#64748B", lineHeight: 1.8, margin: 0 }}>{item.desc}</p>
+                    <h3 style={{ fontSize: 18, fontWeight: 800, color: "#F1F5F9", margin: "0 0 10px" }}>{item.title}</h3>
+                    <p style={{ fontSize: 15, color: "#94A3B8", lineHeight: 1.8, margin: 0 }}>{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -294,12 +338,12 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "white", padding: "88px 24px" }}>
+      <section style={{ padding: "88px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Alumni</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>alumni</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Real stories from students who launched writing careers.
               </h2>
             </div>
@@ -307,15 +351,15 @@ export default function ContentWritingInternshipPage() {
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TESTIMONIALS.map((item, index) => (
               <Reveal key={item.name} delay={index * 70}>
-                <div style={{ background: "#F8FAFC", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, transition: "transform 0.25s, box-shadow 0.25s" }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(15,23,42,0.08)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                  <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, margin: "0 0 24px" }}>
-                    “{item.quote}”
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 28, transition: "all 0.3s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)"; e.currentTarget.style.background = "rgba(34,197,94,0.05)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  <p style={{ fontSize: 15, color: "#CBD5E1", lineHeight: 1.75, margin: "0 0 24px" }}>
+                    "{item.quote}"
                   </p>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: "#0D1F3C" }}>{item.name}</div>
-                    <div style={{ fontSize: 13, color: "#64748B", marginTop: 4 }}>{item.role}</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}>{item.name}</div>
+                    <div style={{ fontSize: 13, color: "#4ADE80", marginTop: 4 }}>{item.role}</div>
                   </div>
                 </div>
               </Reveal>
@@ -324,23 +368,23 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section style={{ padding: "88px 24px", background: "#F8FAFC" }}>
+      <section style={{ padding: "88px 24px", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>FAQ</span>
-              <h2 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 16px", letterSpacing: "-0.02em" }}>
+              <SectionTag>faq</SectionTag>
+              <h2 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 16px", letterSpacing: "-0.02em" }}>
                 Common questions about the content writing internship.
               </h2>
             </div>
           </Reveal>
-          <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: "0 24px" }}>
+          <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "0 24px" }}>
             {FAQS.map((faq) => <FAQ key={faq.q} {...faq} />)}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "48px 24px 8px", background: "white" }}>
+      <section style={{ padding: "48px 24px 8px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <Reveal>
             <p style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "#94A3B8", marginBottom: 10 }}>
@@ -357,26 +401,27 @@ export default function ContentWritingInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "#0D1F3C", padding: "88px 24px", textAlign: "center", color: "white" }}>
-        <div style={{ maxWidth: 700, margin: "0 auto" }}>
+      <section style={{ padding: "88px 24px", textAlign: "center", borderTop: "1px solid rgba(255,255,255,0.08)", position: "relative", overflow: "hidden" }}>
+        <div style={{ position: "absolute", top: -80, right: -80, width: 300, height: 300, borderRadius: "50%", background: "rgba(34,197,94,0.08)", pointerEvents: "none" }} />
+        <div style={{ maxWidth: 700, margin: "0 auto", position: "relative", zIndex: 1 }}>
           <Reveal>
-            <div style={{ fontSize: 46, marginBottom: 20 }}>📝</div>
-            <h2 style={{ fontSize: "clamp(28px,4vw,44px)", fontWeight: 900, lineHeight: 1.1, margin: "0 0 18px", letterSpacing: "-0.02em" }}>
+            <FileText size={44} color="#4ADE80" style={{ marginBottom: 20 }} strokeWidth={1.6} />
+            <h2 style={{ fontSize: "clamp(28px,4vw,44px)", fontWeight: 900, lineHeight: 1.1, margin: "0 0 18px", letterSpacing: "-0.02em", color: "#F8FAFC" }}>
               Launch your content writing internship in 1–6 months.
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.76)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
+            <p style={{ color: "rgba(226,232,240,0.6)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
               Free to apply, crafted for real learning, and built to help you secure your first writing role.
             </p>
-            <a href="mailto:supportthinkly.co@gmail.com" style={{ display: "inline-block", background: "#22C55E", color: "white", fontWeight: 700, fontSize: 16, padding: "16px 44px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 40px rgba(34,197,94,0.25)", transition: "transform 0.2s" }}
-              onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; }}>
+            <a href="mailto:supportthinkly.co@gmail.com" style={{ display: "inline-block", background: "#22C55E", color: "#08150C", fontWeight: 700, fontSize: 16, padding: "16px 44px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 40px rgba(34,197,94,0.3)", transition: "all 0.2s" }}
+              onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
               Apply for Content Writing Internship →
             </a>
           </Reveal>
         </div>
       </section>
        <Footer/>
+      </div>
     </main>
-    
   );
 }

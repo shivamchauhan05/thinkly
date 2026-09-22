@@ -2,6 +2,7 @@
 'use client'
 import { useState, useRef } from 'react'
 import { ShieldCheck, Calendar, Clock, Award, Copy, Download, Share2, CheckCircle, Star } from 'lucide-react'
+import TechBackground from '@/components/TechBackground'
 
 export default function CertificatePreview({
   studentName = "Priya Sharma",
@@ -49,10 +50,13 @@ export default function CertificatePreview({
   }
 
   return (
-    <section id='certificate' className="py-16 bg-gray-100 min-h-screen">
-      <div className="max-w-2xl mx-auto px-4">
+    <section id='certificate' className="py-16 min-h-screen" style={{ position: "relative", background: "#0a1628" }}>
+      <TechBackground />
+      <div className="max-w-2xl mx-auto px-4" style={{ position: "relative", zIndex: 1 }}>
 
         {/* ───── CERTIFICATE CARD ───── */}
+        {/* NOTE: this card is the actual downloadable credential (exported to PNG via html-to-image).
+            Its light/professional styling is intentionally left untouched — do not dark-theme it. */}
         <div ref={certRef} className="bg-white border border-blue-200 rounded-sm overflow-hidden shadow-2xl relative">
 
           {/* Top Header Band */}

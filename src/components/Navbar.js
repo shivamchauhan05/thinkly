@@ -2,19 +2,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useApplyModal } from "./ApplyModal";
 import Image from "next/image";
+import { Megaphone, Palette, Code2, PenTool, Camera, Smartphone } from "lucide-react";
 const INTERNSHIP_DOMAINS = [
-  { emoji: "📣", label: "Marketing", sub: "Social media, SEO, campaigns" },
-  { emoji: "🎨", label: "Design", sub: "UI/UX, graphics, branding" },
-  { emoji: "💻", label: "Technology", sub: "Web dev, apps, coding" },
-  // { emoji: "📊", label: "Finance", sub: "Accounting, analysis, fintech" },
-  { emoji: "✍️", label: "Content Writing", sub: "Blogs, copywriting, scripts" },
-  // { emoji: "👥", label: "Human Resources", sub: "Recruitment, L&D, operations" },
-  { emoji: "📸", label: "Photography & Video", sub: "Reels, editing, shoots" },
-  // { emoji: "📦", label: "Operations", sub: "Logistics, supply chain, admin" },
-  // { emoji: "🤝", label: "Sales & BD", sub: "Lead gen, partnerships, outreach" },
-  { emoji: "📱", label: "Social Media", sub: "Instagram, YouTube, LinkedIn" },
-  // { emoji: "🔬", label: "Research & Data", sub: "Market research, analytics" },
-  // { emoji: "🎓", label: "Education & Training", sub: "Tutoring, curriculum, edtech" },
+  { icon: Megaphone, label: "Marketing", sub: "Social media, SEO, campaigns" },
+  { icon: Palette, label: "Design", sub: "UI/UX, graphics, branding" },
+  { icon: Code2, label: "Technology", sub: "Web dev, apps, coding" },
+  { icon: PenTool, label: "Content Writing", sub: "Blogs, copywriting, scripts" },
+  { icon: Camera, label: "Photography & Video", sub: "Reels, editing, shoots" },
+  { icon: Smartphone, label: "Social Media", sub: "Instagram, YouTube, LinkedIn" },
 ];
 
 export default function Header() {
@@ -328,13 +323,17 @@ export default function Header() {
                     >
                       <span
                         style={{
-                          fontSize: 22,
-                          lineHeight: 1,
+                          width: 36,
+                          height: 36,
+                          borderRadius: 10,
+                          background: "rgba(34,197,94,0.08)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
                           flexShrink: 0,
-                          marginTop: 1,
                         }}
                       >
-                        {domain.emoji}
+                        <domain.icon size={18} color="#16A34A" strokeWidth={1.8} />
                       </span>
                       <div>
                         <div
@@ -533,7 +532,7 @@ export default function Header() {
                   }}
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <span style={{ fontSize: 18 }}>{d.emoji}</span>
+                  <d.icon size={17} color="#16A34A" strokeWidth={1.8} />
                   <span
                     style={{ fontSize: 14, color: "#0D1F3C", fontWeight: 500 }}
                   >

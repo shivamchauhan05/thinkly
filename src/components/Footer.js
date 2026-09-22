@@ -10,6 +10,7 @@ import {
   FaYoutube,
   FaArrowRight,
 } from "react-icons/fa";
+import { Phone, Mail, Heart } from "lucide-react";
 
 const LINKS = {
   Platform: [
@@ -32,22 +33,41 @@ const LINKS = {
     { label: "Marketing", href: "/internship/marketing" },
     { label: "UI/UX Design", href: "/internship/design" },
     { label: "Tech & Coding", href: "/internship/technology" },
-    { label: "Finance", href: "/internship/finance" },
+    { label: "Photography & Video", href: "/internship/photography-video" },
     { label: "Content Writing", href: "/internship/content-writing" },
     { label: "View All Domains →", href: "/internship" },
   ],
 };
 
+function ColumnHeading({ children }) {
+  return (
+    <h3
+      className="
+        mb-5 flex items-center gap-1.5
+        text-xs font-semibold uppercase
+        tracking-[0.15em]
+        text-[#7d8790]
+      "
+      style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
+    >
+      <span className="text-[#22C55E]/60">//</span> {children}
+    </h3>
+  );
+}
+
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#020b14] p-4 sm:p-6">
+    <footer
+      className="w-full p-4 sm:p-6"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+    >
       <div
         className="
           mx-auto w-full max-w-[90%]
           overflow-hidden rounded-2xl
-          border border-white/10
-          bg-gradient-to-br from-[#26323d]/90 to-[#101923]/95
-          shadow-[0_0_25px_rgba(0,255,200,0.08)]
+          border border-white/[0.08]
+          bg-white/[0.03]
+          shadow-[0_0_25px_rgba(34,197,94,0.06)]
         "
       >
         <div
@@ -74,7 +94,7 @@ export default function Footer() {
                   items-center justify-center
                   overflow-hidden rounded-full
                   border border-[#22C55E]/30
-                  bg-[#1a2f50]
+                  bg-[#0d1b30]
                 "
               >
                 <Image
@@ -112,15 +132,15 @@ export default function Footer() {
                 className="
                   flex h-8 w-8 items-center justify-center
                   rounded-full
-                  border border-[#5ce9c4]/30
-                  bg-[#5ce9c4]/10
-                  text-[#5ce9c4]
+                  border border-[#22C55E]/30
+                  bg-[#22C55E]/10
+                  text-[#4ADE80]
                   transition-all duration-300
                   hover:-translate-y-1
-                  hover:border-[#18b98b]
-                  hover:bg-[#18b98b]
-                  hover:text-white
-                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                  hover:border-[#22C55E]
+                  hover:bg-[#22C55E]
+                  hover:text-[#08150C]
+                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
                 "
               >
                 <FaLinkedinIn size={14} />
@@ -133,15 +153,15 @@ export default function Footer() {
                 className="
                   flex h-8 w-8 items-center justify-center
                   rounded-full
-                  border border-[#5ce9c4]/30
-                  bg-[#5ce9c4]/10
-                  text-[#5ce9c4]
+                  border border-[#22C55E]/30
+                  bg-[#22C55E]/10
+                  text-[#4ADE80]
                   transition-all duration-300
                   hover:-translate-y-1
-                  hover:border-[#18b98b]
-                  hover:bg-[#18b98b]
-                  hover:text-white
-                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                  hover:border-[#22C55E]
+                  hover:bg-[#22C55E]
+                  hover:text-[#08150C]
+                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
                 "
               >
                 <FaInstagram size={14} />
@@ -154,15 +174,15 @@ export default function Footer() {
                 className="
                   flex h-8 w-8 items-center justify-center
                   rounded-full
-                  border border-[#5ce9c4]/30
-                  bg-[#5ce9c4]/10
-                  text-[#5ce9c4]
+                  border border-[#22C55E]/30
+                  bg-[#22C55E]/10
+                  text-[#4ADE80]
                   transition-all duration-300
                   hover:-translate-y-1
-                  hover:border-[#18b98b]
-                  hover:bg-[#18b98b]
-                  hover:text-white
-                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                  hover:border-[#22C55E]
+                  hover:bg-[#22C55E]
+                  hover:text-[#08150C]
+                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
                 "
               >
                 <FaTwitter size={14} />
@@ -175,15 +195,15 @@ export default function Footer() {
                 className="
                   flex h-8 w-8 items-center justify-center
                   rounded-full
-                  border border-[#5ce9c4]/30
-                  bg-[#5ce9c4]/10
-                  text-[#5ce9c4]
+                  border border-[#22C55E]/30
+                  bg-[#22C55E]/10
+                  text-[#4ADE80]
                   transition-all duration-300
                   hover:-translate-y-1
-                  hover:border-[#18b98b]
-                  hover:bg-[#18b98b]
-                  hover:text-white
-                  hover:shadow-[0_0_15px_rgba(24,185,139,0.6)]
+                  hover:border-[#22C55E]
+                  hover:bg-[#22C55E]
+                  hover:text-[#08150C]
+                  hover:shadow-[0_0_15px_rgba(34,197,94,0.6)]
                 "
               >
                 <FaYoutube size={14} />
@@ -192,29 +212,30 @@ export default function Footer() {
 
             {/* Contact */}
 
-            <div className="mt-6 flex flex-col text-sm text-[#d0d5d8]">
-              <p className="mb-1 text-[#9fa7ad]">Phone</p>
-
+            <div className="mt-6 flex flex-col gap-2 text-sm text-[#d0d5d8]">
               <a
                 href="tel:+919818509083"
                 className="
-                  mb-2
+                  flex items-center gap-2
                   text-[#d0d5d8]
                   transition-colors
-                  hover:text-[#4ee5bd]
+                  hover:text-[#4ADE80]
                 "
               >
+                <Phone size={14} className="text-[#22C55E]/70 shrink-0" />
                 +91 98185 09083
               </a>
 
               <a
                 href="mailto:support@thinkyedu.co"
                 className="
+                  flex items-center gap-2
                   text-[#d0d5d8]
                   transition-colors
-                  hover:text-[#4ee5bd]
+                  hover:text-[#4ADE80]
                 "
               >
+                <Mail size={14} className="text-[#22C55E]/70 shrink-0" />
                 support@thinkyedu.co
               </a>
             </div>
@@ -227,17 +248,7 @@ export default function Footer() {
               lg:border-b-0
             "
           >
-            <h3
-              className="
-                mb-5
-                text-base
-                font-medium
-                tracking-wide
-                text-[#999fa5]
-              "
-            >
-              PLATFORM
-            </h3>
+            <ColumnHeading>platform</ColumnHeading>
 
             <div className="flex flex-col gap-3">
               {LINKS.Platform.map((item) => (
@@ -248,7 +259,7 @@ export default function Footer() {
                     group relative w-fit
                     text-sm text-[#d5d8db]
                     transition-colors duration-300
-                    hover:text-[#4ee5bd]
+                    hover:text-[#4ADE80]
                   "
                 >
                   {item.label}
@@ -257,7 +268,7 @@ export default function Footer() {
                     className="
                       absolute -bottom-1 left-0
                       h-[2px] w-0
-                      bg-[#20d9a3]
+                      bg-[#22C55E]
                       transition-all duration-300
                       group-hover:w-full
                     "
@@ -274,17 +285,7 @@ export default function Footer() {
               lg:border-b-0
             "
           >
-            <h3
-              className="
-                mb-5
-                text-base
-                font-medium
-                tracking-wide
-                text-[#999fa5]
-              "
-            >
-              COMPANY
-            </h3>
+            <ColumnHeading>company</ColumnHeading>
 
             <div className="flex flex-col gap-3">
               {LINKS.Company.map((item) => (
@@ -295,7 +296,7 @@ export default function Footer() {
                     group relative w-fit
                     text-sm text-[#d5d8db]
                     transition-colors duration-300
-                    hover:text-[#4ee5bd]
+                    hover:text-[#4ADE80]
                   "
                 >
                   {item.label}
@@ -304,7 +305,7 @@ export default function Footer() {
                     className="
                       absolute -bottom-1 left-0
                       h-[2px] w-0
-                      bg-[#20d9a3]
+                      bg-[#22C55E]
                       transition-all duration-300
                       group-hover:w-full
                     "
@@ -315,17 +316,7 @@ export default function Footer() {
           </div>
 
           <div className="p-6 sm:p-7">
-            <h3
-              className="
-                mb-5
-                text-base
-                font-medium
-                tracking-wide
-                text-[#999fa5]
-              "
-            >
-              DOMAINS
-            </h3>
+            <ColumnHeading>domains</ColumnHeading>
 
             <div className="flex flex-col gap-3">
               {LINKS.Domains.map((item) => {
@@ -341,8 +332,8 @@ export default function Footer() {
                       transition-colors duration-300
                       ${
                         isViewAll
-                          ? "mt-2 font-medium text-[#3de0ad]"
-                          : "text-[#d5d8db] hover:text-[#4ee5bd]"
+                          ? "mt-2 font-medium text-[#22C55E]"
+                          : "text-[#d5d8db] hover:text-[#4ADE80]"
                       }
                     `}
                   >
@@ -353,7 +344,7 @@ export default function Footer() {
                         className="
                           absolute -bottom-1 left-0
                           h-[2px] w-0
-                          bg-[#20d9a3]
+                          bg-[#22C55E]
                           transition-all duration-300
                           group-hover:w-full
                         "
@@ -385,28 +376,30 @@ export default function Footer() {
           <div className=" flex flex-wrap gap-x-5  gap-y-2 text-xs">
             <Link
               href="/terms"
-              className=" text-[#8f989f]  transition-colors duration-300  hover:text-[#4ee5bd]"
+              className=" text-[#8f989f]  transition-colors duration-300  hover:text-[#4ADE80]"
             >
               Terms of Service
             </Link>
 
             <Link
               href="/privacy"
-              className="  text-[#8f989f]  transition-colors duration-300  hover:text-[#4ee5bd]"
+              className="  text-[#8f989f]  transition-colors duration-300  hover:text-[#4ADE80]"
             >
               Privacy Policy
             </Link>
 
             <Link
               href="/cookies"
-              className=" text-[#8f989f] transition-colors duration-300 hover:text-[#4ee5bd]
+              className=" text-[#8f989f] transition-colors duration-300 hover:text-[#4ADE80]
       "
             >
               Cookie Policy
             </Link>
           </div>
 
-          <p className="text-xs text-[#8f989f]">Made with 💚 for students</p>
+          <p className="flex items-center gap-1.5 text-xs text-[#8f989f]">
+            Made with <Heart size={12} className="text-[#22C55E]" fill="#22C55E" /> for students
+          </p>
         </div>
       </div>
     </footer>

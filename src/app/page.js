@@ -1,9 +1,33 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Footer from "@/components/Footer";
+import TechBackground from "@/components/TechBackground";
 import { useApplyModal } from "@/components/ApplyModal";
 import Image from "next/image";
-import { Radius } from "lucide-react";
+import {
+  Target,
+  Users,
+  Award,
+  Globe,
+  Zap,
+  Lock,
+  FileText,
+  Search,
+  Handshake,
+  Briefcase,
+  Trophy,
+  Terminal,
+  Megaphone,
+  Palette,
+  Code2,
+  PenTool,
+  Camera,
+  Smartphone,
+  ChevronDown,
+  BookOpen,
+  ArrowRight,
+  Star,
+} from "lucide-react";
 
 // ── Animated counter ───────────────────────────────────────────────────────────
 function Counter({ target, suffix = "", duration = 1800 }) {
@@ -76,10 +100,29 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
-// ── Nav ────────────────────────────────────────────────────────────────────────
+// ── Section label (monospace "// tag" style) ───────────────────────────────────
+function SectionTag({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        color: "#22C55E",
+        fontSize: 12,
+        fontWeight: 700,
+        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+        letterSpacing: "0.05em",
+      }}
+    >
+      <span style={{ opacity: 0.6 }}>//</span> {children}
+    </span>
+  );
+}
+
+// ── Nav (scroll listener only; global Navbar renders the visible header) ──────
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", fn);
@@ -106,8 +149,6 @@ function Hero() {
       className="section-py-lg home-hero"
       style={{
         minHeight: "100vh",
-        background:
-          "linear-gradient(160deg, #ffffff 0%, #f0f9f4 50%, #ffffff 100%)",
         display: "flex",
         alignItems: "center",
         paddingTop: 100,
@@ -137,15 +178,15 @@ function Hero() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  color: "#22C55E",
+                  color: "#4ADE80",
                   fontSize: 12,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.1em",
+                  fontWeight: 600,
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  letterSpacing: "0.02em",
                   border: "1px solid rgba(34,197,94,0.3)",
-                  borderRadius: 999,
-                  padding: "6px 16px",
-                  background: "rgba(34,197,94,0.06)",
+                  borderRadius: 8,
+                  padding: "7px 16px",
+                  background: "rgba(34,197,94,0.08)",
                   marginBottom: 24,
                 }}
               >
@@ -159,7 +200,10 @@ function Hero() {
                     animation: "pulse 2s infinite",
                   }}
                 />
-                Now accepting applications
+                {"> status: accepting_applications"}
+                <span style={{ animation: "blink 1s step-end infinite" }}>
+                  _
+                </span>
               </span>
             </div>
 
@@ -169,7 +213,7 @@ function Hero() {
                 fontWeight: 900,
                 lineHeight: 1.06,
                 letterSpacing: "-0.03em",
-                color: "#0D1F3C",
+                color: "#F8FAFC",
                 marginBottom: 8,
                 opacity: 0,
                 animation: "fadeUp 0.7s ease 0.35s forwards",
@@ -183,13 +227,13 @@ function Hero() {
                   position: "relative",
                 }}
               >
-                With Real Work.
+                {"<With Real Work />"}
                 <span
                   ref={lineRef}
                   style={{
                     display: "block",
                     height: 3,
-                    background: "rgba(34,197,94,0.25)",
+                    background: "rgba(34,197,94,0.35)",
                     borderRadius: 4,
                     marginTop: 4,
                     width: "0%",
@@ -201,7 +245,7 @@ function Hero() {
             <p
               style={{
                 fontSize: 17,
-                color: "#64748B",
+                color: "#94A3B8",
                 lineHeight: 1.75,
                 maxWidth: 480,
                 margin: "24px 0 36px",
@@ -225,14 +269,14 @@ function Hero() {
               <a
                 href="#"
                 style={{
-                  background: "#0D1F3C",
-                  color: "white",
+                  background: "#22C55E",
+                  color: "#08150C",
                   fontWeight: 700,
                   fontSize: 15,
                   padding: "14px 32px",
-                  borderRadius: 999,
+                  borderRadius: 10,
                   textDecoration: "none",
-                  boxShadow: "0 8px 24px rgba(13,31,60,0.18)",
+                  boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
                   transition: "transform 0.2s, box-shadow 0.2s",
                 }}
                 onClick={(e) => {
@@ -242,12 +286,12 @@ function Hero() {
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
                   e.currentTarget.style.boxShadow =
-                    "0 12px 32px rgba(13,31,60,0.25)";
+                    "0 12px 36px rgba(34,197,94,0.38)";
                 }}
                 onMouseOut={(e) => {
                   e.currentTarget.style.transform = "translateY(0)";
                   e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(13,31,60,0.18)";
+                    "0 8px 28px rgba(34,197,94,0.28)";
                 }}
               >
                 Start Your Internship
@@ -255,22 +299,22 @@ function Hero() {
               <a
                 href="#how"
                 style={{
-                  border: "1.5px solid rgba(13,31,60,0.18)",
-                  color: "#0D1F3C",
+                  border: "1.5px solid rgba(255,255,255,0.16)",
+                  color: "#E2E8F0",
                   fontWeight: 600,
                   fontSize: 15,
                   padding: "14px 32px",
-                  borderRadius: 999,
+                  borderRadius: 10,
                   textDecoration: "none",
                   transition: "all 0.2s",
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.borderColor = "#22C55E";
-                  e.currentTarget.style.color = "#22C55E";
+                  e.currentTarget.style.color = "#4ADE80";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(13,31,60,0.18)";
-                  e.currentTarget.style.color = "#0D1F3C";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+                  e.currentTarget.style.color = "#E2E8F0";
                 }}
               >
                 See How It Works
@@ -299,7 +343,7 @@ function Hero() {
                         height: 32,
                         borderRadius: "50%",
                         background: c,
-                        border: "2px solid white",
+                        border: "2px solid #0a1628",
                         marginLeft: i === 0 ? 0 : -10,
                         display: "flex",
                         alignItems: "center",
@@ -319,8 +363,8 @@ function Hero() {
                   ),
                 )}
               </div>
-              <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
-                <strong style={{ color: "#0D1F3C" }}>500+ students</strong>{" "}
+              <p style={{ fontSize: 13, color: "#94A3B8", margin: 0 }}>
+                <strong style={{ color: "#F1F5F9" }}>500+ students</strong>{" "}
                 already placed this year
               </p>
             </div>
@@ -340,115 +384,95 @@ function Hero() {
             {/* Main Circle */}
             <div className="relative w-full max-w-[430px] aspect-square mx-auto">
               {/* Background Glow */}
-              <div className="absolute inset-0 z-0 bg-green-400/10 blur-3xl scale-110 rounded-full" />
+              <div className="absolute inset-0 z-0 bg-green-400/15 blur-3xl scale-110 rounded-full" />
 
-              <div className="relative z-10 w-full h-full overflow-hidden rounded-full shadow-2xl">
-                <Image
-                  className="w-full h-full object-cover rounded-full hover:scale-105 transition-transform duration-500"
-                  src="/meeting.jpeg"
-                  alt="meeting"
-                  width={430}
-                  height={430}
-                />
-              </div>
+              {/* Scan ring */}
+              <div
+                style={{
+                  position: "absolute",
+                  inset: -14,
+                  borderRadius: "50%",
+                  border: "1px dashed rgba(34,197,94,0.35)",
+                  animation: "spin 30s linear infinite",
+                  zIndex: 5,
+                }}
+              />
 
-              {/* ================= ORBIT ================= */}
-              <div className="absolute inset-0 z-30 orbit-container">
-                {[
-                  {
-                    label: "/fb4b2014c15c6b7c4b48fe1c38655253.jpg",
-                    top: "-5%",
-                    delay: "0s",
-                    left: "15%",
-                  },
-                  {
-                    label: "/WhatsApp Image 2026-08-24 at 11.18.18 PM (2).jpeg",
-                    top: "-5%",
-                    right: "18%",
-                    delay: "0.3s",
-                  },
-                  {
-                    label: "/ec09174d206b34fee35573272f46cea8.jpg",
-                    bottom: "4%",
-                    left: "5%",
-                    delay: "0.6s",
-                  },
-                  {
-                    label: "/085842ccc8f4e14165b8fc3c3ed5aa3b.jpg",
-                    bottom: "-7%",
-                    right: "25%",
-                    delay: "0.9s",
-                  },
-                  {
-                    label: "/1b33ef0ce3ca6aa3553cf5aca88230e5.jpg",
-                    top: "35%",
-                    left: "-10%",
-                    delay: "1.2s",
-                  },
-                  {
-                    label: "/d229270a96c77b0c75ec218682cff0b1.jpg",
-                    top: "44%",
-                    right: "-8%",
-                    delay: "1.5s",
-                  },
-                ].map((card) => (
-                  <div
-                    key={card.label}
-                    style={{
-                      position: "absolute",
-
-                      /* POSITION SAME */
-                      top: card.top,
-                      left: card.left,
-                      right: card.right,
-                      bottom: card.bottom,
-
-                      background: "rgba(255, 255, 255, 0.92)",
-                      backdropFilter: "blur(12px)",
-
-                      boxShadow: "0 8px 25px rgba(0,0,0,0.10)",
-
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "6px",
-
-                      
-                      
-                      zIndex: 50,
-                      whiteSpace: "nowrap",
-                      
-                    }}
-                    className="rounded-full"
-                  >
-                    { <Image className="rounded-full object-cover" src={card.label} width={85} height={80} alt="icons" /> }
+              <div
+                className="relative z-10 w-full h-full overflow-hidden rounded-full shadow-2xl"
+                style={{
+                  border: "2px solid rgba(34,197,94,0.4)",
+                  background:
+                    "linear-gradient(160deg, #0d1b30 0%, #0a1628 100%)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0 44px",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    fontSize: 13,
+                    lineHeight: 1.95,
+                    textAlign: "left",
+                    width: "100%",
+                  }}
+                >
+                  <div style={{ color: "#64748B" }}>// thinklyedu.js</div>
+                  <div style={{ color: "#E2E8F0" }}>
+                    <span style={{ color: "#818CF8" }}>const</span> student = {"{"}
                   </div>
-                ))}
+                  <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
+                    skills: [<span style={{ color: "#FBBF24" }}>&quot;ambition&quot;</span>],
+                  </div>
+                  <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
+                    mentor: <span style={{ color: "#FBBF24" }}>true</span>,
+                  </div>
+                  <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
+                    fee: <span style={{ color: "#FBBF24" }}>0</span>,
+                  </div>
+                  <div style={{ color: "#E2E8F0" }}>{"};"}</div>
+                  <div style={{ marginTop: 12, color: "#E2E8F0" }}>
+                    <span style={{ color: "#818CF8" }}>function</span>{" "}
+                    <span style={{ color: "#22C55E" }}>launchCareer</span>
+                    (student) {"{"}
+                  </div>
+                  <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
+                    <span style={{ color: "#818CF8" }}>return</span>{" "}
+                    <span style={{ color: "#FBBF24" }}>&quot;hired&quot;</span>;
+                  </div>
+                  <div style={{ color: "#E2E8F0" }}>
+                    {"}"}
+                    <span style={{ animation: "blink 1s step-end infinite" }}>
+                      _
+                    </span>
+                  </div>
+                </div>
               </div>
+
+              {/* Corner brackets — tech scan frame */}
+              {[
+                { top: -10, left: -10, borderWidth: "3px 0 0 3px" },
+                { top: -10, right: -10, borderWidth: "3px 3px 0 0" },
+                { bottom: -10, left: -10, borderWidth: "0 0 3px 3px" },
+                { bottom: -10, right: -10, borderWidth: "0 3px 3px 0" },
+              ].map((pos, i) => (
+                <div
+                  key={i}
+                  style={{
+                    position: "absolute",
+                    width: 28,
+                    height: 28,
+                    borderStyle: "solid",
+                    borderColor: "#22C55E",
+                    zIndex: 20,
+                    ...pos,
+                  }}
+                />
+              ))}
+
             </div>
-
-            {/* ================= CSS ================= */}
-            <style jsx>{`
-              .orbit-container {
-                position: absolute;
-                inset: 0;
-
-                z-index: 30;
-
-                transform-origin: center center;
-
-                animation: orbit 20s linear infinite;
-              }
-
-              @keyframes orbit {
-                from {
-                  transform: rotate(0deg);
-                }
-
-                to {
-                  transform: rotate(360deg);
-                }
-              }
-            `}</style>
           </div>
         </div>
       </div>
@@ -457,6 +481,8 @@ function Hero() {
         @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
         @keyframes float { 0%,100% { transform:translateY(0px); } 50% { transform:translateY(-10px); } }
         @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+        @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+        @keyframes spin { from { transform:rotate(0deg); } to { transform:rotate(360deg); } }
       `}</style>
     </section>
   );
@@ -465,7 +491,14 @@ function Hero() {
 // ── Stats bar ──────────────────────────────────────────────────────────────────
 function Stats() {
   return (
-    <section style={{ background: "#0D1F3C", padding: "52px 24px" }}>
+    <section
+      style={{
+        padding: "52px 24px",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(255,255,255,0.02)",
+      }}
+    >
       <div
         className="max-w-6xl mx-auto rx-2"
         style={{
@@ -488,6 +521,7 @@ function Stats() {
                 fontWeight: 900,
                 color: "#22C55E",
                 marginBottom: 4,
+                fontFamily: "'JetBrains Mono', ui-monospace, monospace",
               }}
             >
               <Counter target={s.value} suffix={s.suffix} />
@@ -495,7 +529,7 @@ function Stats() {
             <div
               style={{
                 fontSize: 13,
-                color: "rgba(255,255,255,0.5)",
+                color: "rgba(226,232,240,0.55)",
                 fontWeight: 500,
               }}
             >
@@ -508,67 +542,273 @@ function Stats() {
   );
 }
 
+// ── Domains ────────────────────────────────────────────────────────────────────
+function Domains() {
+  const domains = [
+    {
+      icon: Megaphone,
+      name: "Marketing",
+      slug: "marketing",
+      desc: "Social media, SEO, campaigns",
+    },
+    {
+      icon: Palette,
+      name: "Design",
+      slug: "design",
+      desc: "UI/UX, graphics, branding",
+    },
+    {
+      icon: Code2,
+      name: "Technology",
+      slug: "technology",
+      desc: "Web dev, apps, coding",
+    },
+    {
+      icon: PenTool,
+      name: "Content Writing",
+      slug: "content-writing",
+      desc: "Blogs, copywriting, scripts",
+    },
+    {
+      icon: Camera,
+      name: "Photography & Video",
+      slug: "photography-video",
+      desc: "Reels, editing, shoots",
+    },
+    {
+      icon: Smartphone,
+      name: "Social Media",
+      slug: "social-media",
+      desc: "Instagram, YouTube, LinkedIn",
+    },
+  ];
+
+  return (
+    <section id="domains" className="section-py" style={{ padding: "96px 24px" }}>
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <div
+            className="section-head-mb"
+            style={{ textAlign: "center", marginBottom: 64 }}
+          >
+            <SectionTag>domains</SectionTag>
+            <h2
+              style={{
+                fontSize: "clamp(30px,4vw,42px)",
+                fontWeight: 900,
+                letterSpacing: "-0.02em",
+                color: "#F8FAFC",
+                margin: "12px 0 16px",
+                lineHeight: 1.1,
+              }}
+            >
+              Pick Your <span style={{ color: "#22C55E" }}>Domain</span>
+            </h2>
+            <p
+              style={{
+                color: "#94A3B8",
+                fontSize: 16,
+                maxWidth: 500,
+                margin: "0 auto",
+                lineHeight: 1.7,
+              }}
+            >
+              6+ industry-relevant tracks, each with real projects and a
+              dedicated mentor — free, remote or on-site.
+            </p>
+          </div>
+        </Reveal>
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: 20,
+          }}
+        >
+          {domains.map((d, i) => (
+            <Reveal key={d.slug} delay={i * 70}>
+              <a
+                href={`/internship/${d.slug}`}
+                style={{
+                  display: "block",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
+                  borderRadius: 20,
+                  padding: 26,
+                  textDecoration: "none",
+                  transition: "all 0.3s",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+                  e.currentTarget.style.background = "rgba(34,197,94,0.05)";
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 16,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 48,
+                      height: 48,
+                      borderRadius: 12,
+                      background: "rgba(34,197,94,0.1)",
+                      border: "1px solid rgba(34,197,94,0.25)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <d.icon size={22} color="#4ADE80" strokeWidth={1.8} />
+                  </div>
+                  <ArrowRight size={16} color="#4ADE80" />
+                </div>
+                <h3
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#F1F5F9",
+                    marginBottom: 6,
+                  }}
+                >
+                  {d.name}
+                </h3>
+                <p style={{ fontSize: 13.5, color: "#94A3B8", margin: 0 }}>
+                  {d.desc}
+                </p>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Tech stack / skills strip ────────────────────────────────────────────────
+function TechStack() {
+  const skills = [
+    "React", "Node.js", "Python", "Figma", "SQL", "Git & GitHub",
+    "REST APIs", "Canva", "SEO Tools", "Next.js", "Tailwind CSS",
+    "Meta Ads Manager", "Notion", "VS Code",
+  ];
+
+  return (
+    <section
+      style={{
+        padding: "72px 24px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div className="max-w-6xl mx-auto" style={{ textAlign: "center" }}>
+        <Reveal>
+          <SectionTag>skills_you_will_build</SectionTag>
+          <h2
+            style={{
+              fontSize: "clamp(24px,3vw,32px)",
+              fontWeight: 900,
+              letterSpacing: "-0.02em",
+              color: "#F8FAFC",
+              margin: "12px 0 32px",
+            }}
+          >
+            Real Tools. Real <span style={{ color: "#22C55E" }}>Skills.</span>
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              justifyContent: "center",
+            }}
+          >
+            {skills.map((s) => (
+              <span
+                key={s}
+                style={{
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  fontSize: 13,
+                  color: "#4ADE80",
+                  border: "1px solid rgba(34,197,94,0.3)",
+                  background: "rgba(34,197,94,0.06)",
+                  borderRadius: 999,
+                  padding: "8px 18px",
+                }}
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 // ── Features ───────────────────────────────────────────────────────────────────
 function Features() {
   const features = [
     {
-      emoji: "🎯",
+      icon: Target,
       title: "Real Projects Only",
       desc: "No coffee runs. Every Thinklyedu intern works on live, meaningful projects with real deliverables and measurable impact.",
     },
     {
-      emoji: "🧑‍🏫",
+      icon: Users,
       title: "Dedicated Mentorship",
       desc: "Each intern gets a 1-on-1 mentor from the host company — weekly check-ins, feedback, and a professional recommendation letter.",
     },
     {
-      emoji: "📜",
+      icon: Award,
       title: "Verified Certificates",
       desc: "Skill-linked certificates recognized by recruiters. They show what you can actually do, not just where you were.",
     },
     {
-      emoji: "🌍",
+      icon: Globe,
       title: "Remote & On-site",
       desc: "Work from anywhere or experience an office — we have both options across 30+ cities in India.",
     },
     {
-      emoji: "⚡",
+      icon: Zap,
       title: "Fast-track Matching",
       desc: "Our smart matching takes your skills and preferences and finds the right fit within 72 hours of applying.",
     },
     {
-      emoji: "🔒",
+      icon: Lock,
       title: "Always Free",
       desc: "Zero fees. Zero hidden charges. Students will never pay a rupee — now or ever. Our partners fund everything.",
     },
   ];
 
   return (
-    <section
-      id="features"
-      className="section-py"
-      style={{ padding: "96px 24px", background: "white" }}
-    >
+    <section id="features" className="section-py" style={{ padding: "96px 24px" }}>
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 64 }}>
-            <span
-              style={{
-                color: "#22C55E",
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-              }}
-            >
-              Features
-            </span>
+          <div
+            className="section-head-mb"
+            style={{ textAlign: "center", marginBottom: 64 }}
+          >
+            <SectionTag>features</SectionTag>
             <h2
               style={{
                 fontSize: "clamp(30px,4vw,42px)",
                 fontWeight: 900,
                 letterSpacing: "-0.02em",
-                color: "#0D1F3C",
+                color: "#F8FAFC",
                 margin: "12px 0 16px",
                 lineHeight: 1.1,
               }}
@@ -578,7 +818,7 @@ function Features() {
             </h2>
             <p
               style={{
-                color: "#64748B",
+                color: "#94A3B8",
                 fontSize: 16,
                 maxWidth: 500,
                 margin: "0 auto",
@@ -603,33 +843,47 @@ function Features() {
             <Reveal key={f.title} delay={i * 80}>
               <div
                 style={{
-                  background: "#FAFBFC",
-                  border: "1.5px solid #E2E8F0",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
                   borderRadius: 20,
                   padding: 28,
                   transition: "all 0.3s",
                   cursor: "default",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)";
-                  e.currentTarget.style.background = "white";
+                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+                  e.currentTarget.style.background = "rgba(34,197,94,0.05)";
                   e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(0,0,0,0.08)";
+                    "0 8px 32px rgba(34,197,94,0.12)";
                   e.currentTarget.style.transform = "translateY(-4px)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
-                  e.currentTarget.style.background = "#FAFBFC";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
                   e.currentTarget.style.boxShadow = "none";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <div style={{ fontSize: 32, marginBottom: 16 }}>{f.emoji}</div>
+                <div
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 12,
+                    background: "rgba(34,197,94,0.1)",
+                    border: "1px solid rgba(34,197,94,0.25)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 16,
+                  }}
+                >
+                  <f.icon size={22} color="#4ADE80" strokeWidth={1.8} />
+                </div>
                 <h3
                   style={{
                     fontSize: 16,
                     fontWeight: 700,
-                    color: "#0D1F3C",
+                    color: "#F1F5F9",
                     marginBottom: 10,
                   }}
                 >
@@ -638,7 +892,7 @@ function Features() {
                 <p
                   style={{
                     fontSize: 13.5,
-                    color: "#64748B",
+                    color: "#94A3B8",
                     lineHeight: 1.7,
                     margin: 0,
                   }}
@@ -661,56 +915,58 @@ function HowItWorks() {
       num: "01",
       title: "Apply Online",
       desc: "Fill out a simple form — tell us your interests, skills, and availability. Takes less than 5 minutes.",
-      emoji: "📝",
+      icon: FileText,
     },
     {
       num: "02",
       title: "Get Matched",
       desc: "Our team reviews your profile and matches you with the best-fit company within 72 hours.",
-      emoji: "🔍",
+      icon: Search,
     },
     {
       num: "03",
       title: "Meet Your Mentor",
       desc: "Connect with your assigned company mentor. Align on goals, schedule, and your first project.",
-      emoji: "🤝",
+      icon: Handshake,
     },
     {
       num: "04",
       title: "Do Real Work",
       desc: "Work on live projects, get feedback every week, and build a portfolio that gets you hired.",
-      emoji: "💼",
+      icon: Briefcase,
     },
     {
       num: "05",
       title: "Get Certified",
       desc: "Complete your internship and receive a verified certificate you can share on LinkedIn and your resume.",
-      emoji: "🏆",
+      icon: Trophy,
     },
   ];
 
   return (
-    <section id="how" className="section-py" style={{ padding: "96px 24px", background: "#F0F4F8" }}>
+    <section
+      id="how"
+      className="section-py"
+      style={{
+        padding: "96px 24px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 72 }}>
-            <span
-              style={{
-                color: "#22C55E",
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-              }}
-            >
-              The Process
-            </span>
+          <div
+            className="section-head-mb"
+            style={{ textAlign: "center", marginBottom: 72 }}
+          >
+            <SectionTag>the_process</SectionTag>
             <h2
               style={{
                 fontSize: "clamp(30px,4vw,42px)",
                 fontWeight: 900,
                 letterSpacing: "-0.02em",
-                color: "#0D1F3C",
+                color: "#F8FAFC",
                 margin: "12px 0 16px",
                 lineHeight: 1.1,
               }}
@@ -719,7 +975,7 @@ function HowItWorks() {
             </h2>
             <p
               style={{
-                color: "#64748B",
+                color: "#94A3B8",
                 fontSize: 16,
                 maxWidth: 460,
                 margin: "0 auto",
@@ -734,7 +990,7 @@ function HowItWorks() {
 
         {/* Timeline */}
         <div style={{ position: "relative" }}>
-          {/* Connecting line */}
+          {/* Connecting circuit line */}
           <div
             className="rx-hide"
             style={{
@@ -743,7 +999,8 @@ function HowItWorks() {
               left: "calc(10% + 20px)",
               right: "calc(10% + 20px)",
               height: 2,
-              background: "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.2))",
+              background:
+                "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.15))",
               zIndex: 0,
             }}
           />
@@ -774,8 +1031,8 @@ function HowItWorks() {
                       width: 80,
                       height: 80,
                       borderRadius: "50%",
-                      background: i === 0 ? "#22C55E" : "white",
-                      border: `2px solid ${i === 0 ? "#22C55E" : "#E2E8F0"}`,
+                      background: i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)",
+                      border: `2px solid ${i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)"}`,
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
@@ -783,29 +1040,40 @@ function HowItWorks() {
                       marginBottom: 20,
                       boxShadow:
                         i === 0
-                          ? "0 8px 24px rgba(34,197,94,0.3)"
-                          : "0 4px 16px rgba(0,0,0,0.06)",
+                          ? "0 8px 24px rgba(34,197,94,0.35)"
+                          : "0 4px 16px rgba(0,0,0,0.25)",
                       transition: "all 0.3s",
                     }}
                     onMouseOver={(e) => {
                       const el = e.currentTarget;
                       el.style.background = "#22C55E";
                       el.style.borderColor = "#22C55E";
-                      el.style.boxShadow = "0 8px 24px rgba(34,197,94,0.3)";
+                      el.style.boxShadow = "0 8px 24px rgba(34,197,94,0.35)";
                       el.style.transform = "translateY(-4px)";
+                      const icon = el.querySelector("svg");
+                      if (icon) icon.style.color = "#08150C";
                     }}
                     onMouseOut={(e) => {
                       const el = e.currentTarget;
-                      el.style.background = i === 0 ? "#22C55E" : "white";
-                      el.style.borderColor = i === 0 ? "#22C55E" : "#E2E8F0";
+                      el.style.background =
+                        i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)";
+                      el.style.borderColor =
+                        i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)";
                       el.style.boxShadow =
                         i === 0
-                          ? "0 8px 24px rgba(34,197,94,0.3)"
-                          : "0 4px 16px rgba(0,0,0,0.06)";
+                          ? "0 8px 24px rgba(34,197,94,0.35)"
+                          : "0 4px 16px rgba(0,0,0,0.25)";
                       el.style.transform = "translateY(0)";
+                      const icon = el.querySelector("svg");
+                      if (icon) icon.style.color = i === 0 ? "#08150C" : "#4ADE80";
                     }}
                   >
-                    <span style={{ fontSize: 24 }}>{step.emoji}</span>
+                    <step.icon
+                      size={26}
+                      strokeWidth={1.8}
+                      color={i === 0 ? "#08150C" : "#4ADE80"}
+                      style={{ transition: "color 0.3s" }}
+                    />
                   </div>
                   <span
                     style={{
@@ -814,6 +1082,7 @@ function HowItWorks() {
                       color: "#22C55E",
                       letterSpacing: "0.1em",
                       marginBottom: 6,
+                      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
                     }}
                   >
                     {step.num}
@@ -822,7 +1091,7 @@ function HowItWorks() {
                     style={{
                       fontSize: 15,
                       fontWeight: 700,
-                      color: "#0D1F3C",
+                      color: "#F1F5F9",
                       marginBottom: 8,
                     }}
                   >
@@ -831,7 +1100,7 @@ function HowItWorks() {
                   <p
                     style={{
                       fontSize: 12.5,
-                      color: "#64748B",
+                      color: "#94A3B8",
                       lineHeight: 1.65,
                       margin: 0,
                     }}
@@ -895,7 +1164,7 @@ function Testimonials() {
       name: "Kartik Singh",
       role: "Tech Intern → Software Engineer",
       avatar: "KS",
-      color: "#0D1F3C",
+      color: "#22C55E",
       quote:
         "Thinklyedu is the real deal. Free, fast, and focused on actual learning. Every student deserves this kind of opportunity at the start of their career.",
     },
@@ -905,28 +1174,21 @@ function Testimonials() {
     <section
       id="testimonials"
       className="section-py"
-      style={{ padding: "96px 24px", background: "white", overflow: "hidden" }}
+      style={{ padding: "96px 24px", overflow: "hidden" }}
     >
       <div className="max-w-6xl mx-auto">
         <Reveal>
-          <div className="section-head-mb" style={{ textAlign: "center", marginBottom: 64 }}>
-            <span
-              style={{
-                color: "#22C55E",
-                fontSize: 11,
-                fontWeight: 700,
-                textTransform: "uppercase",
-                letterSpacing: "0.12em",
-              }}
-            >
-              Student Stories
-            </span>
+          <div
+            className="section-head-mb"
+            style={{ textAlign: "center", marginBottom: 64 }}
+          >
+            <SectionTag>student_stories</SectionTag>
             <h2
               style={{
                 fontSize: "clamp(30px,4vw,42px)",
                 fontWeight: 900,
                 letterSpacing: "-0.02em",
-                color: "#0D1F3C",
+                color: "#F8FAFC",
                 margin: "12px 0 16px",
                 lineHeight: 1.1,
               }}
@@ -936,7 +1198,7 @@ function Testimonials() {
             </h2>
             <p
               style={{
-                color: "#64748B",
+                color: "#94A3B8",
                 fontSize: 16,
                 maxWidth: 460,
                 margin: "0 auto",
@@ -961,8 +1223,8 @@ function Testimonials() {
             <Reveal key={t.name} delay={i * 70}>
               <div
                 style={{
-                  background: "#FAFBFC",
-                  border: "1.5px solid #E2E8F0",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
                   borderRadius: 20,
                   padding: 28,
                   height: "100%",
@@ -970,13 +1232,13 @@ function Testimonials() {
                   transition: "all 0.3s",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.3)";
+                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)";
                   e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(0,0,0,0.08)";
+                    "0 8px 32px rgba(34,197,94,0.1)";
                   e.currentTarget.style.transform = "translateY(-4px)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = "#E2E8F0";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
                   e.currentTarget.style.boxShadow = "none";
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
@@ -984,15 +1246,13 @@ function Testimonials() {
                 {/* Stars */}
                 <div style={{ display: "flex", gap: 2, marginBottom: 16 }}>
                   {[...Array(5)].map((_, j) => (
-                    <span key={j} style={{ color: "#F59E0B", fontSize: 14 }}>
-                      ★
-                    </span>
+                    <Star key={j} size={14} color="#F59E0B" fill="#F59E0B" />
                   ))}
                 </div>
                 <p
                   style={{
                     fontSize: 14,
-                    color: "#475569",
+                    color: "#CBD5E1",
                     lineHeight: 1.75,
                     margin: "0 0 24px",
                     fontStyle: "italic",
@@ -1023,7 +1283,7 @@ function Testimonials() {
                       style={{
                         fontSize: 14,
                         fontWeight: 700,
-                        color: "#0D1F3C",
+                        color: "#F1F5F9",
                       }}
                     >
                       {t.name}
@@ -1031,7 +1291,7 @@ function Testimonials() {
                     <div
                       style={{
                         fontSize: 11.5,
-                        color: "#22C55E",
+                        color: "#4ADE80",
                         fontWeight: 600,
                       }}
                     >
@@ -1040,6 +1300,332 @@ function Testimonials() {
                   </div>
                 </div>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── FAQ ────────────────────────────────────────────────────────────────────────
+function FAQ() {
+  const [openIndex, setOpenIndex] = useState(null);
+  const faqs = [
+    {
+      q: "Is the internship free?",
+      a: "Yes, all our internships are completely free. We believe in providing equal opportunities for everyone to learn and grow.",
+    },
+    {
+      q: "Is the internship remote?",
+      a: "Most tracks are 100% remote, and select domains also offer on-site options across 30+ cities in India — you choose what fits you.",
+    },
+    {
+      q: "How do I get a certificate?",
+      a: "You'll receive a verified, skill-linked certificate upon successful completion of all internship tasks and projects, with a unique verification ID.",
+    },
+    {
+      q: "How long is the internship?",
+      a: "Typically 4-6 weeks depending on the domain. You can work at your own pace within the timeline alongside your mentor.",
+    },
+    {
+      q: "What are the eligibility criteria?",
+      a: "Anyone with a passion to learn and basic knowledge of their chosen domain can apply. Students and fresh graduates are encouraged to apply.",
+    },
+  ];
+
+  return (
+    <section id="faq" className="section-py" style={{ padding: "96px 24px" }}>
+      <div className="max-w-3xl mx-auto">
+        <Reveal>
+          <div
+            className="section-head-mb"
+            style={{ textAlign: "center", marginBottom: 56 }}
+          >
+            <SectionTag>faq</SectionTag>
+            <h2
+              style={{
+                fontSize: "clamp(28px,4vw,38px)",
+                fontWeight: 900,
+                letterSpacing: "-0.02em",
+                color: "#F8FAFC",
+                margin: "12px 0 16px",
+                lineHeight: 1.1,
+              }}
+            >
+              Frequently Asked{" "}
+              <span style={{ color: "#22C55E" }}>Questions</span>
+            </h2>
+            <p style={{ color: "#94A3B8", fontSize: 16, margin: 0 }}>
+              Got questions? We've got answers.
+            </p>
+          </div>
+        </Reveal>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {faqs.map((faq, i) => {
+            const open = openIndex === i;
+            return (
+              <Reveal key={faq.q} delay={i * 50}>
+                <div
+                  style={{
+                    background: "rgba(255,255,255,0.03)",
+                    border: `1.5px solid ${open ? "rgba(34,197,94,0.4)" : "rgba(255,255,255,0.08)"}`,
+                    borderRadius: 14,
+                    overflow: "hidden",
+                    transition: "border-color 0.25s",
+                  }}
+                >
+                  <button
+                    onClick={() => setOpenIndex(open ? null : i)}
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: 16,
+                      padding: "18px 22px",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      textAlign: "left",
+                      fontFamily: "inherit",
+                    }}
+                  >
+                    <span
+                      style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}
+                    >
+                      {faq.q}
+                    </span>
+                    <ChevronDown
+                      size={18}
+                      color="#4ADE80"
+                      style={{
+                        flexShrink: 0,
+                        transition: "transform 0.25s",
+                        transform: open ? "rotate(180deg)" : "none",
+                      }}
+                    />
+                  </button>
+                  <div
+                    style={{
+                      maxHeight: open ? 200 : 0,
+                      transition: "max-height 0.3s ease",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <p
+                      style={{
+                        margin: 0,
+                        padding: "0 22px 20px",
+                        fontSize: 13.5,
+                        color: "#94A3B8",
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {faq.a}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Blog preview ──────────────────────────────────────────────────────────────
+function BlogPreview() {
+  const posts = [
+    {
+      title: "How to Build a High-Impact Tech Portfolio",
+      excerpt:
+        "Learn what recruiters actually look for in modern frontend & full-stack roles.",
+      category: "Technology",
+      readTime: "6 min read",
+      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM (1).jpeg",
+    },
+    {
+      title: "Figma to Code: A Designer's Bridge",
+      excerpt:
+        "Master the workflow to turn UI mockups into clean, production-ready interfaces.",
+      category: "Design",
+      readTime: "5 min read",
+      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM.jpeg",
+    },
+    {
+      title: "Scale Meta Ads Without Burning Budget",
+      excerpt:
+        "A practical playbook for scaling paid social campaigns with measurable ROAS.",
+      category: "Marketing",
+      readTime: "7 min read",
+      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM.jpeg",
+    },
+  ];
+
+  return (
+    <section
+      className="section-py"
+      style={{
+        padding: "96px 24px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <Reveal>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: 16,
+              marginBottom: 48,
+            }}
+          >
+            <div>
+              <SectionTag>from_the_blog</SectionTag>
+              <h2
+                style={{
+                  fontSize: "clamp(28px,4vw,38px)",
+                  fontWeight: 900,
+                  letterSpacing: "-0.02em",
+                  color: "#F8FAFC",
+                  margin: "12px 0 0",
+                  lineHeight: 1.1,
+                }}
+              >
+                Learn Before You{" "}
+                <span style={{ color: "#22C55E" }}>Apply</span>
+              </h2>
+            </div>
+            <a
+              href="/blog"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                color: "#4ADE80",
+                fontSize: 14,
+                fontWeight: 700,
+                textDecoration: "none",
+              }}
+            >
+              View all articles <ArrowRight size={15} />
+            </a>
+          </div>
+        </Reveal>
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: 24,
+          }}
+        >
+          {posts.map((p, i) => (
+            <Reveal key={p.title} delay={i * 80}>
+              <a
+                href="/blog"
+                style={{
+                  display: "block",
+                  textDecoration: "none",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  transition: "all 0.3s",
+                  height: "100%",
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)";
+                  e.currentTarget.style.transform = "translateY(-4px)";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                  e.currentTarget.style.transform = "translateY(0)";
+                }}
+              >
+                <div
+                  style={{
+                    position: "relative",
+                    height: 160,
+                    width: "100%",
+                    overflow: "hidden",
+                  }}
+                >
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    style={{ objectFit: "cover" }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background:
+                        "linear-gradient(180deg, transparent 40%, rgba(6,11,22,0.85) 100%)",
+                    }}
+                  />
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: 12,
+                      left: 12,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      color: "#08150C",
+                      background: "#4ADE80",
+                      borderRadius: 999,
+                      padding: "4px 12px",
+                    }}
+                  >
+                    {p.category}
+                  </span>
+                </div>
+                <div style={{ padding: 22 }}>
+                  <h3
+                    style={{
+                      fontSize: 15.5,
+                      fontWeight: 700,
+                      color: "#F1F5F9",
+                      marginBottom: 8,
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {p.title}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: 13,
+                      color: "#94A3B8",
+                      lineHeight: 1.6,
+                      margin: "0 0 14px",
+                    }}
+                  >
+                    {p.excerpt}
+                  </p>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      fontSize: 12,
+                      color: "#4ADE80",
+                      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    }}
+                  >
+                    <BookOpen size={13} /> {p.readTime}
+                  </span>
+                </div>
+              </a>
             </Reveal>
           ))}
         </div>
@@ -1058,9 +1644,9 @@ function CTA() {
       className="section-py-lg"
       style={{
         padding: "100px 24px",
-        background: "#0D1F3C",
         position: "relative",
         overflow: "hidden",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       {/* bg decoration */}
@@ -1072,7 +1658,7 @@ function CTA() {
           width: 320,
           height: 320,
           borderRadius: "50%",
-          background: "rgba(34,197,94,0.06)",
+          background: "rgba(34,197,94,0.08)",
           pointerEvents: "none",
         }}
       />
@@ -1084,7 +1670,7 @@ function CTA() {
           width: 240,
           height: 240,
           borderRadius: "50%",
-          background: "rgba(34,197,94,0.04)",
+          background: "rgba(34,197,94,0.05)",
           pointerEvents: "none",
         }}
       />
@@ -1096,12 +1682,14 @@ function CTA() {
         <Reveal>
           <span
             style={{
-              display: "inline-block",
-              color: "#22C55E",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              color: "#4ADE80",
               fontSize: 11,
               fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
+              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+              letterSpacing: "0.05em",
               border: "1px solid rgba(34,197,94,0.3)",
               borderRadius: 999,
               padding: "6px 16px",
@@ -1109,13 +1697,13 @@ function CTA() {
               marginBottom: 24,
             }}
           >
-            Start Today — It's Free
+            <Terminal size={13} /> Start Today — It's Free
           </span>
           <h2
             style={{
               fontSize: "clamp(32px,5vw,52px)",
               fontWeight: 900,
-              color: "white",
+              color: "#F8FAFC",
               lineHeight: 1.08,
               letterSpacing: "-0.02em",
               marginBottom: 20,
@@ -1128,7 +1716,7 @@ function CTA() {
           </h2>
           <p
             style={{
-              color: "rgba(255,255,255,0.55)",
+              color: "rgba(226,232,240,0.6)",
               fontSize: 17,
               lineHeight: 1.7,
               marginBottom: 40,
@@ -1151,13 +1739,13 @@ function CTA() {
               href="#"
               style={{
                 background: "#22C55E",
-                color: "white",
+                color: "#08150C",
                 fontWeight: 800,
                 fontSize: 16,
                 padding: "16px 40px",
                 borderRadius: 999,
                 textDecoration: "none",
-                boxShadow: "0 12px 40px rgba(34,197,94,0.25)",
+                boxShadow: "0 12px 40px rgba(34,197,94,0.3)",
                 transition: "all 0.2s",
               }}
               onClick={(e) => {
@@ -1179,7 +1767,7 @@ function CTA() {
               href="/about"
               style={{
                 border: "1.5px solid rgba(255,255,255,0.2)",
-                color: "white",
+                color: "#F1F5F9",
                 fontWeight: 600,
                 fontSize: 16,
                 padding: "16px 40px",
@@ -1189,11 +1777,11 @@ function CTA() {
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = "#22C55E";
-                e.currentTarget.style.color = "#22C55E";
+                e.currentTarget.style.color = "#4ADE80";
               }}
               onMouseOut={(e) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
-                e.currentTarget.style.color = "white";
+                e.currentTarget.style.color = "#F1F5F9";
               }}
             >
               Learn About Us
@@ -1201,9 +1789,10 @@ function CTA() {
           </div>
           <p
             style={{
-              color: "rgba(255,255,255,0.25)",
+              color: "rgba(226,232,240,0.3)",
               fontSize: 13,
               marginTop: 28,
+              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
             }}
           >
             supportthinkly.co@gmail.com &nbsp;·&nbsp; +91 98185 09083
@@ -1214,59 +1803,6 @@ function CTA() {
   );
 }
 
-// ── Footer ─────────────────────────────────────────────────────────────────────
-// function Footer() {
-//   return (
-//     <footer style={{ background: "#0a1628", padding: "40px 24px", borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-//       <div className="max-w-6xl mx-auto" style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-//         <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 32 }}>
-//           {/* Brand */}
-//           <div style={{ maxWidth: 280 }}>
-//             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-//               <div style={{ width: 32, height: 32, borderRadius: "50%", background: "#0D1F3C", border: "1px solid rgba(34,197,94,0.3)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-//                 <span style={{ color: "#22C55E", fontWeight: 900, fontSize: 14 }}>T</span>
-//               </div>
-//               <span style={{ color: "white", fontWeight: 800, fontSize: 17 }}>Thinklyedu</span>
-//             </div>
-//             <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 13, lineHeight: 1.7, margin: 0 }}>
-//               Connecting students with real internship opportunities — for free, always.
-//             </p>
-//           </div>
-
-//           {/* Links */}
-//           <div style={{ display: "flex", gap: 64, flexWrap: "wrap" }}>
-//             <div>
-//               <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>Platform</div>
-//               {["Features", "How It Works", "Domains", "Apply"].map(l => (
-//                 <div key={l} style={{ marginBottom: 10 }}>
-//                   <a href="#" style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
-//                     onMouseOver={e => e.target.style.color = "#22C55E"}
-//                     onMouseOut={e => e.target.style.color = "rgba(255,255,255,0.3)"}>{l}</a>
-//                 </div>
-//               ))}
-//             </div>
-//             <div>
-//               <div style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 14 }}>Company</div>
-//               {["About", "Blog", "Contact", "Privacy"].map(l => (
-//                 <div key={l} style={{ marginBottom: 10 }}>
-//                   <a href="#" style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, textDecoration: "none", transition: "color 0.2s" }}
-//                     onMouseOver={e => e.target.style.color = "#22C55E"}
-//                     onMouseOut={e => e.target.style.color = "rgba(255,255,255,0.3)"}>{l}</a>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         </div>
-
-//         <div style={{ borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 24, display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12 }}>
-//           <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 13 }}>© 2026 Thinklyedu. All rights reserved.</span>
-//           <span style={{ color: "rgba(255,255,255,0.25)", fontSize: 13 }}>Made with 💚 for students</span>
-//         </div>
-//       </div>
-//     </footer>
-//   );
-// }
-
 // ── Page export ────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -1274,17 +1810,26 @@ export default function HomePage() {
     <main
       style={{
         fontFamily: "'Inter', -apple-system, sans-serif",
-        color: "#0D1F3C",
+        color: "#F1F5F9",
+        position: "relative",
+        background: "#0a1628",
       }}
     >
-      <Nav />
-      <Hero />
-      <Stats />
-      <Features />
-      <HowItWorks />
-      <Testimonials />
-      <CTA />
-      <Footer />
+      <TechBackground />
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <Nav />
+        <Hero />
+        <Stats />
+        <Domains />
+        <Features />
+        <TechStack />
+        <HowItWorks />
+        <Testimonials />
+        <BlogPreview />
+        <FAQ />
+        <CTA />
+        <Footer />
+      </div>
     </main>
   );
 }

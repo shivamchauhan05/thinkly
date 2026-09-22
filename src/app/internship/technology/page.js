@@ -1,6 +1,29 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Footer from '@/components/Footer'
+import TechBackground from "@/components/TechBackground";
+import { useApplyModal } from "@/components/ApplyModal";
+import {
+  Terminal,
+  Clock,
+  Globe,
+  Package,
+  GraduationCap,
+  Code2,
+  Settings,
+  Cloud,
+  Brain,
+  Smartphone,
+  Lock,
+  Bot,
+  Database,
+  Puzzle,
+  Link2,
+  FlaskConical,
+  Link,
+  Lightbulb,
+  ChevronDown,
+} from "lucide-react";
 
 function Counter({ target, suffix = "", duration = 1600 }) {
   const [count, setCount] = useState(0);
@@ -64,19 +87,39 @@ function Reveal({ children, delay = 0, className = "" }) {
   );
 }
 
+// ── Section label (monospace "// tag" style, matches homepage/about) ──────────
+function SectionTag({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        color: "#22C55E",
+        fontSize: 12,
+        fontWeight: 700,
+        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+        letterSpacing: "0.05em",
+      }}
+    >
+      <span style={{ opacity: 0.6 }}>//</span> {children}
+    </span>
+  );
+}
+
 const SKILLS = [
-  { icon: "💻", title: "Full Stack Web Development", desc: "Build end-to-end apps with React, Next.js, Node.js, Express, and modern databases." },
-  { icon: "⚙️", title: "Software & Product Engineering", desc: "Plan feature work, write clean code, and collaborate on real product sprints." },
-  { icon: "☁️", title: "Cloud Computing & DevOps", desc: "Ship apps with AWS, Docker, Kubernetes, CI/CD pipelines, and deployment monitoring." },
-  { icon: "🧠", title: "Data Structures & Problem Solving", desc: "Turn requirements into working features with debugging, testing, and quality checks." },
-  { icon: "📱", title: "Mobile & Responsive UI", desc: "Create responsive interfaces that work smoothly across desktop, tablet, and phone." },
-  { icon: "🔐", title: "Cybersecurity & Performance", desc: "Write secure code, optimize load times, and keep production systems stable." },
-  { icon: "🤖", title: "AI, Machine Learning & Data Science", desc: "Work with Python, data pipelines, and applied machine learning models used in real products." },
-  { icon: "🗄️", title: "Database & Backend Engineering", desc: "Design schemas and APIs using SQL, MongoDB, PostgreSQL, and RESTful/GraphQL services." },
-  { icon: "🧩", title: "UI/UX & Frontend Design", desc: "Craft user-friendly, accessible interfaces with Figma-informed design systems and Tailwind CSS." },
-  { icon: "🔗", title: "API & Microservices Development", desc: "Build and integrate scalable REST and GraphQL APIs across distributed microservices." },
-  { icon: "🧪", title: "Automation & QA Testing", desc: "Write unit, integration, and end-to-end tests to ship reliable, bug-free software." },
-  { icon: "⛓️", title: "Emerging Tech: Blockchain & IoT", desc: "Get exposure to blockchain fundamentals, smart contracts, and IoT-driven product ideas." },
+  { icon: Code2, title: "Full Stack Web Development", desc: "Build end-to-end apps with React, Next.js, Node.js, Express, and modern databases." },
+  { icon: Settings, title: "Software & Product Engineering", desc: "Plan feature work, write clean code, and collaborate on real product sprints." },
+  { icon: Cloud, title: "Cloud Computing & DevOps", desc: "Ship apps with AWS, Docker, Kubernetes, CI/CD pipelines, and deployment monitoring." },
+  { icon: Brain, title: "Data Structures & Problem Solving", desc: "Turn requirements into working features with debugging, testing, and quality checks." },
+  { icon: Smartphone, title: "Mobile & Responsive UI", desc: "Create responsive interfaces that work smoothly across desktop, tablet, and phone." },
+  { icon: Lock, title: "Cybersecurity & Performance", desc: "Write secure code, optimize load times, and keep production systems stable." },
+  { icon: Bot, title: "AI, Machine Learning & Data Science", desc: "Work with Python, data pipelines, and applied machine learning models used in real products." },
+  { icon: Database, title: "Database & Backend Engineering", desc: "Design schemas and APIs using SQL, MongoDB, PostgreSQL, and RESTful/GraphQL services." },
+  { icon: Puzzle, title: "UI/UX & Frontend Design", desc: "Craft user-friendly, accessible interfaces with Figma-informed design systems and Tailwind CSS." },
+  { icon: Link2, title: "API & Microservices Development", desc: "Build and integrate scalable REST and GraphQL APIs across distributed microservices." },
+  { icon: FlaskConical, title: "Automation & QA Testing", desc: "Write unit, integration, and end-to-end tests to ship reliable, bug-free software." },
+  { icon: Link, title: "Emerging Tech: Blockchain & IoT", desc: "Get exposure to blockchain fundamentals, smart contracts, and IoT-driven product ideas." },
 ];
 
 const WEEKS = [
@@ -85,11 +128,11 @@ const WEEKS = [
   { week: "Month 3", title: "Integration & Testing", desc: "Connect components, add automation tests, and improve reliability for real user flows.", color: "#F59E0B" },
   { week: "Month 4", title: "Performance & Deployment", desc: "Optimize performance, configure hosting, and release your work to staging or production.", color: "#EF4444" },
   { week: "Month 5", title: "Mentor Project", desc: "Drive a mentor-backed project with clear goals, feedback loops, and review-ready deliverables.", color: "#8B5CF6" },
-  { week: "Month 6", title: "Portfolio & Handoff", desc: "Finalize your portfolio project, write documentation, and prepare for interviews.", color: "#0D1F3C" },
+  { week: "Month 6", title: "Portfolio & Handoff", desc: "Finalize your portfolio project, write documentation, and prepare for interviews.", color: "#4ADE80" },
 ];
 
 const TESTIMONIALS = [
-  { name: "Ananya Verma", role: "Tech Intern → Product Engineer", quote: "I joined a 6-month track and built the kind of project I can show to employers with confidence. The process was practical, supportive, and fast.", color: "#0D1F3C" },
+  { name: "Ananya Verma", role: "Tech Intern → Product Engineer", quote: "I joined a 6-month track and built the kind of project I can show to employers with confidence. The process was practical, supportive, and fast.", color: "#4ADE80" },
   { name: "Aarav Desai", role: "Frontend Intern → UI Developer", quote: "From day one I was writing real code, making releases, and learning best practices instead of busywork.", color: "#22C55E" },
   { name: "Megha Patel", role: "Backend Intern → Developer", quote: "The mentors helped me go from zero to building APIs, deployments, and a live app in just four months.", color: "#3B82F6" },
 ];
@@ -104,25 +147,28 @@ const FAQS = [
 function FAQ({ q, a }) {
   const [open, setOpen] = useState(false);
   return (
-    <div style={{ borderBottom: "1px solid #E2E8F0" }}>
+    <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
       <button onClick={() => setOpen(!open)} style={{
         width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between",
         background: "none", border: "none", cursor: "pointer", padding: "18px 0",
         fontFamily: "inherit", textAlign: "left",
       }}>
-        <span style={{ fontSize: 15, fontWeight: 600, color: "#0D1F3C", paddingRight: 20 }}>{q}</span>
-        <svg style={{ width: 18, height: 18, color: "#22C55E", flexShrink: 0, transition: "transform 0.2s", transform: open ? "rotate(45deg)" : "none" }} viewBox="0 0 20 20" fill="currentColor">
-          <path fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clipRule="evenodd" />
-        </svg>
+        <span style={{ fontSize: 15, fontWeight: 600, color: "#F1F5F9", paddingRight: 20 }}>{q}</span>
+        <ChevronDown
+          size={18}
+          color="#4ADE80"
+          style={{ flexShrink: 0, transition: "transform 0.25s", transform: open ? "rotate(180deg)" : "none" }}
+        />
       </button>
       {open && (
-        <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.75, paddingBottom: 18, margin: 0, paddingRight: 32 }}>{a}</p>
+        <p style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.75, paddingBottom: 18, margin: 0, paddingRight: 32 }}>{a}</p>
       )}
     </div>
   );
 }
 
 export default function TechnologyInternshipPage() {
+  const { open: openApplyModal } = useApplyModal();
   const lineRef = useRef(null);
 
   useEffect(() => {
@@ -134,63 +180,66 @@ export default function TechnologyInternshipPage() {
   }, []);
 
   return (
-    <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", color: "#0D1F3C", background: "white", paddingTop: 68 }}>
+    <main style={{ fontFamily: "'Inter', -apple-system, sans-serif", color: "#F1F5F9", position: "relative", background: "#0a1628", paddingTop: 68 }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
         @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
       `}</style>
 
-      <section style={{ background: "linear-gradient(160deg, #ffffff 0%, #f5fbf8 55%, #ffffff 100%)", padding: "88px 24px 56px", overflow: "hidden", position: "relative" }}>
+      <TechBackground />
+      <div style={{ position: "relative", zIndex: 1 }}>
+
+      <section style={{ padding: "88px 24px 56px", overflow: "hidden", position: "relative" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative" }}>
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 48, alignItems: "center" }}>
             <div>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#22C55E", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "6px 16px", background: "rgba(34,197,94,0.06)", marginBottom: 24 }}>
-                <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#22C55E", display: "inline-block" }} />
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, color: "#4ADE80", fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "6px 16px", background: "rgba(34,197,94,0.08)", marginBottom: 24, fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}>
+                <Terminal size={13} />
                 1–6 month internship track
               </span>
 
-              <h1 style={{ fontSize: "clamp(38px,5vw,62px)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#0D1F3C", margin: "0 0 18px" }}>
+              <h1 style={{ fontSize: "clamp(38px,5vw,62px)", fontWeight: 900, lineHeight: 1.05, letterSpacing: "-0.03em", color: "#F8FAFC", margin: "0 0 18px" }}>
                 Technology
                 <span style={{ display: "block", color: "#22C55E", position: "relative" }}>
                   Internship
-                  <span ref={lineRef} style={{ display: "block", height: 3, background: "rgba(34,197,94,0.25)", borderRadius: 4, marginTop: 6, width: "0%" }} />
+                  <span ref={lineRef} style={{ display: "block", height: 3, background: "rgba(34,197,94,0.35)", borderRadius: 4, marginTop: 6, width: "0%" }} />
                 </span>
               </h1>
 
-              <p style={{ fontSize: 17, color: "#64748B", lineHeight: 1.75, maxWidth: 560, margin: "0 0 32px" }}>
+              <p style={{ fontSize: 17, color: "#94A3B8", lineHeight: 1.75, maxWidth: 560, margin: "0 0 32px" }}>
                 Start your tech career with a flexible 1 to 6 month software development internship. Gain hands-on experience in web development, full stack development, cloud computing, and data science — build real software, ship features, and graduate with portfolio-ready work and a verified certificate.
               </p>
 
               <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
                 {[
-                  { icon: "⏱️", label: "Flexible duration", value: "1–6 months" },
-                  { icon: "🌐", label: "Remote ready", value: "Work from anywhere" },
-                  { icon: "📦", label: "Project-based", value: "Real product work" },
-                  { icon: "🎓", label: "Verified certificate", value: "Shareable on LinkedIn" },
+                  { icon: Clock, label: "Flexible duration", value: "1–6 months" },
+                  { icon: Globe, label: "Remote ready", value: "Work from anywhere" },
+                  { icon: Package, label: "Project-based", value: "Real product work" },
+                  { icon: GraduationCap, label: "Verified certificate", value: "Shareable on LinkedIn" },
                 ].map((item) => (
                   <div key={item.label} style={{ display: "flex", gap: 12, alignItems: "center", minWidth: 200 }}>
-                    <div style={{ width: 44, height: 44, borderRadius: 18, background: "#f4fdf7", display: "grid", placeItems: "center", fontSize: 18 }}>
-                      {item.icon}
+                    <div style={{ width: 44, height: 44, borderRadius: 18, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.25)", display: "grid", placeItems: "center" }}>
+                      <item.icon size={18} color="#4ADE80" strokeWidth={1.8} />
                     </div>
                     <div>
                       <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "#22C55E" }}>{item.label}</div>
-                      <div style={{ fontSize: 14, fontWeight: 700, color: "#0D1F3C" }}>{item.value}</div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#F1F5F9" }}>{item.value}</div>
                     </div>
                   </div>
                 ))}
               </div>
 
               <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
-                <a href="#" style={{ background: "#0D1F3C", color: "white", fontWeight: 700, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 32px rgba(13,31,60,0.16)", transition: "transform 0.2s" }}
+                <a href="#" style={{ background: "#22C55E", color: "#08150C", fontWeight: 700, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", boxShadow: "0 8px 28px rgba(34,197,94,0.28)", transition: "all 0.2s" }}
                   onClick={(e) => { e.preventDefault(); openApplyModal() }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; }}>
+                  onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   Apply Now
                 </a>
-                <a href="#curriculum" style={{ border: "1.5px solid rgba(13,31,60,0.18)", color: "#0D1F3C", fontWeight: 600, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", transition: "all 0.2s" }}
-                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.color = "#22C55E"; }}
-                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(13,31,60,0.18)"; e.currentTarget.style.color = "#0D1F3C"; }}>
+                <a href="#curriculum" style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0", fontWeight: 600, fontSize: 15, padding: "14px 34px", borderRadius: 999, textDecoration: "none", transition: "all 0.2s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.color = "#4ADE80"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)"; e.currentTarget.style.color = "#E2E8F0"; }}>
                   See Curriculum
                 </a>
               </div>
@@ -207,9 +256,9 @@ export default function TechnologyInternshipPage() {
                 { label: "Version Control", value: "Git, GitHub, Agile Workflows" },
                 { label: "Testing & QA", value: "Unit tests, Automation, Code review" },
               ].map((item) => (
-                <div key={item.label} style={{ background: "white", borderRadius: 24, border: "1px solid #E2E8F0", padding: 20, minHeight: 120, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, color: "#0D1F3C" }}>{item.label}</span>
-                  <span style={{ fontSize: 16, fontWeight: 700, color: "#64748B" }}>{item.value}</span>
+                <div key={item.label} style={{ background: "rgba(255,255,255,0.03)", borderRadius: 24, border: "1.5px solid rgba(255,255,255,0.08)", padding: 20, minHeight: 120, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, color: "#F1F5F9" }}>{item.label}</span>
+                  <span style={{ fontSize: 16, fontWeight: 700, color: "#94A3B8" }}>{item.value}</span>
                 </div>
               ))}
             </div>
@@ -217,15 +266,15 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "#F8FAFC", padding: "72px 24px" }}>
+      <section style={{ padding: "72px 24px", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>What you will learn</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>what_you_will_learn</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Built-for-work skills that matter.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
+              <p style={{ color: "#94A3B8", fontSize: 16, maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
                 Every module is chosen to help you move from learning to earning, with a focus on practical delivery over theory.
               </p>
             </div>
@@ -234,12 +283,14 @@ export default function TechnologyInternshipPage() {
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {SKILLS.map((skill, index) => (
               <Reveal key={skill.title} delay={index * 70}>
-                <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 26, transition: "transform 0.25s, box-shadow 0.25s" }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(15,23,42,0.08)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                  <div style={{ fontSize: 28, marginBottom: 16 }}>{skill.icon}</div>
-                  <h3 style={{ fontSize: 17, fontWeight: 700, color: "#0D1F3C", marginBottom: 10 }}>{skill.title}</h3>
-                  <p style={{ fontSize: 14, color: "#64748B", lineHeight: 1.8, margin: 0 }}>{skill.desc}</p>
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 26, transition: "all 0.3s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)"; e.currentTarget.style.background = "rgba(34,197,94,0.05)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 12, background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.25)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 16 }}>
+                    <skill.icon size={22} color="#4ADE80" strokeWidth={1.8} />
+                  </div>
+                  <h3 style={{ fontSize: 17, fontWeight: 700, color: "#F1F5F9", marginBottom: 10 }}>{skill.title}</h3>
+                  <p style={{ fontSize: 14, color: "#94A3B8", lineHeight: 1.8, margin: 0 }}>{skill.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -247,15 +298,15 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section style={{ padding: "72px 24px", background: "white" }}>
+      <section style={{ padding: "72px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 44 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Tech stack</span>
-              <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>tech_stack</SectionTag>
+              <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Every technology you'll work with, hands-on.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
+              <p style={{ color: "#94A3B8", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
                 From frontend to backend, cloud to AI — this internship covers the full modern technology stack used by real product teams.
               </p>
             </div>
@@ -273,12 +324,13 @@ export default function TechnologyInternshipPage() {
                 "Unit Testing", "Agile & Scrum", "UI/UX Design", "WebSockets", "Postman",
               ].map((tech) => (
                 <span key={tech} style={{
-                  fontSize: 13.5, fontWeight: 600, color: "#0D1F3C", background: "#F8FAFC",
-                  border: "1px solid #E2E8F0", borderRadius: 999, padding: "9px 18px",
+                  fontSize: 13.5, fontWeight: 600, color: "#4ADE80", background: "rgba(34,197,94,0.06)",
+                  border: "1px solid rgba(34,197,94,0.3)", borderRadius: 999, padding: "9px 18px",
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
                   transition: "all 0.2s", cursor: "default",
                 }}
-                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.background = "rgba(34,197,94,0.06)"; e.currentTarget.style.color = "#16803C"; }}
-                  onMouseOut={e => { e.currentTarget.style.borderColor = "#E2E8F0"; e.currentTarget.style.background = "#F8FAFC"; e.currentTarget.style.color = "#0D1F3C"; }}>
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "#22C55E"; e.currentTarget.style.background = "rgba(34,197,94,0.14)"; e.currentTarget.style.color = "#4ADE80"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.3)"; e.currentTarget.style.background = "rgba(34,197,94,0.06)"; e.currentTarget.style.color = "#4ADE80"; }}>
                   {tech}
                 </span>
               ))}
@@ -287,15 +339,15 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section id="curriculum" style={{ padding: "88px 24px", background: "white" }}>
+      <section id="curriculum" style={{ padding: "88px 24px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Curriculum</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>curriculum</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 A clear path from month 1 to month 6.
               </h2>
-              <p style={{ color: "#64748B", fontSize: 16, lineHeight: 1.7 }}>
+              <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.7 }}>
                 Progress through structured monthly goals, practical assignments, and mentor-led project work.
               </p>
             </div>
@@ -307,12 +359,12 @@ export default function TechnologyInternshipPage() {
                 <div style={{ display: "grid", gridTemplateColumns: "48px 1fr", gap: 20, alignItems: "start" }}>
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
                     <div style={{ width: 16, height: 16, borderRadius: "50%", background: item.color, marginTop: 4 }} />
-                    {index < WEEKS.length - 1 && <div style={{ flex: 1, width: 2, background: "#E2E8F0", marginTop: 8 }} />}
+                    {index < WEEKS.length - 1 && <div style={{ flex: 1, width: 2, background: "rgba(255,255,255,0.1)", marginTop: 8 }} />}
                   </div>
-                  <div style={{ padding: 26, background: "#F8FAFC", borderRadius: 20, border: "1px solid #E2E8F0" }}>
-                    <div style={{ fontSize: 12, fontWeight: 700, color: item.color, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10 }}>{item.week}</div>
-                    <h3 style={{ fontSize: 18, fontWeight: 800, color: "#0D1F3C", margin: "0 0 10px" }}>{item.title}</h3>
-                    <p style={{ fontSize: 15, color: "#64748B", lineHeight: 1.8, margin: 0 }}>{item.desc}</p>
+                  <div style={{ padding: 26, background: "rgba(255,255,255,0.03)", borderRadius: 20, border: "1.5px solid rgba(255,255,255,0.08)" }}>
+                    <div style={{ fontSize: 12, fontWeight: 700, color: item.color, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 10, fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}>{item.week}</div>
+                    <h3 style={{ fontSize: 18, fontWeight: 800, color: "#F1F5F9", margin: "0 0 10px" }}>{item.title}</h3>
+                    <p style={{ fontSize: 15, color: "#94A3B8", lineHeight: 1.8, margin: 0 }}>{item.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -321,12 +373,12 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "#F8FAFC", padding: "88px 24px" }}>
+      <section style={{ padding: "88px 24px", background: "rgba(255,255,255,0.02)", borderTop: "1px solid rgba(255,255,255,0.08)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 56 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>Alumni</span>
-              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
+              <SectionTag>alumni</SectionTag>
+              <h2 style={{ fontSize: "clamp(28px,4vw,40px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
                 Real stories from students who launched tech careers.
               </h2>
             </div>
@@ -334,15 +386,15 @@ export default function TechnologyInternshipPage() {
           <div className="rx-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TESTIMONIALS.map((item, index) => (
               <Reveal key={item.name} delay={index * 70}>
-                <div style={{ background: "white", border: "1.5px solid #E2E8F0", borderRadius: 20, padding: 28, transition: "transform 0.25s, box-shadow 0.25s" }}
-                  onMouseOver={e => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.boxShadow = "0 10px 30px rgba(15,23,42,0.08)"; }}
-                  onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
-                  <p style={{ fontSize: 15, color: "#475569", lineHeight: 1.75, margin: "0 0 24px" }}>
-                    “{item.quote}”
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: 28, transition: "all 0.3s" }}
+                  onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+                  onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}>
+                  <p style={{ fontSize: 15, color: "#CBD5E1", lineHeight: 1.75, margin: "0 0 24px", fontStyle: "italic" }}>
+                    &ldquo;{item.quote}&rdquo;
                   </p>
                   <div>
-                    <div style={{ fontSize: 15, fontWeight: 700, color: "#0D1F3C" }}>{item.name}</div>
-                    <div style={{ fontSize: 13, color: "#64748B", marginTop: 4 }}>{item.role}</div>
+                    <div style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}>{item.name}</div>
+                    <div style={{ fontSize: 13, color: "#4ADE80", marginTop: 4, fontWeight: 600 }}>{item.role}</div>
                   </div>
                 </div>
               </Reveal>
@@ -351,29 +403,29 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section style={{ padding: "88px 24px", background: "white" }}>
+      <section style={{ padding: "88px 24px" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <Reveal>
             <div style={{ textAlign: "center", marginBottom: 48 }}>
-              <span style={{ color: "#22C55E", fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em" }}>FAQ</span>
-              <h2 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 900, color: "#0D1F3C", margin: "12px 0 16px", letterSpacing: "-0.02em" }}>
+              <SectionTag>faq</SectionTag>
+              <h2 style={{ fontSize: "clamp(26px,4vw,38px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 16px", letterSpacing: "-0.02em" }}>
                 Common questions about the tech internship.
               </h2>
             </div>
           </Reveal>
-          <div style={{ border: "1.5px solid #E2E8F0", borderRadius: 20, padding: "0 24px" }}>
+          <div style={{ background: "rgba(255,255,255,0.03)", border: "1.5px solid rgba(255,255,255,0.08)", borderRadius: 20, padding: "0 24px" }}>
             {FAQS.map((faq) => <FAQ key={faq.q} {...faq} />)}
           </div>
         </div>
       </section>
 
-      <section style={{ padding: "48px 24px 8px", background: "white" }}>
+      <section style={{ padding: "48px 24px 8px" }}>
         <div style={{ maxWidth: 900, margin: "0 auto", textAlign: "center" }}>
           <Reveal>
             <p style={{ fontSize: 12, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", color: "#94A3B8", marginBottom: 10 }}>
               Related searches
             </p>
-            <p style={{ fontSize: 13, color: "#94A3B8", lineHeight: 2, margin: 0 }}>
+            <p style={{ fontSize: 13, color: "rgba(148,163,184,0.7)", lineHeight: 2, margin: 0 }}>
               Software Development Internship &middot; Web Development Internship for Students &middot; Full Stack Developer Internship &middot;
               Remote Tech Internship India &middot; Coding Internship with Certificate &middot; IT Internship Program 2026 &middot;
               Computer Science Internship &middot; Python Django Internship &middot; React Node.js Internship &middot;
@@ -384,25 +436,28 @@ export default function TechnologyInternshipPage() {
         </div>
       </section>
 
-      <section style={{ background: "#0D1F3C", padding: "88px 24px", textAlign: "center", color: "white" }}>
+      <section style={{ padding: "88px 24px", textAlign: "center", color: "#F1F5F9", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
           <Reveal>
-            <div style={{ fontSize: 46, marginBottom: 20 }}>💡</div>
-            <h2 style={{ fontSize: "clamp(28px,4vw,44px)", fontWeight: 900, lineHeight: 1.1, margin: "0 0 18px", letterSpacing: "-0.02em" }}>
+            <div style={{ width: 72, height: 72, borderRadius: "50%", background: "rgba(34,197,94,0.1)", border: "1px solid rgba(34,197,94,0.3)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 20px" }}>
+              <Lightbulb size={32} color="#4ADE80" strokeWidth={1.8} />
+            </div>
+            <h2 style={{ fontSize: "clamp(28px,4vw,44px)", fontWeight: 900, lineHeight: 1.1, margin: "0 0 18px", letterSpacing: "-0.02em", color: "#F8FAFC" }}>
               Launch your tech internship in 1–6 months.
             </h2>
-            <p style={{ color: "rgba(255,255,255,0.76)", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
+            <p style={{ color: "#94A3B8", fontSize: 16, lineHeight: 1.8, marginBottom: 32 }}>
               Free to apply, crafted for real learning, and built to help you secure your first tech role.
             </p>
-            <a href="mailto:supportthinkly.co@gmail.com" style={{ display: "inline-block", background: "#22C55E", color: "white", fontWeight: 700, fontSize: 16, padding: "16px 44px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 40px rgba(34,197,94,0.25)", transition: "transform 0.2s" }}
-              onMouseOver={e => { e.currentTarget.style.transform = "translateY(-2px)"; }}
-              onMouseOut={e => { e.currentTarget.style.transform = "translateY(0)"; }}>
+            <a href="mailto:supportthinkly.co@gmail.com" style={{ display: "inline-block", background: "#22C55E", color: "#08150C", fontWeight: 700, fontSize: 16, padding: "16px 44px", borderRadius: 999, textDecoration: "none", boxShadow: "0 12px 40px rgba(34,197,94,0.3)", transition: "all 0.2s" }}
+              onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+              onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
               Apply for Technology Internship →
             </a>
           </Reveal>
         </div>
       </section>
        <Footer/>
+      </div>
     </main>
   );
 }

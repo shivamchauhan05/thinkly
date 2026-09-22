@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import Footer from "@/components/Footer";
+import TechBackground from "@/components/TechBackground";
 import Image from "next/image";
-import { Fullscreen } from "lucide-react";
+import { Terminal, Camera, ChevronDown, Fullscreen } from "lucide-react";
 import {
   FaCamera,
   FaCertificate,
@@ -16,6 +17,26 @@ import {
 } from "react-icons/fa";
 import { FaScissors } from "react-icons/fa6";
 import { MdOutlineWatchLater } from "react-icons/md";
+
+// ── Section label (monospace "// tag" style, matches homepage/about) ──────────
+function SectionTag({ children }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        color: "#22C55E",
+        fontSize: 12,
+        fontWeight: 700,
+        fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+        letterSpacing: "0.05em",
+      }}
+    >
+      <span style={{ opacity: 0.6 }}>//</span> {children}
+    </span>
+  );
+}
 
 export default function PhotographyVideoPage() {
   const lineRef = useRef(null);
@@ -33,16 +54,17 @@ export default function PhotographyVideoPage() {
     <main
       style={{
         fontFamily: "'Inter', -apple-system, sans-serif",
-        color: "#0D1F3C",
-        background: "white",
+        color: "#F1F5F9",
+        position: "relative",
+        background: "#0a1628",
         paddingTop: 68,
       }}
     >
+      <TechBackground />
+      <div style={{ position: "relative", zIndex: 1 }}>
       <section
         style={{
           padding: "clamp(56px,8vw,88px) clamp(20px,6vw,80px) 56px",
-          background:
-            "linear-gradient(160deg, #ffffff 0%, #f5fbf8 55%, #ffffff 100%)",
           display: "flex",
           flexWrap: "wrap",
           gap: 40,
@@ -55,7 +77,7 @@ export default function PhotographyVideoPage() {
               display: "inline-flex",
               alignItems: "center",
               gap: 8,
-              color: "#22C55E",
+              color: "#4ADE80",
               fontSize: 12,
               fontWeight: 700,
               textTransform: "uppercase",
@@ -63,19 +85,12 @@ export default function PhotographyVideoPage() {
               border: "1px solid rgba(34,197,94,0.3)",
               borderRadius: 999,
               padding: "6px 16px",
-              background: "rgba(34,197,94,0.06)",
+              background: "rgba(34,197,94,0.08)",
               marginBottom: 24,
+              fontFamily: "'JetBrains Mono', ui-monospace, monospace",
             }}
           >
-            <span
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                background: "#22C55E",
-                display: "inline-block",
-              }}
-            />
+            <Terminal size={13} />
             1–6 month internship track
           </span>
 
@@ -85,7 +100,7 @@ export default function PhotographyVideoPage() {
               fontWeight: 900,
               lineHeight: 1.05,
               letterSpacing: "-0.03em",
-              color: "#0D1F3C",
+              color: "#F8FAFC",
               margin: "0 0 18px",
             }}
           >
@@ -98,7 +113,7 @@ export default function PhotographyVideoPage() {
               style={{
                 display: "block",
                 height: 3,
-                background: "rgba(34,197,94,0.25)",
+                background: "rgba(34,197,94,0.35)",
                 borderRadius: 4,
                 marginTop: 6,
                 width: "0%",
@@ -109,7 +124,7 @@ export default function PhotographyVideoPage() {
           <p
             style={{
               fontSize: 17,
-              color: "#64748B",
+              color: "#94A3B8",
               lineHeight: 1.75,
               maxWidth: 560,
               margin: "0 0 32px",
@@ -123,27 +138,27 @@ export default function PhotographyVideoPage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-start">
             <div className="flex gap-3 justify-center items-center">
-              <MdOutlineWatchLater size={18} className="font-extrabold" />
+              <MdOutlineWatchLater size={18} className="text-[#4ADE80]" />
               <div>
-                <p className="text-green-600 font-bold text-[14px]">
+                <p className="text-[#22C55E] font-bold text-[14px]">
                   Flexible Duration
                 </p>
                 <p className="font-extrabold text-[13px]">1-6 months</p>
               </div>
             </div>
             <div className="flex gap-3 justify-center items-center">
-              <FaGlobe size={18} className="text-sky-500" />
+              <FaGlobe size={18} className="text-sky-400" />
               <div>
-                <p className="text-green-600 font-bold text-[14px]">
+                <p className="text-[#22C55E] font-bold text-[14px]">
                   REMOTE READY
                 </p>
                 <p className="font-extrabold text-[13px]">Work from anywhere</p>
               </div>
             </div>
             <div className="flex gap-3 justify-center items-center">
-              <FaFileAlt size={18} className="text-blue-800" />
+              <FaFileAlt size={18} className="text-blue-400" />
               <div>
-                <p className="text-green-600 font-bold text-[14px]">
+                <p className="text-[#22C55E] font-bold text-[14px]">
                   PROJECT-BASED
                 </p>
                 <p className="font-extrabold text-[13px]">
@@ -152,9 +167,9 @@ export default function PhotographyVideoPage() {
               </div>
             </div>
             <div className="flex gap-3 justify-center items-center">
-              <FaCertificate size={18} className="text-purple-600"  />
+              <FaCertificate size={18} className="text-purple-400" />
               <div>
-                <p className="text-green-600 font-bold text-[14px]">
+                <p className="text-[#22C55E] font-bold text-[14px]">
                   VERIFIED CERTIFICATE
                 </p>
                 <p className="font-extrabold text-[13px]">
@@ -166,7 +181,10 @@ export default function PhotographyVideoPage() {
         </div>
 
         <div style={{ flex: "1 1 340px", minWidth: 0 }}>
-          <div className="rounded-2xl">
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{ border: "1.5px solid rgba(255,255,255,0.1)" }}
+          >
             <Image
               src="/photography/camera setup.jpeg"
               alt="camera"
@@ -177,7 +195,13 @@ export default function PhotographyVideoPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5 gap-4">
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/camera.jpeg"
                 alt="camera1"
@@ -185,13 +209,19 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Photography Fund:...</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Photography Fund:...</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   Cempositien, lighting, <br /> Pertraiture, Product Shoots.
                 </p>
               </div>
             </div>
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/video-production.jpg"
                 alt="camera1"
@@ -199,14 +229,20 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Video Production</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Video Production</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   Scripting, Directing, Camera
                   <br /> Operation,Audio Recording.
                 </p>
               </div>
             </div>
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/videography.jpg"
                 alt="camera1"
@@ -214,14 +250,20 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Aerial Videography</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Aerial Videography</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   UAV Operations, Sefty
                   <br /> Cinematic Overview, Servey...
                 </p>
               </div>
             </div>
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/WhatsApp Image 2026-08-30 at 10.43.06 PM (1).jpeg"
                 alt="camera1"
@@ -229,14 +271,20 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Editing & Post-Prod...</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Editing & Post-Prod...</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   Color Grading, Sequance, <br /> Visual Effects,
                   DaVincl(premi...
                 </p>
               </div>
             </div>
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/WhatsApp Image 2026-08-30 at 10.43.06 PM.jpeg"
                 alt="camera1"
@@ -244,13 +292,19 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Sound Design & Sco...</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Sound Design & Sco...</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   Field Recording, Dialogus, <br /> Foley, Soundtrack Selection.
                 </p>
               </div>
             </div>
-            <div className="pl-4 py-2 shadow-xl rounded-2xl bg-white">
+            <div
+              className="pl-4 py-2 rounded-2xl transition-all"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1.5px solid rgba(255,255,255,0.08)",
+              }}
+            >
               <Image
                 src="/photography/WhatsApp Image 2026-08-30 at 10.43.05 PM.jpeg"
                 alt="camera1"
@@ -258,8 +312,8 @@ export default function PhotographyVideoPage() {
                 height={80}
               />
               <div>
-                <h2 className="font-extrabold">Creative Direction</h2>
-                <p className="text-[12px] font-bold text-gray-600">
+                <h2 className="font-extrabold" style={{ color: "#F1F5F9" }}>Creative Direction</h2>
+                <p className="text-[12px] font-bold" style={{ color: "#94A3B8" }}>
                   Concept to execution, Brand <br /> Storytelling, Client Brief.
                 </p>
               </div>
@@ -268,8 +322,11 @@ export default function PhotographyVideoPage() {
         </div>
       </section>
 
-      <h2 className="flex justify-center my-14 text-3xl sm:text-5xl gap-4 font-extrabold text-black flex-wrap px-4 text-center">
-        Your <span className="text-green-600 whitespace-nowrap">1-6 Month</span>{" "}
+      <h2
+        className="flex justify-center my-14 text-3xl sm:text-5xl gap-4 font-extrabold flex-wrap px-4 text-center"
+        style={{ color: "#F8FAFC" }}
+      >
+        Your <span style={{ color: "#22C55E", whiteSpace: "nowrap" }}>1-6 Month</span>{" "}
         Journey
       </h2>
 
@@ -319,23 +376,24 @@ export default function PhotographyVideoPage() {
               style={{
                 fontSize: 13.5,
                 fontWeight: 600,
-                color: "#0D1F3C",
-                background: "#F8FAFC",
-                border: "1px solid #E2E8F0",
+                color: "#4ADE80",
+                background: "rgba(34,197,94,0.06)",
+                border: "1px solid rgba(34,197,94,0.3)",
                 borderRadius: 999,
                 padding: "9px 18px",
+                fontFamily: "'JetBrains Mono', ui-monospace, monospace",
                 transition: "all 0.2s",
                 cursor: "default",
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = "#22C55E";
-                e.currentTarget.style.background = "rgba(34,197,94,0.06)";
-                e.currentTarget.style.color = "#16803C";
+                e.currentTarget.style.background = "rgba(34,197,94,0.14)";
+                e.currentTarget.style.color = "#4ADE80";
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = "#E2E8F0";
-                e.currentTarget.style.background = "#F8FAFC";
-                e.currentTarget.style.color = "#0D1F3C";
+                e.currentTarget.style.borderColor = "rgba(34,197,94,0.3)";
+                e.currentTarget.style.background = "rgba(34,197,94,0.06)";
+                e.currentTarget.style.color = "#4ADE80";
               }}
             >
               {tool}
@@ -379,7 +437,7 @@ export default function PhotographyVideoPage() {
               month: "Month 6",
               title: "Client Briefs & Portfolio",
               desc: "Work on a real client-standard project from brief to delivery and package your best work into an interview-ready portfolio.",
-              color: "#0D1F3C",
+              color: "#4ADE80",
             },
           ].map((item, index) => (
             <div
@@ -412,7 +470,7 @@ export default function PhotographyVideoPage() {
                     style={{
                       flex: 1,
                       width: 2,
-                      background: "#E2E8F0",
+                      background: "rgba(255,255,255,0.1)",
                       marginTop: 8,
                     }}
                   />
@@ -421,10 +479,9 @@ export default function PhotographyVideoPage() {
               <div
                 style={{
                   padding: 26,
-                  background: "white",
+                  background: "rgba(255,255,255,0.03)",
                   borderRadius: 20,
-                  border: "1px solid #E2E8F0",
-                  boxShadow: "0 8px 28px rgba(15,23,42,0.05)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
                 }}
               >
                 <div
@@ -435,6 +492,7 @@ export default function PhotographyVideoPage() {
                     textTransform: "uppercase",
                     letterSpacing: "0.12em",
                     marginBottom: 10,
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
                   }}
                 >
                   {item.month}
@@ -443,7 +501,7 @@ export default function PhotographyVideoPage() {
                   style={{
                     fontSize: 18,
                     fontWeight: 800,
-                    color: "#0D1F3C",
+                    color: "#F1F5F9",
                     margin: "0 0 10px",
                   }}
                 >
@@ -452,7 +510,7 @@ export default function PhotographyVideoPage() {
                 <p
                   style={{
                     fontSize: 15,
-                    color: "#64748B",
+                    color: "#94A3B8",
                     lineHeight: 1.8,
                     margin: 0,
                   }}
@@ -465,24 +523,21 @@ export default function PhotographyVideoPage() {
         </div>
       </section>
 
-      <section style={{ background: "#F8FAFC", padding: "80px 24px" }}>
+      <section
+        style={{
+          padding: "80px 24px",
+          background: "rgba(255,255,255,0.02)",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
         <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-          <span
-            style={{
-              color: "#22C55E",
-              fontSize: 11,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-            }}
-          >
-            What you'll master
-          </span>
+          <SectionTag>what_you_will_master</SectionTag>
           <h2
             style={{
               fontSize: "clamp(28px,4vw,40px)",
               fontWeight: 900,
-              color: "#0D1F3C",
+              color: "#F8FAFC",
               margin: "12px auto 14px",
               letterSpacing: "-0.02em",
             }}
@@ -491,7 +546,7 @@ export default function PhotographyVideoPage() {
           </h2>
           <p
             style={{
-              color: "#64748B",
+              color: "#94A3B8",
               fontSize: 16,
               maxWidth: 560,
               margin: "0 auto 48px",
@@ -543,21 +598,22 @@ export default function PhotographyVideoPage() {
                 <div
                   key={skill.title}
                   style={{
-                    background: "white",
-                    border: "1.5px solid #E2E8F0",
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1.5px solid rgba(255,255,255,0.08)",
                     borderRadius: 20,
                     padding: 26,
                     textAlign: "left",
-                    transition: "transform 0.25s, box-shadow 0.25s",
+                    transition: "all 0.3s",
                   }}
                   onMouseOver={(e) => {
-                    e.currentTarget.style.transform = "translateY(-3px)";
-                    e.currentTarget.style.boxShadow =
-                      "0 10px 30px rgba(15,23,42,0.08)";
+                    e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+                    e.currentTarget.style.background = "rgba(34,197,94,0.05)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
                   }}
                   onMouseOut={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
                     e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
                   }}
                 >
                   {/* ICON */}
@@ -567,20 +623,21 @@ export default function PhotographyVideoPage() {
                       height: 52,
                       borderRadius: "50%",
                       background: "rgba(34,197,94,0.1)",
+                      border: "1px solid rgba(34,197,94,0.25)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       marginBottom: 16,
                     }}
                   >
-                    <Icon size={26} color="#22C55E" />
+                    <Icon size={22} color="#4ADE80" />
                   </div>
 
                   <h3
                     style={{
                       fontSize: 17,
                       fontWeight: 700,
-                      color: "#0D1F3C",
+                      color: "#F1F5F9",
                       marginBottom: 10,
                     }}
                   >
@@ -590,7 +647,7 @@ export default function PhotographyVideoPage() {
                   <p
                     style={{
                       fontSize: 14,
-                      color: "#64748B",
+                      color: "#94A3B8",
                       lineHeight: 1.8,
                       margin: 0,
                     }}
@@ -604,24 +661,14 @@ export default function PhotographyVideoPage() {
         </div>
       </section>
 
-      <section style={{ padding: "80px 24px", background: "white" }}>
+      <section style={{ padding: "80px 24px" }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", textAlign: "center" }}>
-          <span
-            style={{
-              color: "#22C55E",
-              fontSize: 11,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-            }}
-          >
-            Alumni
-          </span>
+          <SectionTag>alumni</SectionTag>
           <h2
             style={{
               fontSize: "clamp(28px,4vw,40px)",
               fontWeight: 900,
-              color: "#0D1F3C",
+              color: "#F8FAFC",
               margin: "12px auto 48px",
               letterSpacing: "-0.02em",
             }}
@@ -655,40 +702,40 @@ export default function PhotographyVideoPage() {
               <div
                 key={item.name}
                 style={{
-                  background: "#F8FAFC",
-                  border: "1.5px solid #E2E8F0",
+                  background: "rgba(255,255,255,0.03)",
+                  border: "1.5px solid rgba(255,255,255,0.08)",
                   borderRadius: 20,
                   padding: 28,
                   textAlign: "left",
-                  transition: "transform 0.25s, box-shadow 0.25s",
+                  transition: "all 0.3s",
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.transform = "translateY(-3px)";
-                  e.currentTarget.style.boxShadow =
-                    "0 10px 30px rgba(15,23,42,0.08)";
+                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)";
+                  e.currentTarget.style.transform = "translateY(-4px)";
                 }}
                 onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
                   e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "none";
                 }}
               >
                 <p
                   style={{
                     fontSize: 15,
-                    color: "#475569",
+                    color: "#CBD5E1",
                     lineHeight: 1.75,
                     margin: "0 0 24px",
+                    fontStyle: "italic",
                   }}
                 >
-                  “{item.quote}”
+                  &ldquo;{item.quote}&rdquo;
                 </p>
                 <div>
                   <div
-                    style={{ fontSize: 15, fontWeight: 700, color: "#0D1F3C" }}
+                    style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}
                   >
                     {item.name}
                   </div>
-                  <div style={{ fontSize: 13, color: "#64748B", marginTop: 4 }}>
+                  <div style={{ fontSize: 13, color: "#4ADE80", marginTop: 4, fontWeight: 600 }}>
                     {item.role}
                   </div>
                 </div>
@@ -698,24 +745,21 @@ export default function PhotographyVideoPage() {
         </div>
       </section>
 
-      <section style={{ padding: "80px 24px", background: "#F8FAFC" }}>
+      <section
+        style={{
+          padding: "80px 24px",
+          background: "rgba(255,255,255,0.02)",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
+      >
         <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center" }}>
-          <span
-            style={{
-              color: "#22C55E",
-              fontSize: 11,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.12em",
-            }}
-          >
-            FAQ
-          </span>
+          <SectionTag>faq</SectionTag>
           <h2
             style={{
               fontSize: "clamp(26px,4vw,38px)",
               fontWeight: 900,
-              color: "#0D1F3C",
+              color: "#F8FAFC",
               margin: "12px auto 16px",
               letterSpacing: "-0.02em",
             }}
@@ -724,8 +768,8 @@ export default function PhotographyVideoPage() {
           </h2>
           <div
             style={{
-              background: "white",
-              border: "1.5px solid #E2E8F0",
+              background: "rgba(255,255,255,0.03)",
+              border: "1.5px solid rgba(255,255,255,0.08)",
               borderRadius: 20,
               padding: "0 24px",
               textAlign: "left",
@@ -755,7 +799,7 @@ export default function PhotographyVideoPage() {
             ].map(({ q, a }) => {
               const [open, setOpen] = React.useState(false);
               return (
-                <div key={q} style={{ borderBottom: "1px solid #E2E8F0" }}>
+                <div key={q} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
                   <button
                     onClick={() => setOpen(!open)}
                     style={{
@@ -775,36 +819,27 @@ export default function PhotographyVideoPage() {
                       style={{
                         fontSize: 15,
                         fontWeight: 600,
-                        color: "#0D1F3C",
+                        color: "#F1F5F9",
                         paddingRight: 20,
                       }}
                     >
                       {q}
                     </span>
-                    <svg
+                    <ChevronDown
+                      size={18}
+                      color="#4ADE80"
                       style={{
-                        width: 18,
-                        height: 18,
-                        color: "#22C55E",
                         flexShrink: 0,
-                        transition: "transform 0.2s",
-                        transform: open ? "rotate(45deg)" : "none",
+                        transition: "transform 0.25s",
+                        transform: open ? "rotate(180deg)" : "none",
                       }}
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
+                    />
                   </button>
                   {open && (
                     <p
                       style={{
                         fontSize: 14,
-                        color: "#64748B",
+                        color: "#94A3B8",
                         lineHeight: 1.75,
                         paddingBottom: 18,
                         margin: 0,
@@ -824,7 +859,6 @@ export default function PhotographyVideoPage() {
       <section
         style={{
           padding: "48px 24px 8px",
-          background: "#F8FAFC",
           textAlign: "center",
         }}
       >
@@ -844,7 +878,7 @@ export default function PhotographyVideoPage() {
           <p
             style={{
               fontSize: 13,
-              color: "#94A3B8",
+              color: "rgba(148,163,184,0.7)",
               lineHeight: 2,
               margin: 0,
             }}
@@ -864,14 +898,28 @@ export default function PhotographyVideoPage() {
 
       <section
         style={{
-          background: "#0D1F3C",
           padding: "88px 24px",
           textAlign: "center",
-          color: "white",
+          color: "#F1F5F9",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
         }}
       >
         <div style={{ maxWidth: 700, margin: "0 auto" }}>
-          <div style={{ fontSize: 46, marginBottom: 20 }}>📸</div>
+          <div
+            style={{
+              width: 72,
+              height: 72,
+              borderRadius: "50%",
+              background: "rgba(34,197,94,0.1)",
+              border: "1px solid rgba(34,197,94,0.3)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              margin: "0 auto 20px",
+            }}
+          >
+            <Camera size={32} color="#4ADE80" strokeWidth={1.8} />
+          </div>
           <h2
             style={{
               fontSize: "clamp(28px,4vw,44px)",
@@ -879,13 +927,14 @@ export default function PhotographyVideoPage() {
               lineHeight: 1.1,
               margin: "0 0 18px",
               letterSpacing: "-0.02em",
+              color: "#F8FAFC",
             }}
           >
             Launch your Photography & Video internship in 1–6 months.
           </h2>
           <p
             style={{
-              color: "rgba(255,255,255,0.76)",
+              color: "#94A3B8",
               fontSize: 16,
               lineHeight: 1.8,
               marginBottom: 32,
@@ -899,19 +948,21 @@ export default function PhotographyVideoPage() {
             style={{
               display: "inline-block",
               background: "#22C55E",
-              color: "white",
+              color: "#08150C",
               fontWeight: 700,
               fontSize: 16,
               padding: "16px 44px",
               borderRadius: 999,
               textDecoration: "none",
-              boxShadow: "0 12px 40px rgba(34,197,94,0.25)",
-              transition: "transform 0.2s",
+              boxShadow: "0 12px 40px rgba(34,197,94,0.3)",
+              transition: "all 0.2s",
             }}
             onMouseOver={(e) => {
+              e.currentTarget.style.background = "#16a34a";
               e.currentTarget.style.transform = "translateY(-2px)";
             }}
             onMouseOut={(e) => {
+              e.currentTarget.style.background = "#22C55E";
               e.currentTarget.style.transform = "translateY(0)";
             }}
           >
@@ -921,6 +972,7 @@ export default function PhotographyVideoPage() {
       </section>
 
       <Footer />
+      </div>
     </main>
   );
 }
