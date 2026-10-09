@@ -9,7 +9,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
-import { Phone, Mail, Heart, ArrowRight, ArrowUp } from "lucide-react";
+import { Phone, Mail, Heart, ArrowRight, ArrowUp,MapPin } from "lucide-react";
 
 const LINKS = {
   Platform: [
@@ -119,6 +119,20 @@ export default function Footer() {
                 <Mail size={14} className="shrink-0 text-[#22C55E]/70" />
                 support@thinkyedu.co
               </a>
+                  
+<a
+  href="https://www.google.com/maps/search/?api=1&query=Noida%2C+Uttar+Pradesh%2C+India"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="flex items-start gap-2 text-[#94A3B8] transition-colors hover:text-[#4ADE80]"
+>
+  <MapPin
+    size={14}
+    className="mt-0.5 shrink-0 text-[#22C55E]/70"
+  />
+  <span>Noida, Uttar Pradesh, India</span>
+</a>
+      
             </div>
 
             <div className="mt-6 flex gap-3">
