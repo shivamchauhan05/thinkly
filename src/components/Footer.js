@@ -117,7 +117,7 @@ export default function Footer() {
                 className="flex items-center gap-2 text-[#94A3B8] transition-colors hover:text-[#4ADE80]"
               >
                 <Mail size={14} className="shrink-0 text-[#22C55E]/70" />
-                support@thinkyedu.co
+            supportthinkly.co@gmail.com
               </a>
                   
 <a
