@@ -3,6 +3,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar' 
 import Footer from '@/components/Footer'
 import { ApplyModalProvider } from '@/components/ApplyModal'
+import { QuoteModalProvider } from '@/components/QuoteModal'
 
 export const metadata = {
   metadataBase: new URL('https://thinklyedu.com'),
@@ -18,9 +19,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="bg-white">
         <ApplyModalProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <QuoteModalProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </QuoteModalProvider>
         </ApplyModalProvider>
       </body>
     </html>

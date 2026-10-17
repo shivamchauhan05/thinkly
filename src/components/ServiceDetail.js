@@ -2,13 +2,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import TechBackground from "@/components/TechBackground";
-import { useApplyModal } from "@/components/ApplyModal";
+import { useQuoteModal } from "@/components/QuoteModal";
 import { SERVICES_DATA, RELATED_SERVICES } from "@/lib/services-data";
 import {
   CheckCircle2,
   ChevronDown,
   ArrowRight,
-  Mail,
+  MessageCircle,
   Phone,
   Sparkles,
   Rocket,
@@ -18,7 +18,7 @@ import {
 
 const SITE_DOMAIN = "thinklyedu.com";
 const SITE_URL = "https://thinklyedu.com";
-const SUPPORT_EMAIL = "supportthinkly.co@gmail.com";
+const WHATSAPP_URL = "https://wa.me/919818509083";
 
 function FAQItem({ q, a }) {
   const [open, setOpen] = useState(false);
@@ -79,7 +79,7 @@ const HIGHLIGHTS = [
 ];
 
 export default function ServiceDetail({ slug }) {
-  const { open: openApplyModal } = useApplyModal();
+  const { open: openQuoteModal } = useQuoteModal();
   const {
     title,
     badge,
@@ -149,13 +149,14 @@ export default function ServiceDetail({ slug }) {
               <div className="mt-8 flex flex-wrap gap-3">
                 <button
                   type="button"
-                  onClick={() => openApplyModal()}
-                  className="rounded-full px-7 py-3 text-sm font-bold transition-all"
+                  onClick={openQuoteModal}
+                  className="rounded-full px-7 py-3 text-sm font-bold transition-all inline-block"
                   style={{
                     background: "#22C55E",
                     color: "#08150C",
                     border: "none",
                     cursor: "pointer",
+                    textDecoration: "none",
                     boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
                   }}
                   onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}
@@ -164,11 +165,21 @@ export default function ServiceDetail({ slug }) {
                   Get a Free Quote →
                 </button>
                 <a
-                  href={`mailto:${SUPPORT_EMAIL}`}
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition-all"
                   style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0" }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.borderColor = "#22C55E";
+                    e.currentTarget.style.color = "#4ADE80";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+                    e.currentTarget.style.color = "#E2E8F0";
+                  }}
                 >
-                  <Mail size={16} /> Talk to us
+                  <MessageCircle size={16} /> Talk to us
                 </a>
               </div>
             </div>
@@ -493,13 +504,14 @@ export default function ServiceDetail({ slug }) {
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <button
                 type="button"
-                onClick={() => openApplyModal()}
-                className="rounded-full px-8 py-3 text-sm font-bold transition-all"
+                onClick={openQuoteModal}
+                className="rounded-full px-8 py-3 text-sm font-bold transition-all inline-block"
                 style={{
                   background: "#22C55E",
                   color: "#08150C",
                   border: "none",
                   cursor: "pointer",
+                  textDecoration: "none",
                   boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
                 }}
                 onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}

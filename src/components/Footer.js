@@ -121,7 +121,7 @@ export default function Footer() {
                 +91 98185 09083
               </a>
               <a
-                href="mailto:support@thinkyedu.co"
+                href="mailto:supportthinkly.co@gmail.com"
                 className="flex items-center gap-2 text-[#94A3B8] transition-colors hover:text-[#4ADE80]"
               >
                 <Mail size={14} className="shrink-0 text-[#22C55E]/70" />

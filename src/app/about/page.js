@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import TechBackground from "@/components/TechBackground";
 import { useApplyModal } from "@/components/ApplyModal";
 import {
@@ -11,7 +12,78 @@ import {
   Terminal,
   Zap,
   Target,
+  Globe,
+  Smartphone,
+  Bot,
+  GraduationCap,
+  Megaphone,
 } from "lucide-react";
+
+// ── Our own live products ────────────────────────────────────────────────────
+const OWN_WORK = [
+  {
+    name: "MedShop Australia",
+    tag: "Online pharmacy",
+    desc: "A live pharmacy store serving real customers in Australia.",
+    url: "https://medshopaustralia.com/",
+    displayUrl: "medshopaustralia.com",
+  },
+  {
+    name: "My Meds Shop Australia",
+    tag: "Online pharmacy",
+    desc: "A second pharmacy brand we run and keep improving.",
+    url: "https://mymedsshopaustralia.com/",
+    displayUrl: "mymedsshopaustralia.com",
+  },
+  {
+    name: "LaptechPro",
+    tag: "Tech store",
+    desc: "A laptop sales and service platform built to bring real enquiries.",
+    url: "https://laptechpro.in",
+    displayUrl: "laptechpro.in",
+  },
+  {
+    name: "MSGMIC",
+    tag: "Education",
+    desc: "A school website that connects students, parents and staff.",
+    url: "https://msgmic.in",
+    displayUrl: "msgmic.in",
+  },
+];
+
+// ── Services we offer to businesses ──────────────────────────────────────────
+const SERVICES = [
+  {
+    icon: Globe,
+    title: "Website Development",
+    desc: "Business websites, landing pages and online stores that load fast and convert.",
+    href: "/services/website",
+  },
+  {
+    icon: Smartphone,
+    title: "App Development",
+    desc: "Mobile apps for Android and iOS, built around a real business need.",
+    href: "/services/app",
+  },
+  {
+    icon: Bot,
+    title: "AI Automation",
+    desc: "Chatbots and automated workflows that save hours of manual work.",
+    href: "/services/ai-automation",
+  },
+  {
+    icon: GraduationCap,
+    title: "EdTech Solutions",
+    desc: "Learning platforms and school websites that make education easy to run.",
+    href: "/services/edtech",
+  },
+  {
+    icon: Megaphone,
+    title: "Digital Marketing",
+    desc: "SEO, social media and paid ads that bring in real customers.",
+    href: "/services/digital-marketing",
+  },
+];
 
 // ── Mission network nodes ───────────────────────────────────────────────────
 // x/y are pre-rounded (2dp) so server- and client-rendered markup match
@@ -27,11 +99,11 @@ function pillarPos(deg) {
 }
 
 const MISSION_PILLARS = [
-  { deg: 0, label: "Real Projects", icon: Rocket },
+  { deg: 0, label: "Client Projects", icon: Rocket },
   { deg: 60, label: "Mentorship", icon: Users },
   { deg: 120, label: "Certified", icon: CheckCircle2 },
-  { deg: 180, label: "Zero Cost", icon: Star },
-  { deg: 240, label: "Fast Match", icon: Zap },
+  { deg: 180, label: "Own Products", icon: Globe },
+  { deg: 240, label: "Fast Delivery", icon: Zap },
   { deg: 300, label: "Community", icon: Briefcase },
 ].map((p) => ({ ...p, ...pillarPos(p.deg) }));
 
@@ -50,7 +122,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -131,9 +203,9 @@ export default function AboutPage() {
               className="text-5xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4"
               style={{ color: "#F8FAFC" }}
             >
-              Where Students Get
+              We Build Products.
               <span className="block relative" style={{ color: "#22C55E" }}>
-                Real Experience.
+                We Build Careers.
                 <span
                   ref={lineRef}
                   className="absolute bottom-1 left-0 h-[3px] rounded-full"
@@ -145,32 +217,33 @@ export default function AboutPage() {
               className="text-lg leading-relaxed max-w-xl mt-6 mb-10"
               style={{ color: "#94A3B8" }}
             >
-              Thinklyedu bridges the gap between classroom learning and career
-              readiness — connecting ambitious students with internship
-              opportunities that actually matter.
+              Thinklyedu is a technology company. We design and build websites,
+              mobile apps, AI automation and digital marketing for real
+              businesses — and we train the next generation of talent through
+              hands-on internships.
             </p>
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#"
+              <Link
+                href="/contact"
                 className="font-bold px-8 py-3.5 rounded-full transition-colors"
                 style={{
                   background: "#22C55E",
                   color: "#08150C",
                   boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
                 }}
+                onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}
+                onMouseOut={(e) => (e.currentTarget.style.background = "#22C55E")}
+              >
+                Start a Project →
+              </Link>
+              <a
+                href="#"
+                className="font-semibold px-8 py-3.5 rounded-full transition-colors"
+                style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0" }}
                 onClick={(e) => {
                   e.preventDefault();
                   openApplyModal();
                 }}
-                onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}
-                onMouseOut={(e) => (e.currentTarget.style.background = "#22C55E")}
-              >
-                Start Your Journey →
-              </a>
-              <a
-                href="#mission"
-                className="font-semibold px-8 py-3.5 rounded-full transition-colors"
-                style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0" }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.borderColor = "#22C55E";
                   e.currentTarget.style.color = "#4ADE80";
@@ -180,7 +253,7 @@ export default function AboutPage() {
                   e.currentTarget.style.color = "#E2E8F0";
                 }}
               >
-                Learn More
+                Apply for Internship
               </a>
             </div>
           </div>
@@ -197,10 +270,10 @@ export default function AboutPage() {
         >
           <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: 500, suffix: "+", label: "Students Placed" },
-              { value: 120, suffix: "+", label: "Partner Companies" },
-              { value: 95, suffix: "%", label: "Satisfaction Rate" },
-              { value: 30, suffix: "+", label: "Cities Covered" },
+              { value: 500, suffix: "+", label: "Students Mentored" },
+              { value: 10, suffix: "+", label: "Live Products" },
+              { value: 5, suffix: "", label: "Digital Services" },
+              { value: 2, suffix: "", label: "Countries" },
             ].map((s) => (
               <div key={s.label}>
                 <div
@@ -337,7 +410,7 @@ export default function AboutPage() {
                   boxShadow: "0 8px 24px rgba(34,197,94,0.3)",
                 }}
               >
-                <Target size={13} strokeWidth={2.2} /> Internships that count
+                <Target size={13} strokeWidth={2.2} /> Projects that ship
               </div>
             </div>
 
@@ -345,22 +418,23 @@ export default function AboutPage() {
             <div>
               <SectionTag>our_mission</SectionTag>
               <h2 className="text-4xl font-extrabold mt-3 mb-6 leading-tight" style={{ color: "#F8FAFC" }}>
-                Empowering Students
-                <span style={{ color: "#22C55E" }}> Through Action</span>
+                We Build.
+                <span style={{ color: "#22C55E" }}> And We Teach.</span>
               </h2>
               <p className="leading-relaxed mb-6" style={{ color: "#94A3B8" }}>
-                We believe every student deserves a fair shot at real-world
-                experience. Thinklyedu was built to eliminate the catch-22 of
-                needing experience to get experience — by creating structured,
-                mentored internship pathways with companies that are committed
-                to student growth.
+                Thinklyedu does two things well. First, we build digital products
+                for businesses — from websites and apps to AI automation and
+                marketing. Every project is real, shipped, and used by real
+                customers, including our own brands in India and Australia.
+                Second, we use that same work to train students, so they learn on
+                live projects instead of simulations.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Structured learning programs with measurable outcomes",
-                  "Mentorship from industry professionals",
-                  "Certificate of completion for every intern",
-                  "Zero cost for students — always",
+                  "End-to-end digital services for businesses",
+                  "Real, shipped products — including our own brands",
+                  "Interns learn on live client work, not mock briefs",
+                  "Verified certificates and mentorship for students",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm font-medium" style={{ color: "#CBD5E1" }}>
                     <CheckCircle2 size={19} color="#22C55E" style={{ flexShrink: 0, marginTop: 1 }} />
@@ -368,6 +442,137 @@ export default function AboutPage() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ── WHAT WE DO ── */}
+        <section
+          id="services"
+          className="py-24 px-6"
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.08)",
+            borderBottom: "1px solid rgba(255,255,255,0.08)",
+            background: "rgba(255,255,255,0.02)",
+          }}
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <SectionTag>what_we_do</SectionTag>
+              <h2 className="text-4xl font-extrabold mt-3 leading-tight" style={{ color: "#F8FAFC" }}>
+                Everything Digital, <span style={{ color: "#22C55E" }}>Under One Roof.</span>
+              </h2>
+              <p className="mt-4 max-w-xl mx-auto" style={{ color: "#94A3B8" }}>
+                One team for your website, app, automation and marketing. No
+                juggling different vendors.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {SERVICES.map((s) => (
+                <Link
+                  key={s.title}
+                  href={s.href}
+                  className="group rounded-2xl p-7 transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1.5px solid rgba(255,255,255,0.08)",
+                    textDecoration: "none",
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+                    e.currentTarget.style.background = "rgba(34,197,94,0.05)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                    style={{
+                      background: "rgba(34,197,94,0.1)",
+                      border: "1px solid rgba(34,197,94,0.25)",
+                    }}
+                  >
+                    <s.icon size={22} color="#4ADE80" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="text-lg font-bold mb-2" style={{ color: "#F1F5F9" }}>
+                    {s.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "#94A3B8" }}>
+                    {s.desc}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── OUR OWN PRODUCTS ── */}
+        <section id="work" className="py-24 px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-14">
+              <SectionTag>our_work</SectionTag>
+              <h2 className="text-4xl font-extrabold mt-3 leading-tight" style={{ color: "#F8FAFC" }}>
+                Products We <span style={{ color: "#22C55E" }}>Run Ourselves.</span>
+              </h2>
+              <p className="mt-4 max-w-xl mx-auto" style={{ color: "#94A3B8" }}>
+                We don&apos;t just build for clients — we run our own live
+                products across different industries and countries.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {OWN_WORK.map((w) => (
+                <a
+                  key={w.name}
+                  href={w.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group rounded-2xl p-6 transition-all duration-300"
+                  style={{
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1.5px solid rgba(255,255,255,0.08)",
+                    textDecoration: "none",
+                    display: "block",
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+                    e.currentTarget.style.background = "rgba(34,197,94,0.05)";
+                    e.currentTarget.style.transform = "translateY(-4px)";
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+                    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+                    e.currentTarget.style.transform = "translateY(0)";
+                  }}
+                >
+                  <span
+                    className="text-[11px] font-bold uppercase tracking-wider"
+                    style={{ color: "#22C55E" }}
+                  >
+                    {w.tag}
+                  </span>
+                  <h3 className="text-lg font-bold mt-2 mb-2" style={{ color: "#F1F5F9" }}>
+                    {w.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed mb-4" style={{ color: "#94A3B8" }}>
+                    {w.desc}
+                  </p>
+                  <span
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold"
+                    style={{
+                      color: "#4ADE80",
+                      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                    }}
+                  >
+                    <Globe size={13} /> {w.displayUrl}
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
         </section>
@@ -387,21 +592,22 @@ export default function AboutPage() {
             <div>
               <SectionTag>our_vision</SectionTag>
               <h2 className="text-4xl font-extrabold mt-3 mb-6 leading-tight" style={{ color: "#F8FAFC" }}>
-                India&apos;s Most Trusted
-                <span style={{ color: "#22C55E" }}> Internship Platform</span>
+                A Company That Builds
+                <span style={{ color: "#22C55E" }}> and Grows Talent.</span>
               </h2>
               <p className="leading-relaxed mb-6" style={{ color: "#94A3B8" }}>
-                We envision a future where no talented student is left behind
-                due to lack of opportunity. By 2027, we aim to place 10,000+
-                students in meaningful internships across every major industry
-                in India — building a generation of career-ready graduates.
+                We are building a technology company that ships real products and
+                creates real opportunities. Our own platforms — an online pharmacy
+                in Australia, a laptop store, a school website — show we can build
+                for any industry. We aim to serve more businesses and mentor more
+                students across India every year.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-8">
                 {[
-                  { icon: Rocket, label: "Career Launch" },
-                  { icon: Users, label: "Community" },
-                  { icon: Briefcase, label: "Industry Connect" },
-                  { icon: Star, label: "Excellence" },
+                  { icon: Rocket, label: "Product Excellence" },
+                  { icon: Globe, label: "Global Clients" },
+                  { icon: Users, label: "Talent Pipeline" },
+                  { icon: Star, label: "Innovation" },
                 ].map((item) => (
                   <div
                     key={item.label}
@@ -433,14 +639,14 @@ export default function AboutPage() {
                   className="font-black text-5xl"
                   style={{ color: "#22C55E", fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
                 >
-                  2027
+                  India + AU
                 </div>
                 <div>
                   <div className="text-xs uppercase tracking-widest mb-2" style={{ color: "rgba(226,232,240,0.4)" }}>
-                    Goal
+                    Where We Work
                   </div>
                   <div className="font-bold text-2xl leading-snug" style={{ color: "#F1F5F9" }}>
-                    10,000+ Students Placed Across India
+                    Building for Real Businesses &amp; Real Students
                   </div>
                 </div>
                 <div className="grid grid-cols-3 gap-2">
@@ -468,11 +674,11 @@ export default function AboutPage() {
             <div className="text-center mb-16">
               <SectionTag>why_thinklyedu</SectionTag>
               <h2 className="text-4xl font-extrabold mt-3 leading-tight" style={{ color: "#F8FAFC" }}>
-                Built Different. <span style={{ color: "#22C55E" }}>For Students.</span>
+                Built Different. <span style={{ color: "#22C55E" }}>For Everyone.</span>
               </h2>
               <p className="mt-4 max-w-xl mx-auto" style={{ color: "#94A3B8" }}>
-                We&apos;re not just another job board. Here&apos;s what makes
-                Thinklyedu the right choice for your career journey.
+                Whether you want to hire us or learn with us, here&apos;s what
+                makes Thinklyedu the right choice.
               </p>
             </div>
 
@@ -480,39 +686,39 @@ export default function AboutPage() {
               {[
                 {
                   icon: Rocket,
-                  title: "Real Projects, Real Impact",
-                  desc: "Forget coffee-fetching internships. Our partners assign students to live projects with measurable deliverables and genuine ownership.",
-                  highlight: "Live projects",
+                  title: "Real Products, Not Mock Work",
+                  desc: "We build websites, apps and automation for live businesses — and for our own brands in India and Australia. Nothing here is a simulation.",
+                  highlight: "Shipped work",
                 },
                 {
                   icon: Users,
                   title: "Mentor-Driven Learning",
-                  desc: "Every intern is assigned a dedicated mentor from the host company who guides weekly, reviews work, and writes a professional recommendation.",
+                  desc: "Every intern gets a dedicated mentor who reviews real deliverables every week and helps you improve with honest feedback.",
                   highlight: "1-on-1 mentorship",
                 },
                 {
                   icon: Star,
                   title: "Verified Certifications",
-                  desc: "Our certificates are industry-recognized and skill-linked, so recruiters know exactly what you can do — not just where you interned.",
+                  desc: "Our certificates prove what you actually built — not just where you sat. Recruiters can see real, skill-linked output.",
                   highlight: "Skill-linked certs",
                 },
                 {
+                  icon: Globe,
+                  title: "Full-Service Digital Team",
+                  desc: "Website, App, AI Automation, EdTech and Digital Marketing — everything under one roof, with one team that stays with you.",
+                  highlight: "5 core services",
+                },
+                {
+                  icon: CheckCircle2,
+                  title: "Learn Without Paying",
+                  desc: "Students join real projects without any fee. You bring the effort, we bring the work, the tools and the guidance.",
+                  highlight: "No fee for students",
+                },
+                {
                   icon: Briefcase,
-                  title: "All Domains Welcome",
-                  desc: "From Marketing and Design to Tech, Finance, and Operations — we have internship pathways across 15+ domains.",
-                  highlight: "15+ domains",
-                },
-                {
-                  icon: Star,
-                  title: "100% Free for Students",
-                  desc: "We will never charge a student. Ever. Our platform is fully funded by our partner companies, so you can focus on learning.",
-                  highlight: "Zero cost",
-                },
-                {
-                  icon: Users,
-                  title: "Community & Network",
-                  desc: "Join a growing community of 500+ Thinklyedu alumni who help each other with referrals, advice, and opportunities.",
-                  highlight: "500+ alumni",
+                  title: "A Growing Community",
+                  desc: "A network of students, builders and clients who share opportunities, referrals and advice — everyone grows together.",
+                  highlight: "500+ community",
                 },
               ].map((card) => (
                 <div
@@ -560,7 +766,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* ── APPLY CTA ── */}
+        {/* ── DUAL CTA ── */}
         <section
           id="apply"
           className="py-24 px-6"
@@ -579,33 +785,49 @@ export default function AboutPage() {
               <Terminal size={13} /> Ready to Begin?
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6" style={{ color: "#F8FAFC" }}>
-              Your career story
+              Let&apos;s Build Something.
               <span className="block" style={{ color: "#22C55E" }}>
-                starts right here.
+                Or Launch Your Career.
               </span>
             </h2>
             <p className="text-lg leading-relaxed mb-10 max-w-xl mx-auto" style={{ color: "rgba(226,232,240,0.6)" }}>
-              Join thousands of students who took the leap. Apply for a
-              Thinklyedu internship today — it&apos;s free, it&apos;s real,
-              and it could change everything.
+              Need a website, app or automation for your business? Or looking for
+              real internship experience? We do both — talk to us.
             </p>
-            <a
-              href="#"
-              className="inline-block font-black text-lg px-10 py-4 rounded-full transition-colors"
-              style={{
-                background: "#22C55E",
-                color: "#08150C",
-                boxShadow: "0 12px 40px rgba(34,197,94,0.3)",
-              }}
-              onClick={(e) => {
-                e.preventDefault();
-                openApplyModal();
-              }}
-              onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}
-              onMouseOut={(e) => (e.currentTarget.style.background = "#22C55E")}
-            >
-              Apply for Internship →
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/contact"
+                className="inline-block font-black text-lg px-10 py-4 rounded-full transition-colors"
+                style={{
+                  background: "#22C55E",
+                  color: "#08150C",
+                  boxShadow: "0 12px 40px rgba(34,197,94,0.3)",
+                }}
+                onMouseOver={(e) => (e.currentTarget.style.background = "#16a34a")}
+                onMouseOut={(e) => (e.currentTarget.style.background = "#22C55E")}
+              >
+                Start a Project →
+              </Link>
+              <a
+                href="#"
+                className="inline-block font-bold text-lg px-10 py-4 rounded-full transition-colors"
+                style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openApplyModal();
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.borderColor = "#22C55E";
+                  e.currentTarget.style.color = "#4ADE80";
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.16)";
+                  e.currentTarget.style.color = "#E2E8F0";
+                }}
+              >
+                Apply for Internship →
+              </a>
+            </div>
             <p
               className="text-sm mt-6"
               style={{ color: "rgba(226,232,240,0.3)", fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
