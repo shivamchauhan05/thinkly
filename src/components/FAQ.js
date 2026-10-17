@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 
 const faqs = [
   { id: 1, question: 'Is the internship free?', answer: 'Yes, all our internships are completely free. We believe in providing equal opportunities for everyone to learn and grow.' },
-  { id: 2, question: 'Is the internship remote?', answer: 'Yes, all our internships are 100% remote. You can work from anywhere with an internet connection.' },
+  { id: 2, question: 'Is the internship remote?', answer: 'Yes, all our internships are 100% remote. You can work remotely with an internet connection.' },
   { id: 3, question: 'How do I get a certificate?', answer: 'You will receive a certificate upon successful completion of all internship tasks and projects. The certificate includes a unique verification ID.' },
   { id: 4, question: 'How long is the internship?', answer: 'The internship duration is typically 4-6 weeks, depending on the domain. You can work at your own pace within the timeline.' },
   { id: 5, question: 'What are the eligibility criteria?', answer: 'Anyone with a passion to learn and basic knowledge of their chosen domain can apply. Students and fresh graduates are encouraged to apply.' },

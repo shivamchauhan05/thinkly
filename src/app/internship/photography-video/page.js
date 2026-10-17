@@ -151,7 +151,7 @@ export default function PhotographyVideoPage() {
                 <p className="text-[#22C55E] font-bold text-[14px]">
                   REMOTE READY
                 </p>
-                <p className="font-extrabold text-[13px]">Work from anywhere</p>
+                <p className="font-extrabold text-[13px]">Remote</p>
               </div>
             </div>
             <div className="flex gap-3 justify-center items-center">

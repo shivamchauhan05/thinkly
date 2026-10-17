@@ -97,7 +97,7 @@ const BENEFITS = [
   'Flexible 1 to 6 month tracks',
   'Verified completion certificate',
   'Portfolio-ready project work',
-  'Work from anywhere',
+  'Remote',
   'Beginner friendly, no experience needed',
 ]
 

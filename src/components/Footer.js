@@ -4,10 +4,10 @@ import React from "react";
 import Link from "next/link"; 
 import Image from "next/image";
 import {
+  FaWhatsapp,
   FaLinkedinIn,
+  FaFacebookF,
   FaInstagram,
-  FaTwitter,
-  FaYoutube,
 } from "react-icons/fa";
 import { Phone, Mail, Heart, ArrowRight, ArrowUp,MapPin } from "lucide-react";
 
@@ -17,7 +17,6 @@ const LINKS = {
     { label: "Internship", href: "/internship" },
     { label: "Certificate", href: "/certificate" },
     { label: "Project", href: "/project" },
-    { label: "Verification Portal", href: "/verification" },
   ],
 
   Company: [
@@ -47,10 +46,10 @@ const LINKS = {
 };
 
 const SOCIALS = [
-  { Icon: FaLinkedinIn, href: "https://linkedin.com", label: "LinkedIn" },
+  { Icon: FaWhatsapp, href: "https://wa.me/919818509083", label: "WhatsApp" },
+  { Icon: FaLinkedinIn, href: "https://www.linkedin.com/company/thinklyedu/", label: "LinkedIn" },
+  { Icon: FaFacebookF, href: "https://facebook.com", label: "Facebook" },
   { Icon: FaInstagram, href: "https://instagram.com", label: "Instagram" },
-  { Icon: FaTwitter, href: "https://twitter.com", label: "Twitter" },
-  { Icon: FaYoutube, href: "https://youtube.com", label: "YouTube" },
 ];
 
 function ColumnHeading({ children }) {

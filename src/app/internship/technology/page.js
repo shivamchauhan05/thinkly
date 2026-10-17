@@ -213,7 +213,7 @@ export default function TechnologyInternshipPage() {
               <div style={{ display: "flex", flexWrap: "wrap", gap: 16, marginBottom: 36 }}>
                 {[
                   { icon: Clock, label: "Flexible duration", value: "1–6 months" },
-                  { icon: Globe, label: "Remote ready", value: "Work from anywhere" },
+                  { icon: Globe, label: "Remote ready", value: "Remote" },
                   { icon: Package, label: "Project-based", value: "Real product work" },
                   { icon: GraduationCap, label: "Verified certificate", value: "Shareable on LinkedIn" },
                 ].map((item) => (
