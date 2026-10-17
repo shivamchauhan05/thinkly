@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Footer from '@/components/Footer'
+import Link from "next/link";
 import TechBackground from '@/components/TechBackground'
 import { CATEGORIES, POSTS } from '@/lib/blog-data'
 import { Terminal, Search, Mail, BookOpen } from "lucide-react";
@@ -20,7 +20,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -236,7 +236,8 @@ export default function BlogPage() {
           <div style={{ maxWidth: 1100, margin: "0 auto" }}>
             {featured && (
               <Reveal>
-                <div
+                <Link
+                  href={`/blog/${featured.slug}`}
                   style={{
                     display: "grid",
                     gridTemplateColumns: "1fr",
@@ -245,6 +246,7 @@ export default function BlogPage() {
                     borderRadius: 24,
                     overflow: "hidden",
                     marginBottom: 48,
+                    textDecoration: "none",
                   }}
                 >
                   <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
@@ -313,7 +315,7 @@ export default function BlogPage() {
                       Read Full Article →
                     </span>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             )}
 
@@ -333,7 +335,8 @@ export default function BlogPage() {
               >
                 {rest.map((post, index) => (
                   <Reveal key={post.title} delay={index * 70}>
-                    <div
+                    <Link
+                      href={`/blog/${post.slug}`}
                       style={{
                         background: "rgba(255,255,255,0.03)",
                         border: "1.5px solid rgba(255,255,255,0.08)",
@@ -343,6 +346,7 @@ export default function BlogPage() {
                         display: "flex",
                         flexDirection: "column",
                         height: "100%",
+                        textDecoration: "none",
                       }}
                       onMouseOver={(e) => {
                         e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
@@ -405,7 +409,7 @@ export default function BlogPage() {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   </Reveal>
                 ))}
               </div>
@@ -499,8 +503,6 @@ export default function BlogPage() {
             </div>
           </div>
         </section>
-
-        <Footer />
       </div>
     </main>
   );

@@ -1,9 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Footer from "@/components/Footer";
 import TechBackground from "@/components/TechBackground";
 import { useApplyModal } from "@/components/ApplyModal";
 import Image from "next/image";
+import Link from "next/link";
+import { POSTS } from "@/lib/blog-data";
 import {
   Target,
   Users,
@@ -26,8 +27,52 @@ import {
   ChevronDown,
   BookOpen,
   ArrowRight,
-  Star,
+  Bot,
+  Pill,
+  Laptop,
+  GraduationCap,
+  Rocket,
+  Send,
 } from "lucide-react";
+
+// ── CONFIG: apni details yahan badlo ───────────────────────────────────────────
+const CONTACT = {
+  email: "supportthinkly.co@gmail.com",
+  phoneDisplay: "+91 98185 09083",
+  whatsapp: "919818509083", // country code + number, bina + ke
+};
+
+// "Our Work" section ke links: apni live websites ke URL yahan daalo
+const OWN_SITES = [
+  {
+    icon: Pill,
+    name: "MedShop Australia",
+    tag: "Online pharmacy",
+    desc: "A live online pharmacy serving real customers with product pages, easy ordering and fast enquiries.",
+    href: "https://medshopaustralia.com/",
+  },
+  {
+    icon: Pill,
+    name: "My Meds Shop Australia",
+    tag: "Online pharmacy",
+    desc: "A second pharmacy store where we test and improve what turns visitors into repeat customers.",
+    href: "https://mymedsshopaustralia.com/",
+  },
+  {
+    icon: Laptop,
+    name: "LaptechPro",
+    tag: "Tech store",
+    desc: "A laptop sales and service platform built to bring in real enquiries and online orders.",
+    href: "https://laptechpro.in",
+  },
+  {
+    icon: GraduationCap,
+    name: "MSGMIC",
+    tag: "Education",
+    desc: "A school website that shares information, builds trust and connects with students and parents.",
+    href: "https://msgmic.in",
+  },
+];
 
 // ── Animated counter ───────────────────────────────────────────────────────────
 function Counter({ target, suffix = "", duration = 1800 }) {
@@ -115,8 +160,91 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
+  );
+}
+
+// ── Shared section heading ─────────────────────────────────────────────────────
+function SectionHead({ tag, before, green, after = "", desc, mb = 64 }) {
+  return (
+    <Reveal>
+      <div
+        className="section-head-mb"
+        style={{ textAlign: "center", marginBottom: mb }}
+      >
+        <SectionTag>{tag}</SectionTag>
+        <h2
+          style={{
+            fontSize: "clamp(30px,4vw,42px)",
+            fontWeight: 900,
+            letterSpacing: "-0.02em",
+            color: "#F8FAFC",
+            margin: "12px 0 16px",
+            lineHeight: 1.1,
+          }}
+        >
+          {before} <span style={{ color: "#22C55E" }}>{green}</span>
+          {after}
+        </h2>
+        {desc && (
+          <p
+            style={{
+              color: "#94A3B8",
+              fontSize: 16,
+              maxWidth: 520,
+              margin: "0 auto",
+              lineHeight: 1.7,
+            }}
+          >
+            {desc}
+          </p>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
+// ── Shared card hover handlers ─────────────────────────────────────────────────
+const cardHover = {
+  onMouseOver: (e) => {
+    e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
+    e.currentTarget.style.background = "rgba(34,197,94,0.05)";
+    e.currentTarget.style.boxShadow = "0 8px 32px rgba(34,197,94,0.12)";
+    e.currentTarget.style.transform = "translateY(-4px)";
+  },
+  onMouseOut: (e) => {
+    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
+    e.currentTarget.style.background = "rgba(255,255,255,0.03)";
+    e.currentTarget.style.boxShadow = "none";
+    e.currentTarget.style.transform = "translateY(0)";
+  },
+};
+
+const cardBase = {
+  background: "rgba(255,255,255,0.03)",
+  border: "1.5px solid rgba(255,255,255,0.08)",
+  borderRadius: 20,
+  padding: 28,
+  transition: "all 0.3s",
+};
+
+function IconBox({ icon: Icon }) {
+  return (
+    <div
+      style={{
+        width: 48,
+        height: 48,
+        borderRadius: 12,
+        background: "rgba(34,197,94,0.1)",
+        border: "1px solid rgba(34,197,94,0.25)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Icon size={22} color="#4ADE80" strokeWidth={1.8} />
+    </div>
   );
 }
 
@@ -200,7 +328,7 @@ function Hero() {
                     animation: "pulse 2s infinite",
                   }}
                 />
-                {"> status: accepting_applications"}
+                {"> status: open_for_projects_&_interns"}
                 <span style={{ animation: "blink 1s step-end infinite" }}>
                   _
                 </span>
@@ -209,7 +337,7 @@ function Hero() {
 
             <h1
               style={{
-                fontSize: "clamp(40px,5vw,60px)",
+                fontSize: "clamp(38px,4.6vw,56px)",
                 fontWeight: 900,
                 lineHeight: 1.06,
                 letterSpacing: "-0.03em",
@@ -219,7 +347,7 @@ function Hero() {
                 animation: "fadeUp 0.7s ease 0.35s forwards",
               }}
             >
-              Launch Your Career
+              We Build Digital Products.
               <span
                 style={{
                   display: "block",
@@ -227,7 +355,7 @@ function Hero() {
                   position: "relative",
                 }}
               >
-                {"<With Real Work />"}
+                {"<We Train Builders />"}
                 <span
                   ref={lineRef}
                   style={{
@@ -247,14 +375,15 @@ function Hero() {
                 fontSize: 17,
                 color: "#94A3B8",
                 lineHeight: 1.75,
-                maxWidth: 480,
+                maxWidth: 500,
                 margin: "24px 0 36px",
                 opacity: 0,
                 animation: "fadeUp 0.7s ease 0.5s forwards",
               }}
             >
-              Thinklyedu connects students with internship opportunities across
-              15+ domains — for free. No experience needed. Just ambition.
+              Thinklyedu is a team of 10 that builds websites, mobile apps and
+              AI automation for businesses. We also run live-project internships
+              where students learn by doing real work.
             </p>
 
             <div
@@ -267,7 +396,7 @@ function Hero() {
               }}
             >
               <a
-                href="#"
+                href="#contact"
                 style={{
                   background: "#22C55E",
                   color: "#08150C",
@@ -278,10 +407,6 @@ function Hero() {
                   textDecoration: "none",
                   boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
                   transition: "transform 0.2s, box-shadow 0.2s",
-                }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  openApplyModal();
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.transform = "translateY(-2px)";
@@ -294,10 +419,10 @@ function Hero() {
                     "0 8px 28px rgba(34,197,94,0.28)";
                 }}
               >
-                Start Your Internship
+                Start a Project
               </a>
               <a
-                href="#how"
+                href="#"
                 style={{
                   border: "1.5px solid rgba(255,255,255,0.16)",
                   color: "#E2E8F0",
@@ -308,6 +433,10 @@ function Hero() {
                   textDecoration: "none",
                   transition: "all 0.2s",
                 }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  openApplyModal();
+                }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.borderColor = "#22C55E";
                   e.currentTarget.style.color = "#4ADE80";
@@ -317,7 +446,7 @@ function Hero() {
                   e.currentTarget.style.color = "#E2E8F0";
                 }}
               >
-                See How It Works
+                Apply for Internship
               </a>
             </div>
 
@@ -327,50 +456,33 @@ function Hero() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                gap: 24,
+                gap: 14,
                 marginTop: 48,
                 opacity: 0,
                 animation: "fadeUp 0.7s ease 0.8s forwards",
               }}
             >
-              <div style={{ display: "flex" }}>
-                {["#22C55E", "#0D1F3C", "#3B82F6", "#F59E0B", "#EF4444"].map(
-                  (c, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        width: 32,
-                        height: 32,
-                        borderRadius: "50%",
-                        background: c,
-                        border: "2px solid #0a1628",
-                        marginLeft: i === 0 ? 0 : -10,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <span
-                        style={{
-                          color: "white",
-                          fontSize: 11,
-                          fontWeight: 700,
-                        }}
-                      >
-                        {String.fromCharCode(65 + i)}
-                      </span>
-                    </div>
-                  ),
-                )}
-              </div>
+              <span
+                style={{
+                  width: 8,
+                  height: 8,
+                  borderRadius: "50%",
+                  background: "#22C55E",
+                  display: "inline-block",
+                  animation: "pulse 2s infinite",
+                  flexShrink: 0,
+                }}
+              />
               <p style={{ fontSize: 13, color: "#94A3B8", margin: 0 }}>
-                <strong style={{ color: "#F1F5F9" }}>500+ students</strong>{" "}
-                already placed this year
+                <strong style={{ color: "#F1F5F9" }}>
+                  4 live websites run by our own team.
+                </strong>{" "}
+                Real traffic, real leads, real results.
               </p>
             </div>
           </div>
 
-          {/* Right — floating cards visual */}
+          {/* Right — code visual */}
           <div
             className="hero-visual"
             style={{
@@ -381,12 +493,9 @@ function Hero() {
               justifyContent: "center",
             }}
           >
-            {/* Main Circle */}
             <div className="relative w-full max-w-[430px] aspect-square mx-auto">
-              {/* Background Glow */}
               <div className="absolute inset-0 z-0 bg-green-400/15 blur-3xl scale-110 rounded-full" />
 
-              {/* Scan ring */}
               <div
                 style={{
                   position: "absolute",
@@ -419,28 +528,38 @@ function Hero() {
                     width: "100%",
                   }}
                 >
-                  <div style={{ color: "#64748B" }}>// thinklyedu.js</div>
+                  <div style={{ color: "#64748B" }}>{"// thinklyedu.js"}</div>
                   <div style={{ color: "#E2E8F0" }}>
-                    <span style={{ color: "#818CF8" }}>const</span> student = {"{"}
+                    <span style={{ color: "#818CF8" }}>const</span> team = {"{"}
                   </div>
                   <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
-                    skills: [<span style={{ color: "#FBBF24" }}>&quot;ambition&quot;</span>],
+                    builds: [
+                    <span style={{ color: "#FBBF24" }}>&quot;web&quot;</span>,{" "}
+                    <span style={{ color: "#FBBF24" }}>&quot;apps&quot;</span>,{" "}
+                    <span style={{ color: "#FBBF24" }}>&quot;AI&quot;</span>],
                   </div>
                   <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
-                    mentor: <span style={{ color: "#FBBF24" }}>true</span>,
+                    interns:{" "}
+                    <span style={{ color: "#FBBF24" }}>
+                      &quot;live projects&quot;
+                    </span>
+                    ,
                   </div>
                   <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
-                    fee: <span style={{ color: "#FBBF24" }}>0</span>,
+                    size: <span style={{ color: "#FBBF24" }}>10</span>,
                   </div>
                   <div style={{ color: "#E2E8F0" }}>{"};"}</div>
                   <div style={{ marginTop: 12, color: "#E2E8F0" }}>
                     <span style={{ color: "#818CF8" }}>function</span>{" "}
-                    <span style={{ color: "#22C55E" }}>launchCareer</span>
-                    (student) {"{"}
+                    <span style={{ color: "#22C55E" }}>startWithUs</span>
+                    (you) {"{"}
                   </div>
                   <div style={{ paddingLeft: 16, color: "#E2E8F0" }}>
                     <span style={{ color: "#818CF8" }}>return</span>{" "}
-                    <span style={{ color: "#FBBF24" }}>&quot;hired&quot;</span>;
+                    <span style={{ color: "#FBBF24" }}>
+                      &quot;let&apos;s build&quot;
+                    </span>
+                    ;
                   </div>
                   <div style={{ color: "#E2E8F0" }}>
                     {"}"}
@@ -451,7 +570,6 @@ function Hero() {
                 </div>
               </div>
 
-              {/* Corner brackets — tech scan frame */}
               {[
                 { top: -10, left: -10, borderWidth: "3px 0 0 3px" },
                 { top: -10, right: -10, borderWidth: "3px 3px 0 0" },
@@ -471,7 +589,6 @@ function Hero() {
                   }}
                 />
               ))}
-
             </div>
           </div>
         </div>
@@ -488,7 +605,7 @@ function Hero() {
   );
 }
 
-// ── Stats bar ──────────────────────────────────────────────────────────────────
+// ── Stats bar (sirf sachche numbers) ───────────────────────────────────────────
 function Stats() {
   return (
     <section
@@ -509,9 +626,9 @@ function Stats() {
         }}
       >
         {[
-          { value: 500, suffix: "+", label: "Students Placed" },
-          { value: 120, suffix: "+", label: "Partner Companies" },
-          { value: 15, suffix: "+", label: "Internship Domains" },
+          { value: 10, suffix: "", label: "Team Members" },
+          { value: 4, suffix: "", label: "Websites We Run Ourselves" },
+          { value: 3, suffix: "", label: "Core Services" },
           { value: 100, suffix: "%", label: "Free for Students" },
         ].map((s) => (
           <div key={s.label}>
@@ -542,82 +659,594 @@ function Stats() {
   );
 }
 
-// ── Domains ────────────────────────────────────────────────────────────────────
-function Domains() {
-  const domains = [
+// ── Services (clients) ─────────────────────────────────────────────────────────
+function Services() {
+  const services = [
     {
-      icon: Megaphone,
-      name: "Marketing",
-      slug: "marketing",
-      desc: "Social media, SEO, campaigns",
-    },
-    {
-      icon: Palette,
-      name: "Design",
-      slug: "design",
-      desc: "UI/UX, graphics, branding",
-    },
-    {
-      icon: Code2,
-      name: "Technology",
-      slug: "technology",
-      desc: "Web dev, apps, coding",
-    },
-    {
-      icon: PenTool,
-      name: "Content Writing",
-      slug: "content-writing",
-      desc: "Blogs, copywriting, scripts",
-    },
-    {
-      icon: Camera,
-      name: "Photography & Video",
-      slug: "photography-video",
-      desc: "Reels, editing, shoots",
+      icon: Globe,
+      title: "Websites",
+      desc: "Fast, mobile-friendly websites for businesses, online stores and lead generation. Built to load quickly and turn visitors into customers.",
     },
     {
       icon: Smartphone,
-      name: "Social Media",
-      slug: "social-media",
-      desc: "Instagram, YouTube, LinkedIn",
+      title: "Mobile Apps",
+      desc: "Simple and reliable mobile apps for your business, designed for real users and ready to grow with you.",
+    },
+    {
+      icon: Bot,
+      title: "AI Automation",
+      desc: "Chatbots, lead follow-ups and workflow automation that handle repetitive work, so you save hours every week.",
     },
   ];
 
   return (
-    <section id="domains" className="section-py" style={{ padding: "96px 24px" }}>
+    <section id="services" className="section-py" style={{ padding: "96px 24px" }}>
       <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <div
-            className="section-head-mb"
-            style={{ textAlign: "center", marginBottom: 64 }}
-          >
-            <SectionTag>domains</SectionTag>
-            <h2
+        <SectionHead
+          tag="what_we_build"
+          before="From Idea to"
+          green="Launch"
+          desc="We take care of design, development and automation, so you can focus on running your business."
+        />
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: 24,
+          }}
+        >
+          {services.map((s, i) => (
+            <Reveal key={s.title} delay={i * 80}>
+              <div
+                style={{ ...cardBase, cursor: "default", height: "100%", boxSizing: "border-box" }}
+                {...cardHover}
+              >
+                <div style={{ marginBottom: 16 }}>
+                  <IconBox icon={s.icon} />
+                </div>
+                <h3
+                  style={{
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "#F1F5F9",
+                    marginBottom: 10,
+                  }}
+                >
+                  {s.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 13.5,
+                    color: "#94A3B8",
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  {s.desc}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200}>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <a
+              href="#contact"
               style={{
-                fontSize: "clamp(30px,4vw,42px)",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                color: "#F8FAFC",
-                margin: "12px 0 16px",
-                lineHeight: 1.1,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                color: "#4ADE80",
+                fontSize: 15,
+                fontWeight: 700,
+                textDecoration: "none",
               }}
             >
-              Pick Your <span style={{ color: "#22C55E" }}>Domain</span>
-            </h2>
-            <p
-              style={{
-                color: "#94A3B8",
-                fontSize: 16,
-                maxWidth: 500,
-                margin: "0 auto",
-                lineHeight: 1.7,
-              }}
-            >
-              6+ industry-relevant tracks, each with real projects and a
-              dedicated mentor — free, remote or on-site.
-            </p>
+              Discuss your project <ArrowRight size={16} />
+            </a>
           </div>
         </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ── Our own websites (proof of work) ───────────────────────────────────────────
+function OurWork() {
+  return (
+    <section
+      id="work"
+      className="section-py"
+      style={{
+        padding: "96px 24px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          tag="our_work"
+          before="We Don't Just Build for Others."
+          green="We Run Our Own."
+          desc="Live websites in different industries, with real visitors and real leads. We know what works in real business."
+        />
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2,1fr)",
+            gap: 20,
+          }}
+        >
+          {OWN_SITES.map((w, i) => (
+            <Reveal key={w.name} delay={i * 70}>
+              <a
+                href={w.href}
+                target={w.href === "#" ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                style={{
+                  ...cardBase,
+                  display: "block",
+                  textDecoration: "none",
+                  height: "100%",
+                  boxSizing: "border-box",
+                }}
+                {...cardHover}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: 16,
+                  }}
+                >
+                  <IconBox icon={w.icon} />
+                  <span
+                    style={{
+                      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                      fontSize: 11.5,
+                      color: "#4ADE80",
+                      border: "1px solid rgba(34,197,94,0.3)",
+                      background: "rgba(34,197,94,0.06)",
+                      borderRadius: 999,
+                      padding: "5px 14px",
+                    }}
+                  >
+                    {w.tag}
+                  </span>
+                </div>
+                <h3
+                  style={{
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "#F1F5F9",
+                    marginBottom: 8,
+                  }}
+                >
+                  {w.name}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 13.5,
+                    color: "#94A3B8",
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  {w.desc}
+                </p>
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Why choose us (clients) ────────────────────────────────────────────────────
+function WhyUs() {
+  const points = [
+    {
+      icon: Target,
+      title: "Real Experience",
+      desc: "We know what it takes to get traffic, leads and sales because we do it every day on our own websites.",
+    },
+    {
+      icon: Users,
+      title: "One Team, Everything",
+      desc: "Design, development and AI automation under one roof. No juggling many different vendors.",
+    },
+    {
+      icon: Handshake,
+      title: "Clear Communication",
+      desc: "Simple, honest updates. No confusing tech talk and no surprises.",
+    },
+    {
+      icon: Award,
+      title: "Fresh Ideas, Careful Work",
+      desc: "A young, energetic team that handles every project with care and a focus on quality.",
+    },
+  ];
+
+  return (
+    <section id="why" className="section-py" style={{ padding: "96px 24px" }}>
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          tag="why_thinklyedu"
+          before="Why Businesses"
+          green="Choose Us"
+        />
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4,1fr)",
+            gap: 20,
+          }}
+        >
+          {points.map((f, i) => (
+            <Reveal key={f.title} delay={i * 80}>
+              <div
+                style={{ ...cardBase, cursor: "default", height: "100%", boxSizing: "border-box" }}
+                {...cardHover}
+              >
+                <div style={{ marginBottom: 16 }}>
+                  <IconBox icon={f.icon} />
+                </div>
+                <h3
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#F1F5F9",
+                    marginBottom: 10,
+                  }}
+                >
+                  {f.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 13.5,
+                    color: "#94A3B8",
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  {f.desc}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── Timeline (reused for client process + internship steps) ────────────────────
+function Timeline({ steps, cols }) {
+  return (
+    <div style={{ position: "relative" }}>
+      <div
+        className="rx-hide"
+        style={{
+          position: "absolute",
+          top: 40,
+          left: `calc(${50 / cols}% + 20px)`,
+          right: `calc(${50 / cols}% + 20px)`,
+          height: 2,
+          background: "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.15))",
+          zIndex: 0,
+        }}
+      />
+      <div
+        className="rx-stack"
+        style={{
+          display: "grid",
+          gridTemplateColumns: `repeat(${cols},1fr)`,
+          gap: 24,
+          position: "relative",
+          zIndex: 1,
+        }}
+      >
+        {steps.map((step, i) => (
+          <Reveal key={step.num} delay={i * 100}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <div
+                style={{
+                  width: 80,
+                  height: 80,
+                  borderRadius: "50%",
+                  background: i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)",
+                  border: `2px solid ${i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)"}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 20,
+                  boxShadow:
+                    i === 0
+                      ? "0 8px 24px rgba(34,197,94,0.35)"
+                      : "0 4px 16px rgba(0,0,0,0.25)",
+                  transition: "all 0.3s",
+                }}
+                onMouseOver={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background = "#22C55E";
+                  el.style.borderColor = "#22C55E";
+                  el.style.boxShadow = "0 8px 24px rgba(34,197,94,0.35)";
+                  el.style.transform = "translateY(-4px)";
+                  const icon = el.querySelector("svg");
+                  if (icon) icon.style.color = "#08150C";
+                }}
+                onMouseOut={(e) => {
+                  const el = e.currentTarget;
+                  el.style.background =
+                    i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)";
+                  el.style.borderColor =
+                    i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)";
+                  el.style.boxShadow =
+                    i === 0
+                      ? "0 8px 24px rgba(34,197,94,0.35)"
+                      : "0 4px 16px rgba(0,0,0,0.25)";
+                  el.style.transform = "translateY(0)";
+                  const icon = el.querySelector("svg");
+                  if (icon) icon.style.color = i === 0 ? "#08150C" : "#4ADE80";
+                }}
+              >
+                <step.icon
+                  size={26}
+                  strokeWidth={1.8}
+                  color={i === 0 ? "#08150C" : "#4ADE80"}
+                  style={{ transition: "color 0.3s" }}
+                />
+              </div>
+              <span
+                style={{
+                  fontSize: 11,
+                  fontWeight: 700,
+                  color: "#22C55E",
+                  letterSpacing: "0.1em",
+                  marginBottom: 6,
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                }}
+              >
+                {step.num}
+              </span>
+              <h3
+                style={{
+                  fontSize: 15,
+                  fontWeight: 700,
+                  color: "#F1F5F9",
+                  marginBottom: 8,
+                }}
+              >
+                {step.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 12.5,
+                  color: "#94A3B8",
+                  lineHeight: 1.65,
+                  margin: 0,
+                }}
+              >
+                {step.desc}
+              </p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Client process ─────────────────────────────────────────────────────────────
+function ClientProcess() {
+  const steps = [
+    {
+      num: "01",
+      title: "Share Your Idea",
+      desc: "Tell us what you want to build. A short conversation is enough to get started.",
+      icon: FileText,
+    },
+    {
+      num: "02",
+      title: "Plan & Quote",
+      desc: "We prepare a clear plan with timeline and cost, so you know exactly what to expect.",
+      icon: Search,
+    },
+    {
+      num: "03",
+      title: "Build & Review",
+      desc: "We build in stages and show you progress along the way, so you stay in control.",
+      icon: Code2,
+    },
+    {
+      num: "04",
+      title: "Launch & Support",
+      desc: "We launch your project and stay with you after it goes live.",
+      icon: Rocket,
+    },
+  ];
+
+  return (
+    <section
+      id="process"
+      className="section-py"
+      style={{
+        padding: "96px 24px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
+      }}
+    >
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          tag="how_we_work"
+          before="From Idea to"
+          green="Live"
+          desc="Four simple steps. Clear at every stage."
+          mb={72}
+        />
+        <Timeline steps={steps} cols={4} />
+      </div>
+    </section>
+  );
+}
+
+// ── Internship intro + benefits ────────────────────────────────────────────────
+function InternshipIntro() {
+  const { open: openApplyModal } = useApplyModal();
+  const benefits = [
+    {
+      icon: Target,
+      title: "Live Projects",
+      desc: "Work on real websites and real tasks, not just practice assignments.",
+    },
+    {
+      icon: Users,
+      title: "Training & Guidance",
+      desc: "Learn from our team and get regular feedback on your work.",
+    },
+    {
+      icon: Award,
+      title: "Verified Certificate",
+      desc: "Receive a certificate after successfully completing your tasks.",
+    },
+    {
+      icon: Briefcase,
+      title: "A Portfolio to Show",
+      desc: "Build real work you can proudly share with recruiters.",
+    },
+    {
+      icon: Lock,
+      title: "No Fees",
+      desc: "The internship is free for students. No hidden charges.",
+    },
+    {
+      icon: Zap,
+      title: "No Experience Needed",
+      desc: "You only need the will to learn. We help you with the rest.",
+    },
+  ];
+
+  return (
+    <section id="internship" className="section-py" style={{ padding: "96px 24px 40px" }}>
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          tag="internships"
+          before="Learn by Doing."
+          green="Intern at Thinklyedu."
+          desc="If you are a student or a fresh graduate, you do not need to wait for experience to start your career. You gain it by working on live projects with our team."
+        />
+
+        <div
+          className="rx-stack"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3,1fr)",
+            gap: 24,
+          }}
+        >
+          {benefits.map((f, i) => (
+            <Reveal key={f.title} delay={i * 80}>
+              <div
+                style={{ ...cardBase, cursor: "default", height: "100%", boxSizing: "border-box" }}
+                {...cardHover}
+              >
+                <div style={{ marginBottom: 16 }}>
+                  <IconBox icon={f.icon} />
+                </div>
+                <h3
+                  style={{
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#F1F5F9",
+                    marginBottom: 10,
+                  }}
+                >
+                  {f.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: 13.5,
+                    color: "#94A3B8",
+                    lineHeight: 1.7,
+                    margin: 0,
+                  }}
+                >
+                  {f.desc}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal delay={200}>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                openApplyModal();
+              }}
+              style={{
+                display: "inline-block",
+                background: "#22C55E",
+                color: "#08150C",
+                fontWeight: 700,
+                fontSize: 15,
+                padding: "14px 32px",
+                borderRadius: 10,
+                textDecoration: "none",
+                boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
+              }}
+            >
+              Apply for Internship
+            </a>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+// ── Domains ────────────────────────────────────────────────────────────────────
+function Domains() {
+  const domains = [
+    { icon: Megaphone, name: "Marketing", slug: "marketing", desc: "Social media, SEO, campaigns" },
+    { icon: Palette, name: "Design", slug: "design", desc: "UI/UX, graphics, branding" },
+    { icon: Code2, name: "Technology", slug: "technology", desc: "Web dev, apps, coding" },
+    { icon: PenTool, name: "Content Writing", slug: "content-writing", desc: "Blogs, copywriting, scripts" },
+    { icon: Camera, name: "Photography & Video", slug: "photography-video", desc: "Reels, editing, shoots" },
+    { icon: Smartphone, name: "Social Media", slug: "social-media", desc: "Instagram, YouTube, LinkedIn" },
+  ];
+
+  return (
+    <section id="domains" className="section-py" style={{ padding: "56px 24px 96px" }}>
+      <div className="max-w-6xl mx-auto">
+        <SectionHead
+          tag="domains"
+          before="Pick Your"
+          green="Domain"
+          desc="Six industry-relevant tracks, each with real project work and guidance from our team."
+          mb={48}
+        />
 
         <div
           className="rx-stack"
@@ -632,13 +1261,10 @@ function Domains() {
               <a
                 href={`/internship/${d.slug}`}
                 style={{
+                  ...cardBase,
                   display: "block",
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1.5px solid rgba(255,255,255,0.08)",
-                  borderRadius: 20,
                   padding: 26,
                   textDecoration: "none",
-                  transition: "all 0.3s",
                 }}
                 onMouseOver={(e) => {
                   e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
@@ -659,20 +1285,7 @@ function Domains() {
                     marginBottom: 16,
                   }}
                 >
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: 12,
-                      background: "rgba(34,197,94,0.1)",
-                      border: "1px solid rgba(34,197,94,0.25)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <d.icon size={22} color="#4ADE80" strokeWidth={1.8} />
-                  </div>
+                  <IconBox icon={d.icon} />
                   <ArrowRight size={16} color="#4ADE80" />
                 </div>
                 <h3
@@ -697,7 +1310,7 @@ function Domains() {
   );
 }
 
-// ── Tech stack / skills strip ────────────────────────────────────────────────
+// ── Tech stack / skills strip ──────────────────────────────────────────────────
 function TechStack() {
   const skills = [
     "React", "Node.js", "Python", "Figma", "SQL", "Git & GitHub",
@@ -759,186 +1372,37 @@ function TechStack() {
   );
 }
 
-// ── Features ───────────────────────────────────────────────────────────────────
-function Features() {
-  const features = [
-    {
-      icon: Target,
-      title: "Real Projects Only",
-      desc: "No coffee runs. Every Thinklyedu intern works on live, meaningful projects with real deliverables and measurable impact.",
-    },
-    {
-      icon: Users,
-      title: "Dedicated Mentorship",
-      desc: "Each intern gets a 1-on-1 mentor from the host company — weekly check-ins, feedback, and a professional recommendation letter.",
-    },
-    {
-      icon: Award,
-      title: "Verified Certificates",
-      desc: "Skill-linked certificates recognized by recruiters. They show what you can actually do, not just where you were.",
-    },
-    {
-      icon: Globe,
-      title: "Remote & On-site",
-      desc: "Work from anywhere or experience an office — we have both options across 30+ cities in India.",
-    },
-    {
-      icon: Zap,
-      title: "Fast-track Matching",
-      desc: "Our smart matching takes your skills and preferences and finds the right fit within 72 hours of applying.",
-    },
-    {
-      icon: Lock,
-      title: "Always Free",
-      desc: "Zero fees. Zero hidden charges. Students will never pay a rupee — now or ever. Our partners fund everything.",
-    },
-  ];
-
-  return (
-    <section id="features" className="section-py" style={{ padding: "96px 24px" }}>
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <div
-            className="section-head-mb"
-            style={{ textAlign: "center", marginBottom: 64 }}
-          >
-            <SectionTag>features</SectionTag>
-            <h2
-              style={{
-                fontSize: "clamp(30px,4vw,42px)",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                color: "#F8FAFC",
-                margin: "12px 0 16px",
-                lineHeight: 1.1,
-              }}
-            >
-              Everything You Need to{" "}
-              <span style={{ color: "#22C55E" }}>Grow</span>
-            </h2>
-            <p
-              style={{
-                color: "#94A3B8",
-                fontSize: 16,
-                maxWidth: 500,
-                margin: "0 auto",
-                lineHeight: 1.7,
-              }}
-            >
-              We've thought of everything so you can focus on what matters —
-              building skills and launching your career.
-            </p>
-          </div>
-        </Reveal>
-
-        <div
-          className="rx-stack"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3,1fr)",
-            gap: 24,
-          }}
-        >
-          {features.map((f, i) => (
-            <Reveal key={f.title} delay={i * 80}>
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1.5px solid rgba(255,255,255,0.08)",
-                  borderRadius: 20,
-                  padding: 28,
-                  transition: "all 0.3s",
-                  cursor: "default",
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)";
-                  e.currentTarget.style.background = "rgba(34,197,94,0.05)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(34,197,94,0.12)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                  e.currentTarget.style.background = "rgba(255,255,255,0.03)";
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 12,
-                    background: "rgba(34,197,94,0.1)",
-                    border: "1px solid rgba(34,197,94,0.25)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 16,
-                  }}
-                >
-                  <f.icon size={22} color="#4ADE80" strokeWidth={1.8} />
-                </div>
-                <h3
-                  style={{
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#F1F5F9",
-                    marginBottom: 10,
-                  }}
-                >
-                  {f.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 13.5,
-                    color: "#94A3B8",
-                    lineHeight: 1.7,
-                    margin: 0,
-                  }}
-                >
-                  {f.desc}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ── How It Works ───────────────────────────────────────────────────────────────
-function HowItWorks() {
+// ── Internship steps ───────────────────────────────────────────────────────────
+function InternshipSteps() {
   const steps = [
     {
       num: "01",
       title: "Apply Online",
-      desc: "Fill out a simple form — tell us your interests, skills, and availability. Takes less than 5 minutes.",
+      desc: "Fill out a simple form with your interests, skills and availability. It takes only a few minutes.",
       icon: FileText,
     },
     {
       num: "02",
-      title: "Get Matched",
-      desc: "Our team reviews your profile and matches you with the best-fit company within 72 hours.",
+      title: "Get Selected",
+      desc: "Our team reviews your profile and gets back to you.",
       icon: Search,
     },
     {
       num: "03",
       title: "Meet Your Mentor",
-      desc: "Connect with your assigned company mentor. Align on goals, schedule, and your first project.",
+      desc: "Meet the team, align on your goals and plan your first project.",
       icon: Handshake,
     },
     {
       num: "04",
       title: "Do Real Work",
-      desc: "Work on live projects, get feedback every week, and build a portfolio that gets you hired.",
+      desc: "Work on live projects, get regular feedback and build a portfolio.",
       icon: Briefcase,
     },
     {
       num: "05",
       title: "Get Certified",
-      desc: "Complete your internship and receive a verified certificate you can share on LinkedIn and your resume.",
+      desc: "Complete your tasks and receive a certificate you can share on LinkedIn and your resume.",
       icon: Trophy,
     },
   ];
@@ -947,523 +1411,25 @@ function HowItWorks() {
     <section
       id="how"
       className="section-py"
-      style={{
-        padding: "96px 24px",
-        background: "rgba(255,255,255,0.02)",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-      }}
+      style={{ padding: "96px 24px" }}
     >
       <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <div
-            className="section-head-mb"
-            style={{ textAlign: "center", marginBottom: 72 }}
-          >
-            <SectionTag>the_process</SectionTag>
-            <h2
-              style={{
-                fontSize: "clamp(30px,4vw,42px)",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                color: "#F8FAFC",
-                margin: "12px 0 16px",
-                lineHeight: 1.1,
-              }}
-            >
-              From Apply to <span style={{ color: "#22C55E" }}>Certified</span>
-            </h2>
-            <p
-              style={{
-                color: "#94A3B8",
-                fontSize: 16,
-                maxWidth: 460,
-                margin: "0 auto",
-                lineHeight: 1.7,
-              }}
-            >
-              Five simple steps stand between you and a career-defining
-              internship experience.
-            </p>
-          </div>
-        </Reveal>
-
-        {/* Timeline */}
-        <div style={{ position: "relative" }}>
-          {/* Connecting circuit line */}
-          <div
-            className="rx-hide"
-            style={{
-              position: "absolute",
-              top: 40,
-              left: "calc(10% + 20px)",
-              right: "calc(10% + 20px)",
-              height: 2,
-              background:
-                "linear-gradient(90deg,#22C55E,rgba(34,197,94,0.15))",
-              zIndex: 0,
-            }}
-          />
-
-          <div
-            className="rx-stack"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(5,1fr)",
-              gap: 24,
-              position: "relative",
-              zIndex: 1,
-            }}
-          >
-            {steps.map((step, i) => (
-              <Reveal key={step.num} delay={i * 100}>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    textAlign: "center",
-                  }}
-                >
-                  {/* Circle */}
-                  <div
-                    style={{
-                      width: 80,
-                      height: 80,
-                      borderRadius: "50%",
-                      background: i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)",
-                      border: `2px solid ${i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)"}`,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: 20,
-                      boxShadow:
-                        i === 0
-                          ? "0 8px 24px rgba(34,197,94,0.35)"
-                          : "0 4px 16px rgba(0,0,0,0.25)",
-                      transition: "all 0.3s",
-                    }}
-                    onMouseOver={(e) => {
-                      const el = e.currentTarget;
-                      el.style.background = "#22C55E";
-                      el.style.borderColor = "#22C55E";
-                      el.style.boxShadow = "0 8px 24px rgba(34,197,94,0.35)";
-                      el.style.transform = "translateY(-4px)";
-                      const icon = el.querySelector("svg");
-                      if (icon) icon.style.color = "#08150C";
-                    }}
-                    onMouseOut={(e) => {
-                      const el = e.currentTarget;
-                      el.style.background =
-                        i === 0 ? "#22C55E" : "rgba(255,255,255,0.04)";
-                      el.style.borderColor =
-                        i === 0 ? "#22C55E" : "rgba(255,255,255,0.12)";
-                      el.style.boxShadow =
-                        i === 0
-                          ? "0 8px 24px rgba(34,197,94,0.35)"
-                          : "0 4px 16px rgba(0,0,0,0.25)";
-                      el.style.transform = "translateY(0)";
-                      const icon = el.querySelector("svg");
-                      if (icon) icon.style.color = i === 0 ? "#08150C" : "#4ADE80";
-                    }}
-                  >
-                    <step.icon
-                      size={26}
-                      strokeWidth={1.8}
-                      color={i === 0 ? "#08150C" : "#4ADE80"}
-                      style={{ transition: "color 0.3s" }}
-                    />
-                  </div>
-                  <span
-                    style={{
-                      fontSize: 11,
-                      fontWeight: 700,
-                      color: "#22C55E",
-                      letterSpacing: "0.1em",
-                      marginBottom: 6,
-                      fontFamily: "'JetBrains Mono', ui-monospace, monospace",
-                    }}
-                  >
-                    {step.num}
-                  </span>
-                  <h3
-                    style={{
-                      fontSize: 15,
-                      fontWeight: 700,
-                      color: "#F1F5F9",
-                      marginBottom: 8,
-                    }}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: 12.5,
-                      color: "#94A3B8",
-                      lineHeight: 1.65,
-                      margin: 0,
-                    }}
-                  >
-                    {step.desc}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        <SectionHead
+          tag="internship_process"
+          before="From Apply to"
+          green="Certified"
+          desc="Five simple steps between you and real project experience."
+          mb={72}
+        />
+        <Timeline steps={steps} cols={5} />
       </div>
     </section>
   );
 }
 
-// ── Testimonials ───────────────────────────────────────────────────────────────
-function Testimonials() {
-  const testimonials = [
-    {
-      name: "Priya Sharma",
-      role: "Marketing Intern → Full-time at StartupX",
-      avatar: "PS",
-      color: "#22C55E",
-      quote:
-        "Thinklyedu gave me my first real project at age 20. Within 3 months I had a portfolio, a mentor, and a job offer. I cannot recommend this enough.",
-    },
-    {
-      name: "Arjun Mehta",
-      role: "UI Design Intern → Freelancer",
-      avatar: "AM",
-      color: "#3B82F6",
-      quote:
-        "I had zero experience. Thinklyedu matched me with a design agency in 48 hours. The mentor I got was genuinely invested in my growth — changed my life.",
-    },
-    {
-      name: "Sneha Patel",
-      role: "Finance Intern → MBA Graduate",
-      avatar: "SP",
-      color: "#F59E0B",
-      quote:
-        "The certificate from Thinklyedu got me shortlisted for my MBA program. Admissions teams notice it because it's skill-linked, not just a participation trophy.",
-    },
-    {
-      name: "Rahul Verma",
-      role: "Content Intern → Content Manager",
-      avatar: "RV",
-      color: "#EF4444",
-      quote:
-        "I applied on a Monday and was talking to my mentor by Wednesday. The process is incredibly smooth and the team actually cares about your progress.",
-    },
-    {
-      name: "Ananya Roy",
-      role: "HR Intern → Recruitment Lead",
-      avatar: "AR",
-      color: "#8B5CF6",
-      quote:
-        "What I loved most was how real the work felt. My project actually shipped. Seeing something I built go live during my internship was unforgettable.",
-    },
-    {
-      name: "Kartik Singh",
-      role: "Tech Intern → Software Engineer",
-      avatar: "KS",
-      color: "#22C55E",
-      quote:
-        "Thinklyedu is the real deal. Free, fast, and focused on actual learning. Every student deserves this kind of opportunity at the start of their career.",
-    },
-  ];
-
-  return (
-    <section
-      id="testimonials"
-      className="section-py"
-      style={{ padding: "96px 24px", overflow: "hidden" }}
-    >
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <div
-            className="section-head-mb"
-            style={{ textAlign: "center", marginBottom: 64 }}
-          >
-            <SectionTag>student_stories</SectionTag>
-            <h2
-              style={{
-                fontSize: "clamp(30px,4vw,42px)",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                color: "#F8FAFC",
-                margin: "12px 0 16px",
-                lineHeight: 1.1,
-              }}
-            >
-              Real Students.{" "}
-              <span style={{ color: "#22C55E" }}>Real Results.</span>
-            </h2>
-            <p
-              style={{
-                color: "#94A3B8",
-                fontSize: 16,
-                maxWidth: 460,
-                margin: "0 auto",
-                lineHeight: 1.7,
-              }}
-            >
-              Don't take our word for it. Here's what students say after their
-              Thinklyedu internship.
-            </p>
-          </div>
-        </Reveal>
-
-        <div
-          className="rx-stack"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3,1fr)",
-            gap: 20,
-          }}
-        >
-          {testimonials.map((t, i) => (
-            <Reveal key={t.name} delay={i * 70}>
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1.5px solid rgba(255,255,255,0.08)",
-                  borderRadius: 20,
-                  padding: 28,
-                  height: "100%",
-                  boxSizing: "border-box",
-                  transition: "all 0.3s",
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(34,197,94,0.4)";
-                  e.currentTarget.style.boxShadow =
-                    "0 8px 32px rgba(34,197,94,0.1)";
-                  e.currentTarget.style.transform = "translateY(-4px)";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
-                {/* Stars */}
-                <div style={{ display: "flex", gap: 2, marginBottom: 16 }}>
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} color="#F59E0B" fill="#F59E0B" />
-                  ))}
-                </div>
-                <p
-                  style={{
-                    fontSize: 14,
-                    color: "#CBD5E1",
-                    lineHeight: 1.75,
-                    margin: "0 0 24px",
-                    fontStyle: "italic",
-                  }}
-                >
-                  "{t.quote}"
-                </p>
-                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                  <div
-                    style={{
-                      width: 40,
-                      height: 40,
-                      borderRadius: "50%",
-                      background: t.color,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <span
-                      style={{ color: "white", fontWeight: 800, fontSize: 13 }}
-                    >
-                      {t.avatar}
-                    </span>
-                  </div>
-                  <div>
-                    <div
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 700,
-                        color: "#F1F5F9",
-                      }}
-                    >
-                      {t.name}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 11.5,
-                        color: "#4ADE80",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {t.role}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ── FAQ ────────────────────────────────────────────────────────────────────────
-function FAQ() {
-  const [openIndex, setOpenIndex] = useState(null);
-  const faqs = [
-    {
-      q: "Is the internship free?",
-      a: "Yes, all our internships are completely free. We believe in providing equal opportunities for everyone to learn and grow.",
-    },
-    {
-      q: "Is the internship remote?",
-      a: "Most tracks are 100% remote, and select domains also offer on-site options across 30+ cities in India — you choose what fits you.",
-    },
-    {
-      q: "How do I get a certificate?",
-      a: "You'll receive a verified, skill-linked certificate upon successful completion of all internship tasks and projects, with a unique verification ID.",
-    },
-    {
-      q: "How long is the internship?",
-      a: "Typically 4-6 weeks depending on the domain. You can work at your own pace within the timeline alongside your mentor.",
-    },
-    {
-      q: "What are the eligibility criteria?",
-      a: "Anyone with a passion to learn and basic knowledge of their chosen domain can apply. Students and fresh graduates are encouraged to apply.",
-    },
-  ];
-
-  return (
-    <section id="faq" className="section-py" style={{ padding: "96px 24px" }}>
-      <div className="max-w-3xl mx-auto">
-        <Reveal>
-          <div
-            className="section-head-mb"
-            style={{ textAlign: "center", marginBottom: 56 }}
-          >
-            <SectionTag>faq</SectionTag>
-            <h2
-              style={{
-                fontSize: "clamp(28px,4vw,38px)",
-                fontWeight: 900,
-                letterSpacing: "-0.02em",
-                color: "#F8FAFC",
-                margin: "12px 0 16px",
-                lineHeight: 1.1,
-              }}
-            >
-              Frequently Asked{" "}
-              <span style={{ color: "#22C55E" }}>Questions</span>
-            </h2>
-            <p style={{ color: "#94A3B8", fontSize: 16, margin: 0 }}>
-              Got questions? We've got answers.
-            </p>
-          </div>
-        </Reveal>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          {faqs.map((faq, i) => {
-            const open = openIndex === i;
-            return (
-              <Reveal key={faq.q} delay={i * 50}>
-                <div
-                  style={{
-                    background: "rgba(255,255,255,0.03)",
-                    border: `1.5px solid ${open ? "rgba(34,197,94,0.4)" : "rgba(255,255,255,0.08)"}`,
-                    borderRadius: 14,
-                    overflow: "hidden",
-                    transition: "border-color 0.25s",
-                  }}
-                >
-                  <button
-                    onClick={() => setOpenIndex(open ? null : i)}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      gap: 16,
-                      padding: "18px 22px",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      textAlign: "left",
-                      fontFamily: "inherit",
-                    }}
-                  >
-                    <span
-                      style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}
-                    >
-                      {faq.q}
-                    </span>
-                    <ChevronDown
-                      size={18}
-                      color="#4ADE80"
-                      style={{
-                        flexShrink: 0,
-                        transition: "transform 0.25s",
-                        transform: open ? "rotate(180deg)" : "none",
-                      }}
-                    />
-                  </button>
-                  <div
-                    style={{
-                      maxHeight: open ? 200 : 0,
-                      transition: "max-height 0.3s ease",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <p
-                      style={{
-                        margin: 0,
-                        padding: "0 22px 20px",
-                        fontSize: 13.5,
-                        color: "#94A3B8",
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {faq.a}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ── Blog preview ──────────────────────────────────────────────────────────────
+// ── Blog preview ───────────────────────────────────────────────────────────────
 function BlogPreview() {
-  const posts = [
-    {
-      title: "How to Build a High-Impact Tech Portfolio",
-      excerpt:
-        "Learn what recruiters actually look for in modern frontend & full-stack roles.",
-      category: "Technology",
-      readTime: "6 min read",
-      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM (1).jpeg",
-    },
-    {
-      title: "Figma to Code: A Designer's Bridge",
-      excerpt:
-        "Master the workflow to turn UI mockups into clean, production-ready interfaces.",
-      category: "Design",
-      readTime: "5 min read",
-      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM.jpeg",
-    },
-    {
-      title: "Scale Meta Ads Without Burning Budget",
-      excerpt:
-        "A practical playbook for scaling paid social campaigns with measurable ROAS.",
-      category: "Marketing",
-      readTime: "7 min read",
-      image: "/blog/WhatsApp Image 2026-09-03 at 10.37.41 AM.jpeg",
-    },
-  ];
+  const posts = POSTS.slice(0, 3);
 
   return (
     <section
@@ -1503,7 +1469,7 @@ function BlogPreview() {
                 <span style={{ color: "#22C55E" }}>Apply</span>
               </h2>
             </div>
-            <a
+            <Link
               href="/blog"
               style={{
                 display: "inline-flex",
@@ -1516,7 +1482,7 @@ function BlogPreview() {
               }}
             >
               View all articles <ArrowRight size={15} />
-            </a>
+            </Link>
           </div>
         </Reveal>
 
@@ -1529,9 +1495,9 @@ function BlogPreview() {
           }}
         >
           {posts.map((p, i) => (
-            <Reveal key={p.title} delay={i * 80}>
+            <Reveal key={p.slug} delay={i * 80}>
               <a
-                href="/blog"
+                href={`/blog/${p.slug}`}
                 style={{
                   display: "block",
                   textDecoration: "none",
@@ -1634,13 +1600,211 @@ function BlogPreview() {
   );
 }
 
-// ── CTA ────────────────────────────────────────────────────────────────────────
-function CTA() {
+// ── FAQ (businesses + interns) ─────────────────────────────────────────────────
+function FAQ() {
+  const [tab, setTab] = useState("business");
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const data = {
+    business: [
+      {
+        q: "How long does a website take?",
+        a: "It depends on the project. Most websites take 2 to 4 weeks. We share a clear timeline in your quote before we start.",
+      },
+      {
+        q: "Do you build mobile apps?",
+        a: "Yes. We build mobile apps along with websites and AI automation.",
+      },
+      {
+        q: "What can AI automation do for my business?",
+        a: "It can handle repetitive work such as answering common customer questions with a chatbot, following up on leads and moving data between your tools.",
+      },
+      {
+        q: "Do you support projects after launch?",
+        a: "Yes. We stay with you after launch for updates and fixes.",
+      },
+    ],
+    intern: [
+      {
+        q: "Is the internship free?",
+        a: "Yes. There is no fee for students and no hidden charges.",
+      },
+      {
+        q: "Is the internship remote?",
+        a: "Most tracks are remote, and some domains also offer on-site options. Our team will confirm what fits your domain.",
+      },
+      {
+        q: "How do I get a certificate?",
+        a: "You will receive a verified certificate after you successfully complete all your internship tasks and projects.",
+      },
+      {
+        q: "How long is the internship?",
+        a: "Typically 4-6 weeks depending on the domain. You work at your own pace within the timeline, guided by our team.",
+      },
+      {
+        q: "What are the eligibility criteria?",
+        a: "Anyone with a passion to learn and basic knowledge of their chosen domain can apply. Students and fresh graduates are encouraged to apply.",
+      },
+    ],
+  };
+
+  const faqs = data[tab];
+
+  return (
+    <section id="faq" className="section-py" style={{ padding: "96px 24px" }}>
+      <div className="max-w-3xl mx-auto">
+        <SectionHead
+          tag="faq"
+          before="Frequently Asked"
+          green="Questions"
+          desc="Got questions? We've got answers."
+          mb={32}
+        />
+
+        <Reveal>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: 10,
+              marginBottom: 28,
+            }}
+          >
+            {[
+              { id: "business", label: "For Businesses" },
+              { id: "intern", label: "For Interns" },
+            ].map((t) => (
+              <button
+                key={t.id}
+                onClick={() => {
+                  setTab(t.id);
+                  setOpenIndex(null);
+                }}
+                style={{
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  fontSize: 13,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  borderRadius: 999,
+                  padding: "9px 22px",
+                  border: `1.5px solid ${tab === t.id ? "#22C55E" : "rgba(255,255,255,0.12)"}`,
+                  background: tab === t.id ? "#22C55E" : "transparent",
+                  color: tab === t.id ? "#08150C" : "#94A3B8",
+                  transition: "all 0.2s",
+                }}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {faqs.map((faq, i) => {
+            const open = openIndex === i;
+            return (
+              <div
+                key={tab + faq.q}
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: `1.5px solid ${open ? "rgba(34,197,94,0.4)" : "rgba(255,255,255,0.08)"}`,
+                  borderRadius: 14,
+                  overflow: "hidden",
+                  transition: "border-color 0.25s",
+                }}
+              >
+                <button
+                  onClick={() => setOpenIndex(open ? null : i)}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 16,
+                    padding: "18px 22px",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    textAlign: "left",
+                    fontFamily: "inherit",
+                  }}
+                >
+                  <span style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}>
+                    {faq.q}
+                  </span>
+                  <ChevronDown
+                    size={18}
+                    color="#4ADE80"
+                    style={{
+                      flexShrink: 0,
+                      transition: "transform 0.25s",
+                      transform: open ? "rotate(180deg)" : "none",
+                    }}
+                  />
+                </button>
+                <div
+                  style={{
+                    maxHeight: open ? 200 : 0,
+                    transition: "max-height 0.3s ease",
+                    overflow: "hidden",
+                  }}
+                >
+                  <p
+                    style={{
+                      margin: 0,
+                      padding: "0 22px 20px",
+                      fontSize: 13.5,
+                      color: "#94A3B8",
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {faq.a}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CTA + Contact form ─────────────────────────────────────────────────────────
+function Contact() {
   const { open: openApplyModal } = useApplyModal();
+
+  // Backend ki zaroorat nahi: form WhatsApp par ready message khol deta hai
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const f = new FormData(e.currentTarget);
+    const msg =
+      `Hi Thinklyedu! I am a ${f.get("type")}.\n` +
+      `Name: ${f.get("name")}\n` +
+      `Email/Phone: ${f.get("contact")}\n` +
+      `Message: ${f.get("message")}`;
+    window.open(
+      `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(msg)}`,
+      "_blank",
+    );
+  };
+
+  const field = {
+    width: "100%",
+    boxSizing: "border-box",
+    background: "rgba(255,255,255,0.04)",
+    border: "1.5px solid rgba(255,255,255,0.12)",
+    borderRadius: 10,
+    padding: "13px 16px",
+    color: "#F1F5F9",
+    fontSize: 14,
+    fontFamily: "inherit",
+    outline: "none",
+  };
 
   return (
     <section
-      id="cta"
+      id="contact"
       className="section-py-lg"
       style={{
         padding: "100px 24px",
@@ -1649,7 +1813,6 @@ function CTA() {
         borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      {/* bg decoration */}
       <div
         style={{
           position: "absolute",
@@ -1697,7 +1860,7 @@ function CTA() {
               marginBottom: 24,
             }}
           >
-            <Terminal size={13} /> Start Today — It's Free
+            <Terminal size={13} /> Let&apos;s talk
           </span>
           <h2
             style={{
@@ -1709,9 +1872,9 @@ function CTA() {
               marginBottom: 20,
             }}
           >
-            Your next opportunity
+            Ready to build something?
             <span style={{ display: "block", color: "#22C55E" }}>
-              is one click away.
+              Or ready to learn?
             </span>
           </h2>
           <p
@@ -1719,14 +1882,70 @@ function CTA() {
               color: "rgba(226,232,240,0.6)",
               fontSize: 17,
               lineHeight: 1.7,
-              marginBottom: 40,
               maxWidth: 520,
-              margin: "0 auto 40px",
+              margin: "0 auto 36px",
             }}
           >
-            Join 500+ students who launched their careers through Thinklyedu.
-            Apply today — free, fast, and real.
+            Have a business idea? Tell us about it. Are you a student? Apply for
+            an internship.
           </p>
+
+          {/* Form */}
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              ...cardBase,
+              textAlign: "left",
+              display: "flex",
+              flexDirection: "column",
+              gap: 14,
+              marginBottom: 28,
+            }}
+          >
+            <input name="name" required placeholder="Your name" style={field} />
+            <input
+              name="contact"
+              required
+              placeholder="Email or phone number"
+              style={field}
+            />
+            <select name="type" defaultValue="business owner" style={field}>
+              <option value="business owner" style={{ color: "#000" }}>
+                I am a business owner
+              </option>
+              <option value="student" style={{ color: "#000" }}>
+                I am a student
+              </option>
+            </select>
+            <textarea
+              name="message"
+              required
+              rows={4}
+              placeholder="Tell us about your project or what you want to learn"
+              style={{ ...field, resize: "vertical" }}
+            />
+            <button
+              type="submit"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                background: "#22C55E",
+                color: "#08150C",
+                fontWeight: 800,
+                fontSize: 15,
+                padding: "14px 32px",
+                borderRadius: 10,
+                border: "none",
+                cursor: "pointer",
+                boxShadow: "0 8px 28px rgba(34,197,94,0.28)",
+              }}
+            >
+              <Send size={16} /> Send on WhatsApp
+            </button>
+          </form>
+
           <div
             style={{
               display: "flex",
@@ -1737,40 +1956,16 @@ function CTA() {
           >
             <a
               href="#"
-              style={{
-                background: "#22C55E",
-                color: "#08150C",
-                fontWeight: 800,
-                fontSize: 16,
-                padding: "16px 40px",
-                borderRadius: 999,
-                textDecoration: "none",
-                boxShadow: "0 12px 40px rgba(34,197,94,0.3)",
-                transition: "all 0.2s",
-              }}
               onClick={(e) => {
                 e.preventDefault();
                 openApplyModal();
               }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = "#16a34a";
-                e.currentTarget.style.transform = "translateY(-2px)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = "#22C55E";
-                e.currentTarget.style.transform = "translateY(0)";
-              }}
-            >
-              Apply for Internship →
-            </a>
-            <a
-              href="/about"
               style={{
                 border: "1.5px solid rgba(255,255,255,0.2)",
                 color: "#F1F5F9",
                 fontWeight: 600,
-                fontSize: 16,
-                padding: "16px 40px",
+                fontSize: 15,
+                padding: "14px 34px",
                 borderRadius: 999,
                 textDecoration: "none",
                 transition: "all 0.2s",
@@ -1784,9 +1979,10 @@ function CTA() {
                 e.currentTarget.style.color = "#F1F5F9";
               }}
             >
-              Learn About Us
+              Apply for Internship
             </a>
           </div>
+
           <p
             style={{
               color: "rgba(226,232,240,0.3)",
@@ -1795,7 +1991,7 @@ function CTA() {
               fontFamily: "'JetBrains Mono', ui-monospace, monospace",
             }}
           >
-            supportthinkly.co@gmail.com &nbsp;·&nbsp; +91 98185 09083
+            {CONTACT.email} &nbsp;·&nbsp; {CONTACT.phoneDisplay}
           </p>
         </Reveal>
       </div>
@@ -1820,15 +2016,17 @@ export default function HomePage() {
         <Nav />
         <Hero />
         <Stats />
+        <Services />
+        <OurWork />
+        <WhyUs />
+        <ClientProcess />
+        <InternshipIntro />
         <Domains />
-        <Features />
         <TechStack />
-        <HowItWorks />
-        <Testimonials />
+        <InternshipSteps />
         <BlogPreview />
         <FAQ />
-        <CTA />
-        <Footer />
+        <Contact />
       </div>
     </main>
   );

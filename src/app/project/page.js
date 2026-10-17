@@ -1,6 +1,5 @@
 // ── SEO Metadata (Next.js App Router) ────────────────────────────────────────
 "use client";
-import Footer from '@/components/Footer'
 import TechBackground from '@/components/TechBackground'
 
 import { useApplyModal } from '@/components/ApplyModal'
@@ -659,7 +658,6 @@ export default function ProjectPage() {
           </Reveal>
         </div>
       </section>
-       <Footer/>
       </div>
     </main>
   );

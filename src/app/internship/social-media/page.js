@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Footer from '@/components/Footer'
 import TechBackground from '@/components/TechBackground'
 import { useApplyModal } from '@/components/ApplyModal'
 import {
@@ -419,7 +418,6 @@ export default function SocialMediaInternshipPage() {
           </Reveal>
         </div>
       </section>
-       <Footer/>
       </div>
     </main>
   );

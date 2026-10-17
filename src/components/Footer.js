@@ -28,6 +28,14 @@ const LINKS = {
     { label: "Terms of Service", href: "/terms" },
   ],
 
+  Services: [
+    { label: "Website Development", href: "/services/website" },
+    { label: "App Development", href: "/services/app" },
+    { label: "AI Automation", href: "/services/ai-automation" },
+    { label: "EdTech Solutions", href: "/services/edtech" },
+    { label: "Digital Marketing", href: "/services/digital-marketing" },
+  ],
+
   Domains: [
     { label: "Marketing", href: "/internship/marketing" },
     { label: "UI/UX Design", href: "/internship/design" },
@@ -51,7 +59,7 @@ function ColumnHeading({ children }) {
       className="mb-5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.15em] text-[#7d8790]"
       style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace" }}
     >
-      <span className="text-[#22C55E]/60">//</span> {children}
+      <span className="text-[#22C55E]/60">{"//"}</span> {children}
     </h3>
   );
 }
@@ -70,7 +78,7 @@ function FooterLink({ href, children }) {
 
 export default function Footer() {
   return (
-    <footer className="relative w-full">
+    <footer className="relative w-full bg-[#0a1628] text-[#F1F5F9]">
       {/* glowing circuit-line divider */}
       <div
         className="h-px w-full"
@@ -81,7 +89,7 @@ export default function Footer() {
       />
 
       <div className="mx-auto w-full max-w-6xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr] lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] lg:gap-8">
           {/* Brand */}
           <div>
             <Link href="/" className="flex w-fit items-center gap-2.5">
@@ -100,8 +108,8 @@ export default function Footer() {
             </Link>
 
             <p className="mt-4 max-w-[240px] text-sm leading-relaxed text-[#94A3B8]">
-              Connecting students across India with completely free, always
-              real internship opportunities.
+              We build real projects for businesses and connect students across
+              India with hands-on internship opportunities.
             </p>
 
             <div className="mt-5 flex flex-col gap-2.5 text-sm">
@@ -168,6 +176,18 @@ export default function Footer() {
             <ColumnHeading>company</ColumnHeading>
             <div className="flex flex-col gap-3">
               {LINKS.Company.map((item) => (
+                <FooterLink key={item.label} href={item.href}>
+                  {item.label}
+                </FooterLink>
+              ))}
+            </div>
+          </div>
+
+          {/* Services */}
+          <div>
+            <ColumnHeading>services</ColumnHeading>
+            <div className="flex flex-col gap-3">
+              {LINKS.Services.map((item) => (
                 <FooterLink key={item.label} href={item.href}>
                   {item.label}
                 </FooterLink>

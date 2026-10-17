@@ -1,7 +1,6 @@
 "use client";
 
 import Head from "next/head";
-import Footer from '@/components/Footer'
 import CertificatePreview from '@/components/CertificatePreview'
 import TechBackground from '@/components/TechBackground'
 import {
@@ -504,7 +503,6 @@ export default function CertificatePage() {
           </Reveal>
         </div>
       </section>
-      <Footer/>
       </div>
     </main>
   );

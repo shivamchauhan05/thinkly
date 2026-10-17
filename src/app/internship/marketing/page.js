@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Footer from '@/components/Footer'
 import TechBackground from '@/components/TechBackground'
 import { useApplyModal } from '@/components/ApplyModal'
 import Image from "next/image";
+import Link from "next/link";
 import {
   Megaphone,
   Search,
@@ -13,7 +13,6 @@ import {
   Image as ImageIcon,
   Clock,
   Laptop,
-  DollarSign,
   ScrollText,
   Star,
   ChevronDown,
@@ -82,7 +81,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -117,7 +116,7 @@ const TESTIMONIALS = [
 // ── FAQ ───────────────────────────────────────────────────────────────────────
 const FAQS = [
   { q: "Do I need prior marketing experience?", a: "No. We take students who are curious and willing to learn. Your mentor will guide you from day one." },
-  { q: "Is this internship paid?", a: "This is an unpaid internship. However, you gain a verified certificate, a real portfolio, and a LinkedIn recommendation." },
+  { q: "Is this internship paid?", a: "This is a learning-first internship. Instead of a stipend, you get a verified certificate, a real portfolio, and a LinkedIn recommendation — plus top performers get a chance to work with us on live client projects." },
   { q: "Can I do this remotely?", a: "Yes. Most marketing internships at Thinklyedu are remote-friendly. A few partner companies also offer hybrid/on-site options." },
   { q: "How long does the internship last?", a: "Choose a flexible 1–6 month track based on your goals. Most students complete an internship-ready portfolio in 4–6 months." },
   { q: "Will I get a certificate?", a: "Yes — a skill-linked verified certificate that you can share on LinkedIn and add to your resume." },
@@ -172,9 +171,9 @@ export default function MarketingInternshipPage() {
           {/* Breadcrumb */}
           <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.1s forwards", marginBottom: 24 }}>
             <span style={{ fontSize: 13, color: "#94A3B8" }}>
-              <a href="/" style={{ color: "#94A3B8", textDecoration: "none" }}>Home</a>
+              <Link href="/" style={{ color: "#94A3B8", textDecoration: "none" }}>Home</Link>
               {" / "}
-              <a href="/internship" style={{ color: "#94A3B8", textDecoration: "none" }}>Internship</a>
+              <Link href="/internship" style={{ color: "#94A3B8", textDecoration: "none" }}>Internship</Link>
               {" / "}
               <span style={{ color: "#4ADE80" }}>Marketing</span>
             </span>
@@ -207,7 +206,7 @@ export default function MarketingInternshipPage() {
                 {[
                   { icon: Clock, label: "Duration", val: "1–6 Months" },
                   { icon: Laptop, label: "Mode", val: "Remote / Hybrid" },
-                  { icon: DollarSign, label: "Stipend", val: "Unpaid" },
+                  { icon: Star, label: "Recognition", val: "Certificate + LOR" },
                   { icon: ScrollText, label: "Certificate", val: "Verified" },
                 ].map((f) => (
                   <div key={f.label} style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -226,7 +225,7 @@ export default function MarketingInternshipPage() {
                   onClick={(e) => { e.preventDefault(); openApplyModal() }}
                   onMouseOver={e => { e.currentTarget.style.background = "#16a34a"; e.currentTarget.style.transform = "translateY(-2px)"; }}
                   onMouseOut={e => { e.currentTarget.style.background = "#22C55E"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                  Apply Now — It's Free →
+                  Apply Now — It&apos;s Free →
                 </a>
                 <a href="#curriculum"
                   style={{ border: "1.5px solid rgba(255,255,255,0.16)", color: "#E2E8F0", fontWeight: 600, fontSize: 15, padding: "14px 28px", borderRadius: 999, textDecoration: "none", transition: "all 0.2s" }}
@@ -393,7 +392,7 @@ export default function MarketingInternshipPage() {
                   <div style={{ display: "flex", gap: 2, marginBottom: 16 }}>
                     {[...Array(5)].map((_, j) => <Star key={j} size={14} color="#F59E0B" fill="#F59E0B" />)}
                   </div>
-                  <p style={{ fontSize: 14, color: "#CBD5E1", lineHeight: 1.75, fontStyle: "italic", margin: "0 0 24px" }}>"{t.quote}"</p>
+                  <p style={{ fontSize: 14, color: "#CBD5E1", lineHeight: 1.75, fontStyle: "italic", margin: "0 0 24px" }}>&quot;{t.quote}&quot;</p>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <div style={{ width: 40, height: 40, borderRadius: "50%", background: t.color, display: "flex", alignItems: "center", justifyContent: "center" }}>
                       <span style={{ color: "white", fontWeight: 800, fontSize: 13 }}>{t.avatar}</span>
@@ -452,7 +451,6 @@ export default function MarketingInternshipPage() {
           </Reveal>
         </div>
       </section>
-       <Footer/>
       </div>
     </main>
   );

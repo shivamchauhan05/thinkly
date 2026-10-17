@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import Footer from "@/components/Footer";
 import TechBackground from "@/components/TechBackground";
 import Image from "next/image";
 import { Terminal, Camera, ChevronDown, Fullscreen } from "lucide-react";
@@ -970,8 +969,6 @@ export default function PhotographyVideoPage() {
           </a>
         </div>
       </section>
-
-      <Footer />
       </div>
     </main>
   );

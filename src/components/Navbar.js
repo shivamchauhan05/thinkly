@@ -2,7 +2,19 @@
 import { useEffect, useRef, useState } from "react";
 import { useApplyModal } from "./ApplyModal";
 import Image from "next/image";
-import { Megaphone, Palette, Code2, PenTool, Camera, Smartphone } from "lucide-react";
+import Link from "next/link";
+import {
+  Megaphone,
+  Palette,
+  Code2,
+  PenTool,
+  Camera,
+  Smartphone,
+  Globe,
+  Bot,
+  GraduationCap,
+  Monitor,
+} from "lucide-react";
 const INTERNSHIP_DOMAINS = [
   { icon: Megaphone, label: "Marketing", sub: "Social media, SEO, campaigns" },
   { icon: Palette, label: "Design", sub: "UI/UX, graphics, branding" },
@@ -12,13 +24,49 @@ const INTERNSHIP_DOMAINS = [
   { icon: Smartphone, label: "Social Media", sub: "Instagram, YouTube, LinkedIn" },
 ];
 
+const SERVICES = [
+  {
+    icon: Globe,
+    label: "Website",
+    sub: "Business websites, landing pages & web apps",
+    href: "/services/website",
+  },
+  {
+    icon: Smartphone,
+    label: "App",
+    sub: "Android & iOS mobile app development",
+    href: "/services/app",
+  },
+  {
+    icon: Bot,
+    label: "AI Automation",
+    sub: "Chatbots, workflows & AI-powered tools",
+    href: "/services/ai-automation",
+  },
+  {
+    icon: GraduationCap,
+    label: "EdTech",
+    sub: "LMS, courses & education platforms",
+    href: "/services/edtech",
+  },
+  {
+    icon: Monitor,
+    label: "Digital Marketing",
+    sub: "SEO, ads, social media & brand growth",
+    href: "/services/digital-marketing",
+  },
+];
+
 export default function Header() {
   const { open: openApplyModal } = useApplyModal();
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileDomainOpen, setMobileDomainOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const servicesRef = useRef(null);
   const internshipRef = useRef(null);
 
   useEffect(() => {
@@ -32,6 +80,9 @@ export default function Header() {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
+      }
+      if (servicesRef.current && !servicesRef.current.contains(e.target)) {
+        setServicesOpen(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -114,6 +165,15 @@ export default function Header() {
         .thinkly-dropdown.open {
           opacity: 1; pointer-events: auto;
           transform: translateX(-50%) translateY(0);
+        }
+
+        .thinkly-dropdown-right {
+          left: auto; right: 0;
+          width: 560px;
+          transform: translateY(-8px);
+        }
+        .thinkly-dropdown-right.open {
+          transform: translateY(0);
         }
 
         .thinkly-domain-card {
@@ -211,7 +271,7 @@ export default function Header() {
           }}
         >
           {/* Logo */}
-          <a
+          <Link
             href="/"
             style={{
               display: "flex",
@@ -240,16 +300,16 @@ export default function Header() {
             >
               Thinkly<span style={{ color: "#22C55E" }}>edu</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <nav
             className="thinkly-desktop-nav"
             style={{ display: "flex", alignItems: "center", gap: 32 }}
           >
-            <a href="/" className="thinkly-nav-link">
+            <Link href="/" className="thinkly-nav-link">
               Home
-            </a>
+            </Link>
             <a href="/about" className="thinkly-nav-link">
               About
             </a>
@@ -372,7 +432,7 @@ export default function Header() {
                   }}
                 >
                   <span style={{ fontSize: 12.5, color: "#94A3B8" }}>
-                    Can't find your domain? We'll find one for you.
+                    Can&apos;t find your domain? We&apos;ll find one for you.
                   </span>
                   <a
                     href="/internship"
@@ -390,12 +450,148 @@ export default function Header() {
               </div>
             </div>
 
-            <a href="/certificate" className="thinkly-nav-link">
-              Certificate
-            </a>
-            <a href="/project" className="thinkly-nav-link">
-              Project
-            </a>
+            {/* Services with dropdown */}
+            <div ref={servicesRef} style={{ position: "relative" }}>
+              <button
+                className={`thinkly-internship-btn ${servicesOpen ? "open" : ""}`}
+                onClick={() => {
+                  setServicesOpen(!servicesOpen);
+                  setDropdownOpen(false);
+                }}
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+              >
+                Services
+                <svg
+                  className={`thinkly-chevron ${servicesOpen ? "open" : ""}`}
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M4 6l4 4 4-4"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <div
+                className={`thinkly-dropdown thinkly-dropdown-right ${servicesOpen ? "open" : ""}`}
+              >
+                {/* Header */}
+                <div
+                  style={{
+                    marginBottom: 16,
+                    paddingBottom: 14,
+                    borderBottom: "1px solid #F1F5F9",
+                  }}
+                >
+                  <p
+                    style={{
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: "#94A3B8",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.1em",
+                      margin: "0 0 2px",
+                    }}
+                  >
+                    Our Services
+                  </p>
+                  <p style={{ fontSize: 13, color: "#64748B", margin: 0 }}>
+                    End-to-end solutions to grow your business online
+                  </p>
+                </div>
+
+                {/* Services grid */}
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(2, 1fr)",
+                    gap: 4,
+                  }}
+                >
+                  {SERVICES.map((service) => (
+                    <a
+                      key={service.label}
+                      href={service.href}
+                      className="thinkly-domain-card"
+                      onClick={() => setServicesOpen(false)}
+                    >
+                      <span
+                        style={{
+                          width: 36,
+                          height: 36,
+                          borderRadius: 10,
+                          background: "rgba(34,197,94,0.08)",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <service.icon size={18} color="#16A34A" strokeWidth={1.8} />
+                      </span>
+                      <div>
+                        <div
+                          style={{
+                            fontSize: 13,
+                            fontWeight: 600,
+                            color: "#0D1F3C",
+                            marginBottom: 2,
+                          }}
+                        >
+                          {service.label}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: 11.5,
+                            color: "#94A3B8",
+                            lineHeight: 1.4,
+                          }}
+                        >
+                          {service.sub}
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                {/* Footer */}
+                <div
+                  style={{
+                    marginTop: 16,
+                    paddingTop: 14,
+                    borderTop: "1px solid #F1F5F9",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <span style={{ fontSize: 12.5, color: "#94A3B8" }}>
+                    Custom requirement? Let&apos;s talk about your project.
+                  </span>
+                  <a
+                    href="/contact"
+                    style={{
+                      fontSize: 12.5,
+                      fontWeight: 700,
+                      color: "#22C55E",
+                      textDecoration: "none",
+                    }}
+                    onClick={() => setServicesOpen(false)}
+                  >
+                    Contact us →
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <Link href="/contact" className="thinkly-nav-link">
+              Contact
+            </Link>
           </nav>
 
           {/* Apply CTA + hamburger */}
@@ -460,13 +656,13 @@ export default function Header() {
         className={`thinkly-mobile-menu ${mobileMenuOpen ? "open" : ""}`}
         style={{ fontFamily: "'Inter', sans-serif" }}
       >
-        <a
+        <Link
           href="/"
           className="thinkly-mobile-nav-link"
           onClick={() => setMobileMenuOpen(false)}
         >
           Home
-        </a>
+        </Link>
         <a
           href="/about"
           className="thinkly-mobile-nav-link"
@@ -544,20 +740,82 @@ export default function Header() {
           )}
         </div>
 
-        <a
-          href="/certificate"
+        {/* Mobile services accordion */}
+        <div>
+          <button
+            onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: "12px 0",
+              borderBottom: "1px solid #F1F5F9",
+              fontFamily: "inherit",
+            }}
+          >
+            <span style={{ color: "#475569", fontSize: 15, fontWeight: 500 }}>
+              Services
+            </span>
+            <svg
+              style={{
+                width: 16,
+                height: 16,
+                color: "#94A3B8",
+                transition: "transform 0.2s",
+                transform: mobileServicesOpen ? "rotate(180deg)" : "none",
+              }}
+              viewBox="0 0 16 16"
+              fill="none"
+            >
+              <path
+                d="M4 6l4 4 4-4"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+
+          {mobileServicesOpen && (
+            <div style={{ paddingLeft: 8, paddingBottom: 8 }}>
+              {SERVICES.map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    padding: "10px 8px",
+                    textDecoration: "none",
+                    borderRadius: 8,
+                  }}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <s.icon size={17} color="#16A34A" strokeWidth={1.8} />
+                  <span
+                    style={{ fontSize: 14, color: "#0D1F3C", fontWeight: 500 }}
+                  >
+                    {s.label}
+                  </span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <Link
+          href="/contact"
           className="thinkly-mobile-nav-link"
           onClick={() => setMobileMenuOpen(false)}
         >
-          Certificate
-        </a>
-        <a
-          href="/project"
-          className="thinkly-mobile-nav-link"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          Project
-        </a>
+          Contact
+        </Link>
 
         <a
           href="#"

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Footer from "@/components/Footer";
 import TechBackground from "@/components/TechBackground";
 import { useApplyModal } from "@/components/ApplyModal";
 import {
@@ -615,8 +614,6 @@ export default function AboutPage() {
             </p>
           </div>
         </section>
-
-        <Footer />
       </div>
     </main>
   );
