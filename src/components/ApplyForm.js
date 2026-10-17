@@ -693,7 +693,25 @@ export default function CourseRegistrationForm() {
           </button>
 
           <p style={{ fontSize: 12, color: "#64748B", textAlign: "center", marginTop: 14 }}>
-            By submitting, you agree to our Terms and Privacy Policy. Questions?{" "}
+            By submitting, you agree to our{" "}
+            <a
+              href="/terms"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#4ADE80", textDecoration: "none" }}
+            >
+              Terms
+            </a>{" "}
+            and{" "}
+            <a
+              href="/privacy"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#4ADE80", textDecoration: "none" }}
+            >
+              Privacy Policy
+            </a>
+            . Questions?{" "}
             <a
               href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
