@@ -12,6 +12,18 @@ export const metadata = {
   },
   title: 'Thinkly - Build Your Future',
   description: 'Internships, projects, certificates, and a community that helps you grow.',
+  openGraph: {
+    title: 'Thinkly - Build Your Future',
+    description: 'Internships, projects, certificates, and a community that helps you grow.',
+    siteName: 'Thinklyedu',
+    type: 'website',
+    url: 'https://thinklyedu.com',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Thinkly - Build Your Future',
+    description: 'Internships, projects, certificates, and a community that helps you grow.',
+  },
 }
 
 export default function RootLayout({ children }) {
