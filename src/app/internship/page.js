@@ -27,8 +27,10 @@ const SITE_DOMAIN = 'thinklyedu.com'
 const SITE_URL = 'https://thinklyedu.com'
 const SUPPORT_EMAIL = 'supportthinkly.co@gmail.com'
 
+// slug = folder name inside src/app/internship/
 const internships = [
   {
+    slug: 'marketing',
     title: 'Marketing Internship',
     type: 'Remote',
     duration: '1–6 months',
@@ -37,6 +39,7 @@ const internships = [
     icon: Megaphone,
   },
   {
+    slug: 'design',
     title: 'Design Internship',
     type: 'Remote',
     duration: '1–6 months',
@@ -45,6 +48,7 @@ const internships = [
     icon: Palette,
   },
   {
+    slug: 'technology',
     title: 'Technology Internship',
     type: 'Remote',
     duration: '1–6 months',
@@ -53,6 +57,7 @@ const internships = [
     icon: Code2,
   },
   {
+    slug: 'content-writing',
     title: 'Content Writing Internship',
     type: 'Remote',
     duration: '1–6 months',
@@ -61,6 +66,7 @@ const internships = [
     icon: PenTool,
   },
   {
+    slug: 'photography-video',
     title: 'Photography & Video Internship',
     type: 'Hybrid',
     duration: '1–6 months',
@@ -69,6 +75,7 @@ const internships = [
     icon: Camera,
   },
   {
+    slug: 'social-media',
     title: 'Social Media Internship',
     type: 'Remote',
     duration: '1–6 months',
@@ -221,17 +228,20 @@ export default function InternshipsPage() {
         ))}
       </div>
 
-      {/* Internship cards */}
+      {/* Internship cards (each card is a clickable Link) */}
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {internships.map((item) => {
           const TypeIcon = item.type === 'Remote' ? Wifi : Building2
           return (
-            <div
-              key={item.title}
-              className="rounded-2xl p-6 transition-all duration-300"
+            <Link
+              key={item.slug}
+              href={`/internship/${item.slug}`}
+              className="block rounded-2xl p-6 transition-all duration-300"
               style={{
                 background: 'rgba(255,255,255,0.03)',
                 border: '1.5px solid rgba(255,255,255,0.08)',
+                textDecoration: 'none',
+                cursor: 'pointer',
               }}
               onMouseOver={(e) => {
                 e.currentTarget.style.borderColor = 'rgba(34,197,94,0.5)'
@@ -301,9 +311,14 @@ export default function InternshipsPage() {
                   <Clock size={14} color="#4ADE80" />
                   {item.duration}
                 </span>
+                {/* Apply button opens the modal and does NOT trigger the card link */}
                 <button
                   type="button"
-                  onClick={() => openApplyModal()}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    openApplyModal()
+                  }}
                   className="inline-flex items-center gap-1 font-semibold transition-all"
                   style={{
                     color: '#22C55E',
@@ -320,7 +335,7 @@ export default function InternshipsPage() {
                   Apply now <ArrowRight size={14} />
                 </button>
               </div>
-            </div>
+            </Link>
           )
         })}
       </div>
@@ -473,4 +488,4 @@ export default function InternshipsPage() {
       </section>
     </PageLayout>
   )
-}
+    }
