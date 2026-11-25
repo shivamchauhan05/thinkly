@@ -1,0 +1,36 @@
+name: Keep backend alive
+
+on:
+  schedule:
+    - cron: "0-59/5 * * * *"
+    - cron: "1-59/5 * * * *"
+    - cron: "2-59/5 * * * *"
+    - cron: "3-59/5 * * * *"
+    - cron: "4-59/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: backend-keep-alive
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Ping health endpoint
+        env:
+          KEEP_ALIVE_URL: ${{ vars.KEEP_ALIVE_URL || 'https://thinkly-a35c.onrender.com/api/health' }}
+        run: |
+          for attempt in 1 2 3; do
+            code=$(curl -sS -L -o /dev/null -w "%{http_code}" --max-time 90 "$KEEP_ALIVE_URL" || true)
+            echo "Attempt $attempt: HTTP $code"
+            if [ "$code" = "200" ]; then
+              exit 0
+            fi
+            sleep 5
+          done
+          exit 1
