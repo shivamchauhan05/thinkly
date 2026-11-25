@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import TechBackground from '@/components/TechBackground'
 import { CATEGORIES, POSTS } from '@/lib/blog-data'
+import { fetchPosts } from '@/lib/blog-api'
 import { Terminal, Search, Mail, BookOpen } from "lucide-react";
 
 // ── Section label (monospace "// tag" style, matches homepage/about) ──────────
@@ -63,8 +65,13 @@ function Reveal({ children, delay = 0, className = "" }) {
 export default function BlogPage() {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState("All");
+  const [posts, setPosts] = useState(POSTS);
 
-  const filtered = POSTS.filter((post) => {
+  useEffect(() => {
+    fetchPosts().then(setPosts);
+  }, []);
+
+  const filtered = posts.filter((post) => {
     const matchCat = active === "All" || post.category === active;
     const q = search.toLowerCase();
     const matchSearch =
@@ -250,10 +257,13 @@ export default function BlogPage() {
                   }}
                 >
                   <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
-                    <img
+                    <Image
                       src={featured.image}
                       alt={featured.title}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      fill
+                      unoptimized
+                      sizes="(max-width: 900px) 100vw, 900px"
+                      style={{ objectFit: "cover" }}
                     />
                     <div
                       style={{
@@ -360,7 +370,14 @@ export default function BlogPage() {
                       }}
                     >
                       <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
-                        <img src={post.image} alt={post.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          unoptimized
+                          sizes="(max-width: 900px) 100vw, 360px"
+                          style={{ objectFit: "cover" }}
+                        />
                         <div
                           style={{
                             position: "absolute",

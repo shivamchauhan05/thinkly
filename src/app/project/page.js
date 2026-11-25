@@ -1,5 +1,6 @@
 // ── SEO Metadata (Next.js App Router) ────────────────────────────────────────
 "use client";
+import Link from "next/link";
 import TechBackground from '@/components/TechBackground'
 
 import { useApplyModal } from '@/components/ApplyModal'
@@ -69,7 +70,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -372,7 +373,7 @@ export default function ProjectPage() {
           {/* Breadcrumb */}
           <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.1s forwards", marginBottom: 24 }}>
             <span style={{ fontSize: 13, color: "rgba(226,232,240,0.4)" }}>
-              <a href="/" style={{ color: "rgba(226,232,240,0.4)", textDecoration: "none" }}>Home</a>
+              <Link href="/" style={{ color: "rgba(226,232,240,0.4)", textDecoration: "none" }}>Home</Link>
               {" / "}
               <span style={{ color: "#22C55E" }}>Projects</span>
             </span>
@@ -492,7 +493,7 @@ export default function ProjectPage() {
                 Built by Interns. <span style={{ color: "#22C55E" }}>Live on the Internet.</span>
               </h2>
               <p style={{ color: "#94A3B8", fontSize: 16, maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-                These aren't assignments. Every site below is live, visited by real users, and was built by a Thinklyedu intern.
+                These aren&apos;t assignments. Every site below is live, visited by real users, and was built by a Thinklyedu intern.
               </p>
             </div>
           </Reveal>

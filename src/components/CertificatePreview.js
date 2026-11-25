@@ -1,6 +1,7 @@
 // components/CertificatePreview.js
 'use client'
 import { useState, useRef } from 'react'
+import Image from 'next/image'
 import { ShieldCheck, Calendar, Clock, Award, Copy, Download, Share2, CheckCircle, Star } from 'lucide-react'
 import TechBackground from '@/components/TechBackground'
 
@@ -78,7 +79,7 @@ export default function CertificatePreview({
               </div>
               <div>
                 <div className="text-white font-semibold text-base leading-tight">
-                           <img src='./logo.png' alt="Logo" className="h-35 w-70" />
+                           <Image src="/logo.png" alt="Logo" width={280} height={140} unoptimized className="h-35 w-70" />
 
                 </div>
                 <div className="text-black text-[9px] tracking-[2px] uppercase mt-0.5">

@@ -10,9 +10,12 @@ export default function ImageWithFallback({ src, alt, className, ...props }) {
   return (
     <div className="relative w-full h-full">
       {!error ? (
-        <img
+        <Image
           src={imgSrc}
           alt={alt}
+          width={600}
+          height={400}
+          unoptimized
           className={className}
           onError={() => {
             setError(true)

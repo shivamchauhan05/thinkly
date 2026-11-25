@@ -1,7 +1,6 @@
 // app/layout.js
 import './globals.css'
-import Navbar from '@/components/Navbar' 
-import Footer from '@/components/Footer'
+import SiteChrome from '@/components/SiteChrome'
 import { ApplyModalProvider } from '@/components/ApplyModal'
 import { QuoteModalProvider } from '@/components/QuoteModal'
 
@@ -32,9 +31,7 @@ export default function RootLayout({ children }) {
       <body className="bg-white">
         <ApplyModalProvider>
           <QuoteModalProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <SiteChrome>{children}</SiteChrome>
           </QuoteModalProvider>
         </ApplyModalProvider>
       </body>

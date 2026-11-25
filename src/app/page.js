@@ -5,6 +5,7 @@ import { useApplyModal } from "@/components/ApplyModal";
 import Image from "next/image";
 import Link from "next/link";
 import { POSTS } from "@/lib/blog-data";
+import { fetchPosts } from "@/lib/blog-api";
 import {
   Target,
   Users,
@@ -1429,7 +1430,11 @@ function InternshipSteps() {
 
 // ── Blog preview ───────────────────────────────────────────────────────────────
 function BlogPreview() {
-  const posts = POSTS.slice(0, 3);
+  const [posts, setPosts] = useState(POSTS.slice(0, 3));
+
+  useEffect(() => {
+    fetchPosts().then((data) => setPosts(data.slice(0, 3)));
+  }, []);
 
   return (
     <section

@@ -352,7 +352,7 @@ export default function InternshipsPage() {
               letterSpacing: '0.05em',
             }}
           >
-            <span style={{ opacity: 0.6 }}>//</span> how_it_works
+            <span style={{ opacity: 0.6 }}>{"//"}</span> how_it_works
           </span>
           <h2 className="mt-3 text-2xl font-extrabold md:text-3xl" style={{ color: '#F8FAFC' }}>
             From application to certificate in 4 steps.

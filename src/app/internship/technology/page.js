@@ -101,7 +101,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -303,7 +303,7 @@ export default function TechnologyInternshipPage() {
             <div style={{ textAlign: "center", marginBottom: 44 }}>
               <SectionTag>tech_stack</SectionTag>
               <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
-                Every technology you'll work with, hands-on.
+                Every technology you&apos;ll work with, hands-on.
               </h2>
               <p style={{ color: "#94A3B8", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
                 From frontend to backend, cloud to AI — this internship covers the full modern technology stack used by real product teams.

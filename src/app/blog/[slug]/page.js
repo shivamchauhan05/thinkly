@@ -3,9 +3,15 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import TechBackground from "@/components/TechBackground";
 import { POSTS } from "@/lib/blog-data";
+import { fetchPosts, fetchPostBySlug } from "@/lib/blog-api";
 import { ArrowLeft, ArrowRight, BookOpen, Calendar, Tag } from "lucide-react";
 
 const SITE_URL = "https://thinklyedu.com";
+
+function absoluteImage(image) {
+  if (!image) return `${SITE_URL}/build.jpg`;
+  return String(image).startsWith("http") ? String(image) : `${SITE_URL}${image}`;
+}
 
 export function generateStaticParams() {
   return POSTS.map((post) => ({ slug: post.slug }));
@@ -13,7 +19,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = POSTS.find((p) => p.slug === slug);
+  const post = await fetchPostBySlug(slug);
   if (!post) {
     return { title: "Article not found | Thinklyedu" };
   }
@@ -28,13 +34,13 @@ export async function generateMetadata({ params }) {
       description: post.excerpt,
       url,
       type: "article",
-      images: [{ url: post.image }],
+      images: [{ url: absoluteImage(post.image) }],
     },
     twitter: {
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
+      images: [absoluteImage(post.image)],
     },
   };
 }
@@ -126,13 +132,14 @@ function ContentBlock({ block }) {
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
-  const post = POSTS.find((p) => p.slug === slug);
+  const post = await fetchPostBySlug(slug);
 
   if (!post) {
     notFound();
   }
 
-  const related = POSTS.filter(
+  const allPosts = await fetchPosts();
+  const related = allPosts.filter(
     (p) => p.slug !== post.slug && p.category === post.category,
   ).slice(0, 3);
 
@@ -141,7 +148,7 @@ export default async function BlogPostPage({ params }) {
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    image: `${SITE_URL}${post.image}`,
+    image: absoluteImage(post.image),
     articleSection: post.category,
     publisher: {
       "@type": "Organization",
@@ -278,7 +285,7 @@ export default async function BlogPostPage({ params }) {
             ))}
 
             {/* Inline CTA */}
-            {post.service && (
+            {post.service?.label && post.service?.href && (
               <div
                 style={{
                   marginTop: 48,
@@ -309,7 +316,7 @@ export default async function BlogPostPage({ params }) {
                     margin: "0 0 10px",
                   }}
                 >
-                  Need help with {post.service.label.toLowerCase()}?
+                  Need help with {String(post.service.label).toLowerCase()}?
                 </h3>
                 <p
                   style={{

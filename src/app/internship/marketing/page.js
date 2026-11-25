@@ -71,7 +71,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -267,7 +267,7 @@ export default function MarketingInternshipPage() {
             <div style={{ textAlign: "center", marginBottom: 44 }}>
               <SectionTag>marketing_toolkit</SectionTag>
               <h2 style={{ fontSize: "clamp(26px,4vw,36px)", fontWeight: 900, color: "#F8FAFC", margin: "12px 0 14px", letterSpacing: "-0.02em" }}>
-                Every channel and tool you'll work with, hands-on.
+                Every channel and tool you&apos;ll work with, hands-on.
               </h2>
               <p style={{ color: "#94A3B8", fontSize: 15, maxWidth: 620, margin: "0 auto", lineHeight: 1.75 }}>
                 From organic content to paid ads to analytics — this internship covers the full modern digital marketing workflow.
@@ -353,7 +353,7 @@ export default function MarketingInternshipPage() {
                   onMouseOver={e => { e.currentTarget.style.borderColor = "rgba(34,197,94,0.5)"; e.currentTarget.style.background = "rgba(34,197,94,0.05)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
                   onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.03)"; e.currentTarget.style.transform = "translateY(0)"; }}>
                   <p style={{ fontSize: 15, color: "#CBD5E1", lineHeight: 1.75, margin: "0 0 24px" }}>
-                    "{item.quote}"
+                    &quot;{item.quote}&quot;
                   </p>
                   <div>
                     <div style={{ fontSize: 15, fontWeight: 700, color: "#F1F5F9" }}>{item.name}</div>

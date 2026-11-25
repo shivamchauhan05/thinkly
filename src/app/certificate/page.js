@@ -1,6 +1,7 @@
 "use client";
 
 import Head from "next/head";
+import Link from "next/link";
 import CertificatePreview from '@/components/CertificatePreview'
 import TechBackground from '@/components/TechBackground'
 import {
@@ -77,7 +78,7 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
   );
 }
@@ -218,7 +219,7 @@ export default function CertificatePage() {
           <div>
             <div style={{ opacity: 0, animation: "fadeUp 0.6s ease 0.1s forwards", marginBottom: 20 }}>
               <span style={{ fontSize: 13, color: "rgba(226,232,240,0.4)" }}>
-                <a href="/" style={{ color: "rgba(226,232,240,0.4)", textDecoration: "none" }}>Home</a> / <span style={{ color: "#22C55E" }}>Certificate</span>
+                <Link href="/" style={{ color: "rgba(226,232,240,0.4)", textDecoration: "none" }}>Home</Link> / <span style={{ color: "#22C55E" }}>Certificate</span>
               </span>
             </div>
 

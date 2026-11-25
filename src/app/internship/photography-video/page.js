@@ -32,8 +32,65 @@ function SectionTag({ children }) {
         letterSpacing: "0.05em",
       }}
     >
-      <span style={{ opacity: 0.6 }}>//</span> {children}
+      <span style={{ opacity: 0.6 }}>{"//"}</span> {children}
     </span>
+  );
+}
+
+function FAQItem({ q, a }) {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+      <button
+        onClick={() => setOpen(!open)}
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: "none",
+          border: "none",
+          cursor: "pointer",
+          padding: "18px 0",
+          fontFamily: "inherit",
+          textAlign: "left",
+        }}
+      >
+        <span
+          style={{
+            fontSize: 15,
+            fontWeight: 600,
+            color: "#F1F5F9",
+            paddingRight: 20,
+          }}
+        >
+          {q}
+        </span>
+        <ChevronDown
+          size={18}
+          color="#4ADE80"
+          style={{
+            flexShrink: 0,
+            transition: "transform 0.25s",
+            transform: open ? "rotate(180deg)" : "none",
+          }}
+        />
+      </button>
+      {open && (
+        <p
+          style={{
+            fontSize: 14,
+            color: "#94A3B8",
+            lineHeight: 1.75,
+            paddingBottom: 18,
+            margin: 0,
+            paddingRight: 32,
+          }}
+        >
+          {a}
+        </p>
+      )}
+    </div>
   );
 }
 
@@ -795,62 +852,9 @@ export default function PhotographyVideoPage() {
                 q: "Do I get a certificate?",
                 a: "Yes. You receive a verified Photography & Video internship certificate plus a portfolio-ready body of work.",
               },
-            ].map(({ q, a }) => {
-              const [open, setOpen] = React.useState(false);
-              return (
-                <div key={q} style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-                  <button
-                    onClick={() => setOpen(!open)}
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                      padding: "18px 0",
-                      fontFamily: "inherit",
-                      textAlign: "left",
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontSize: 15,
-                        fontWeight: 600,
-                        color: "#F1F5F9",
-                        paddingRight: 20,
-                      }}
-                    >
-                      {q}
-                    </span>
-                    <ChevronDown
-                      size={18}
-                      color="#4ADE80"
-                      style={{
-                        flexShrink: 0,
-                        transition: "transform 0.25s",
-                        transform: open ? "rotate(180deg)" : "none",
-                      }}
-                    />
-                  </button>
-                  {open && (
-                    <p
-                      style={{
-                        fontSize: 14,
-                        color: "#94A3B8",
-                        lineHeight: 1.75,
-                        paddingBottom: 18,
-                        margin: 0,
-                        paddingRight: 32,
-                      }}
-                    >
-                      {a}
-                    </p>
-                  )}
-                </div>
-              );
-            })}
+            ].map(({ q, a }) => (
+              <FAQItem key={q} q={q} a={a} />
+            ))}
           </div>
         </div>
       </section>
