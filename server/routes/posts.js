@@ -18,7 +18,7 @@ function cleanContent(content) {
   return content
     .filter((block) => block && typeof block === "object")
     .map((block) => {
-      const type = ["paragraph", "heading", "quote", "list"].includes(block.type)
+      const type = ["paragraph", "heading", "quote", "list", "image"].includes(block.type)
         ? block.type
         : "paragraph";
       if (type === "list") {
@@ -29,9 +29,19 @@ function cleanContent(content) {
             : [],
         };
       }
+      if (type === "image") {
+        return {
+          type,
+          url: String(block.url || ""),
+          text: String(block.text || ""),
+          publicId: String(block.publicId || ""),
+        };
+      }
       return { type, text: String(block.text || "") };
     })
-    .filter((block) => (block.type === "list" ? block.items.length : block.text));
+    .filter((block) =>
+      block.type === "list" ? block.items.length : block.type === "image" ? block.url : block.text,
+    );
 }
 
 function today() {

@@ -48,6 +48,19 @@ export async function adminRequest(path, options = {}) {
   });
 }
 
+export async function uploadImage(file) {
+  const token = getToken();
+  const payload = new FormData();
+  payload.append("file", file);
+
+  const res = await fetch(`${API_URL}/api/uploads`, {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body: payload,
+  });
+  return parseResponse(res);
+}
+
 export async function fetchPosts() {
   try {
     return await publicRequest("/api/posts");

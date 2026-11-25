@@ -13,7 +13,7 @@ import {
   Trash2,
 } from "lucide-react";
 import { CATEGORIES } from "@/lib/blog-data";
-import { adminRequest, clearToken, isAuthError } from "@/lib/blog-api";
+import { adminRequest, clearToken, isAuthError, uploadImage } from "@/lib/blog-api";
 import {
   pageStyle,
   panelStyle,
@@ -49,6 +49,7 @@ const blockTypes = [
   ["heading", "Heading"],
   ["quote", "Quote"],
   ["list", "Bullet list"],
+  ["image", "Image"],
 ];
 
 export default function PostEditor({ postId }) {
@@ -57,6 +58,8 @@ export default function PostEditor({ postId }) {
   const [slugTouched, setSlugTouched] = useState(false);
   const [loading, setLoading] = useState(Boolean(postId));
   const [saving, setSaving] = useState(false);
+  const [uploadingCover, setUploadingCover] = useState(false);
+  const [uploadingBlock, setUploadingBlock] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -126,6 +129,46 @@ export default function PostEditor({ postId }) {
     });
   }
 
+  async function handleImageUpload(file, onSuccess, setBusy) {
+    if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      setError("Please choose an image file.");
+      return;
+    }
+
+    setBusy(true);
+    setError("");
+    try {
+      const data = await uploadImage(file);
+      onSuccess(data);
+    } catch (err) {
+      if (isAuthError(err)) {
+        clearToken();
+        router.replace("/admin/login");
+        return;
+      }
+      setError(err.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  function handleCoverUpload(file) {
+    return handleImageUpload(
+      file,
+      (data) => setField("image", data.secureUrl),
+      setUploadingCover,
+    );
+  }
+
+  function handleBlockUpload(index, file) {
+    return handleImageUpload(
+      file,
+      (data) => setBlock(index, { url: data.secureUrl, publicId: data.publicId }),
+      (busy) => setUploadingBlock(busy ? index : null),
+    );
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     setSaving(true);
@@ -134,11 +177,20 @@ export default function PostEditor({ postId }) {
       const payload = {
         ...form,
         slug: form.slug || slugify(form.title),
-        content: form.content.map((block) =>
-          block.type === "list"
-            ? { type: "list", items: block.items || [] }
-            : { type: block.type, text: block.text || "" },
-        ),
+        content: form.content.map((block) => {
+          if (block.type === "list") {
+            return { type: "list", items: block.items || [] };
+          }
+          if (block.type === "image") {
+            return {
+              type: "image",
+              url: block.url || "",
+              text: block.text || "",
+              publicId: block.publicId || "",
+            };
+          }
+          return { type: block.type, text: block.text || "" };
+        }),
       };
       if (postId) {
         await adminRequest(`/api/posts/${postId}`, {
@@ -294,14 +346,31 @@ export default function PostEditor({ postId }) {
                 />
               </div>
               <div style={{ gridColumn: "1 / -1" }}>
-                <label style={labelStyle} htmlFor="post-image">Cover image URL / path</label>
+                <label style={labelStyle} htmlFor="post-image">Cover image</label>
                 <input
                   id="post-image"
                   value={form.image}
                   onChange={(e) => setField("image", e.target.value)}
                   style={inputStyle}
-                  placeholder="/build.jpg"
+                  placeholder="Cloudinary URL or /build.jpg"
                 />
+                <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginTop: 10 }}>
+                  <label style={{ ...ghostButton, padding: "8px 12px", fontSize: 12, cursor: "pointer" }}>
+                    <Plus size={13} /> {uploadingCover ? "Uploading..." : "Upload image"}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      hidden
+                      onChange={(e) => {
+                        handleCoverUpload(e.target.files?.[0]);
+                        e.target.value = "";
+                      }}
+                    />
+                  </label>
+                  <span style={{ color: "#64748B", fontSize: 12 }}>
+                    Uploads to Cloudinary — JPG, PNG or WebP up to 10MB
+                  </span>
+                </div>
                 {form.image && (
                   <Image
                     src={form.image}
@@ -532,6 +601,59 @@ export default function PostEditor({ postId }) {
                         style={{ ...textareaStyle, minHeight: 130 }}
                         placeholder={"First point\nSecond point"}
                       />
+                    </>
+                  ) : block.type === "image" ? (
+                    <>
+                      <label style={labelStyle} htmlFor={`block-url-${index}`}>Image URL</label>
+                      <input
+                        id={`block-url-${index}`}
+                        value={block.url || ""}
+                        onChange={(e) => setBlock(index, { url: e.target.value })}
+                        style={inputStyle}
+                        placeholder="Cloudinary URL"
+                      />
+                      <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginTop: 10 }}>
+                        <label style={{ ...ghostButton, padding: "8px 12px", fontSize: 12, cursor: "pointer" }}>
+                          <Plus size={13} /> {uploadingBlock === index ? "Uploading..." : "Upload image"}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            onChange={(e) => {
+                              handleBlockUpload(index, e.target.files?.[0]);
+                              e.target.value = "";
+                            }}
+                          />
+                        </label>
+                        <span style={{ color: "#64748B", fontSize: 12 }}>Max 10MB</span>
+                      </div>
+                      <label style={{ ...labelStyle, marginTop: 14 }} htmlFor={`block-caption-${index}`}>
+                        Caption (optional)
+                      </label>
+                      <input
+                        id={`block-caption-${index}`}
+                        value={block.text || ""}
+                        onChange={(e) => setBlock(index, { text: e.target.value })}
+                        style={inputStyle}
+                        placeholder="Image caption"
+                      />
+                      {block.url && (
+                        <Image
+                          src={block.url}
+                          alt={block.text || `Article image ${index + 1}`}
+                          width={900}
+                          height={500}
+                          unoptimized
+                          style={{
+                            marginTop: 12,
+                            width: "100%",
+                            maxHeight: 220,
+                            objectFit: "cover",
+                            borderRadius: 12,
+                            border: "1px solid rgba(255,255,255,0.1)",
+                          }}
+                        />
+                      )}
                     </>
                   ) : (
                     <>

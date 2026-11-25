@@ -116,6 +116,38 @@ function ContentBlock({ block }) {
     );
   }
 
+  if (block.type === "image" && block.url) {
+    return (
+      <figure style={{ margin: "32px 0" }}>
+        <Image
+          src={block.url}
+          alt={block.text || "Blog image"}
+          width={900}
+          height={500}
+          unoptimized
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: 16,
+            border: "1px solid rgba(255,255,255,0.1)",
+          }}
+        />
+        {block.text && (
+          <figcaption
+            style={{
+              marginTop: 10,
+              color: "#94A3B8",
+              fontSize: 14,
+              textAlign: "center",
+            }}
+          >
+            {block.text}
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
+
   return (
     <p
       style={{
